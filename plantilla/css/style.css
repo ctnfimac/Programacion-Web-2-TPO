@@ -1,21 +1,33 @@
+/*header y banner*/
+
 html,
 body,
 header,
 .view {
   height: 100%;
+  min-height: none;
+  max-height: 600px;
 }
 
-@media (max-width: 740px) {
+/* @media (max-width: 740px) { */
+@media (max-width: 570px) {
   html,
   body,
   header,
   .view {
-    height: 100vh;
+	height: 100vh;
+	min-height: 1000px;
   }
 }
 
+/* para que aparesca el login en movil */
+@media (max-width: 740px) {
+.view, .view .mask, .waves-effect {
+    overflow: none;
+}
+}
 .top-nav-collapse {
-  background-color: #78909c !important;
+  background-color: #7b1fa2 !important;
 }
 
 .navbar:not(.top-nav-collapse) {
@@ -24,7 +36,7 @@ header,
 
 @media (max-width: 991px) {
   .navbar:not(.top-nav-collapse) {
-    background: #78909c !important;
+    background: #7b1fa2 !important;
   }
 }
 
@@ -41,8 +53,25 @@ h5 {
   width: 80px;
 }
 
-/* Stilos footer */
-.footer-style {
+
+@media screen and (min-width:35em){
+	.mask{
+		padding-top:70px
+	}
+}
+
+@media screen and (min-width:60em){
+	.mask{
+		padding-top:100px
+	}
+}
+
+
+/*end header y banner*/
+
+
+/*Stilos footer */
+ .footer-style {
     background-color: #78909c;
     padding: 20px;
     padding-left: 80px;
