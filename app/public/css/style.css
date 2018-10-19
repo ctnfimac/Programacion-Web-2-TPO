@@ -1,0 +1,119 @@
+/*header y banner*/
+
+html,
+body,
+header,
+.view {
+  height: 100%;
+  min-height: none;
+  max-height: 600px;
+}
+
+/* @media (max-width: 740px) { */
+@media (max-width: 570px) {
+  html,
+  body,
+  header,
+  .view {
+	height: 100vh;
+	min-height: 1000px;
+  }
+}
+
+/* para que aparesca el login en movil */
+@media (max-width: 740px) {
+.view, .view .mask, .waves-effect {
+    overflow: none;
+}
+}
+.top-nav-collapse {
+  background-color: #7b1fa2 !important;
+}
+
+.navbar:not(.top-nav-collapse) {
+  background: transparent !important;
+}
+
+@media (max-width: 991px) {
+  .navbar:not(.top-nav-collapse) {
+    background: #7b1fa2 !important;
+  }
+}
+
+h1 {
+  letter-spacing: 8px;
+}
+
+h5 {
+  letter-spacing: 3px;
+}
+
+.hr-light {
+  border-top: 3px solid #fff;
+  width: 80px;
+}
+
+
+@media screen and (min-width:35em){
+	.mask{
+		padding-top:70px
+	}
+}
+
+@media screen and (min-width:60em){
+	.mask{
+		padding-top:100px
+	}
+}
+
+
+/*end header y banner*/
+
+
+/*Stilos footer */
+ .footer-style {
+    background-color: #78909c;
+    padding: 20px;
+    padding-left: 80px;
+    padding-right: 80px;
+    -webkit-box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.34);
+    -moz-box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.34);
+    box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.34);
+    font-size: 13px;
+}
+
+@media (max-width: 715px) {
+    .footer-style {
+        padding: 20px;   
+    }
+}
+
+.link-style {
+    text-decoration: none;
+    color: #fff;
+}
+
+.separator-line {
+    margin: 10px;
+    width: 100%;
+    padding: 0.3px;
+    background-color: #fff;
+}
+
+.container-icons {
+    margin: 5px;
+    display: inline-block;
+}
+
+.iconLink-style {
+    border-radius: 50%;
+    text-decoration: none;
+    margin: 5px;
+}
+
+.icon-style {
+    color: #fff;
+}
+
+
+
