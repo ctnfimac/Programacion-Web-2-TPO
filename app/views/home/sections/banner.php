@@ -15,7 +15,7 @@ $banner = '
 				  </div> 
 				  
 				  <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
-						<form class="text-center border border-light p-3 bg-white rounded mb-0" method="POST">
+						<form class="text-center border border-light p-3 bg-white rounded mb-0" action="index.php?route=admin" method="POST">
 							<p class="h4 mb-4">Login</p>
 							<input type="text" id="defaultLoginFormEmail" name="email" class="form-control mb-4" placeholder="E-mail" required>
 							<input type="password" id="defaultLoginFormPassword" name="password" class="form-control mb-4" placeholder="Password" required>

@@ -12,7 +12,7 @@ $cabecera = '
 			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
 				<a class="dropdown-item" href="#">Christian Peralta</a>
 				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Cerrar Sesión</a>
+				<a class="dropdown-item" href="index.php?route=salir">Cerrar Sesión</a>
 			</div>
 		</li>
 	</ul>

@@ -1,7 +1,7 @@
 <?php
 
 class AdminModel extends Conexion{
-	public function buscarAdministrador($email,$pass){
+	public function buscarUsuario($email,$pass){
 		//$matriz = array();
 		$admin_email = false;
 		$this->query = 
