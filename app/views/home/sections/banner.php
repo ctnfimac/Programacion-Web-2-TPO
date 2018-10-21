@@ -15,10 +15,10 @@ $banner = '
 				  </div> 
 				  
 				  <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
-						<form class="text-center border border-light p-3 bg-white rounded mb-0 ">
+						<form class="text-center border border-light p-3 bg-white rounded mb-0" method="POST">
 							<p class="h4 mb-4">Login</p>
-							<input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
-							<input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+							<input type="text" id="defaultLoginFormEmail" name="email" class="form-control mb-4" placeholder="E-mail" required>
+							<input type="password" id="defaultLoginFormPassword" name="password" class="form-control mb-4" placeholder="Password" required>
 							<div class="d-flex justify-content-around">
 								<div>
 									<div class="custom-control custom-checkbox">
