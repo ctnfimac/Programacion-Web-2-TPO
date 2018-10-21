@@ -131,4 +131,3 @@ insert into Admin(id, id_usuario) values
 (1, 1),
 (2, 2),
 (3, 3);
-
