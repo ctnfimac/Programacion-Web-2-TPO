@@ -1,7 +1,7 @@
 <?php
 
 // echo 'estas en el home';
-include('home/overall/head.php');
+// include('home/overall/head.php');
 
 require_once('home/sections/nav.php');
 require_once('home/sections/banner.php');
@@ -19,4 +19,4 @@ printf($galeria);
 printf($contacto);
 printf($modal_registro);
 
-include('home/overall/footer.php');
+// include('home/overall/footer.php');

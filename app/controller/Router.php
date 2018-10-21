@@ -9,7 +9,10 @@ class Router{
 		switch($route){
 			case 'home':
 				$view_controller->load_view('home');
-				 break;
+				break;
+			case 'admin':
+				$view_controller->load_view('admin');
+				break;
 			default:
 				echo 'error 404, pagina no encontrada';
 				break; 

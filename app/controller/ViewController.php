@@ -10,6 +10,7 @@ class ViewController{
 
 	public function load_view($view){
 		require_once(self::$view_path . $this->pagina . '/overall/head.php');
+		if($view == 'admin') require_once(self::$view_path . $this->pagina . '/overall/header.php');
 		require_once(self::$view_path . $this->pagina . '.php');
 		require_once(self::$view_path . $this->pagina .'/overall/footer.php');
 	}
