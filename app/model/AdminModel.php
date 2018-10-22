@@ -3,16 +3,16 @@
 class AdminModel extends Conexion{
 	public function buscarUsuario($email,$pass){
 		//$matriz = array();
-		$admin_email = false;
+		$admin_nombre = false;
 		$this->query = 
 				"SELECT * 
-				 FROM admin 
-				 WHERE email = '$email' AND pass = '$pass' LIMIT 1";
+				 FROM usuario
+				 WHERE email = '$email' AND contrasenia = '$pass' LIMIT 1";
 		$tabla = $this->get_query();
 		while($fila = $tabla->fetch_assoc()){
-			$admin_email = $fila['email'];
+			$admin_nombre = $fila['nombre'];
 		}
-		return $admin_email;
+		return $admin_nombre;
 	}
 
 	public function alta(){

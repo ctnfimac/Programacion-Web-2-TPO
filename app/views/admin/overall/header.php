@@ -1,5 +1,5 @@
 <?php
-
+//session_start();
 $cabecera = '
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top d-flex justify-content-between">
 	<a class="navbar-brand mr-1" href="index.html">Administración</a>  
@@ -10,7 +10,7 @@ $cabecera = '
 				<i class="fas fa-user-circle fa-fw"></i>
 			</a>
 			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-				<a class="dropdown-item" href="#">Christian Peralta</a>
+				<a class="dropdown-item" href="#">%s</a>
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="index.php?route=salir">Cerrar Sesión</a>
 			</div>
@@ -53,4 +53,4 @@ $cabecera = '
 
 
 
-printf($cabecera);
+printf($cabecera,$_SESSION['admin']);

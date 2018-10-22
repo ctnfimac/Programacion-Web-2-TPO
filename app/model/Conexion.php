@@ -4,7 +4,7 @@ abstract class Conexion{
 	private static $db_host = 'localhost';
 	private static $db_user = 'root';
 	private static $db_pass = '';
-	private static $db_name = 'pw';
+	private static $db_name = 'sistema_de_comida';
 	private static $db_charset = 'utf8';
 	private $conn;
 	protected $query;
