@@ -1,6 +1,7 @@
 <?php
 
 class AdminModel extends Conexion{
+
 	public function buscarUsuario($email,$pass){
 		//$matriz = array();
 		$admin_nombre = false;
@@ -16,7 +17,7 @@ class AdminModel extends Conexion{
 	}
 
 	public function alta(){
-
+		
 	}
 	public function baja($email){
 

@@ -4,6 +4,8 @@ require_once('class/Menu.php');
 
 class MenuModel extends Conexion{
 
+	const URL = './public/img/menu/';
+
 	public function mostrarMenus(){
 		$matriz = array();
 		$contador = 0;
@@ -18,8 +20,18 @@ class MenuModel extends Conexion{
 	}
 
 	public function alta(){
+		$descripcion = $_POST['descripcion'];
+		$url_img =  self::URL . $_FILES['fileImagen']['name'];
 
+		// guardo la imagen en el directorio
+		if(file_exists($url_img)) unlink($url_img);
+			move_uploaded_file($_FILES["fileImagen"]["tmp_name"], $url_img);
+
+		$this->query = "INSERT INTO menu (descripcion,imagen) VALUES ('$descripcion','$url_img')";
+		$this->set_query();
 	}
+
+
 	public function baja($id){
 		$this->query = "SELECT imagen FROM menu WHERE id = '$id'";
 		$resultado = $this->get_query();
@@ -27,7 +39,8 @@ class MenuModel extends Conexion{
 		$url = $registro['imagen'];
 		$this->query = "DELETE FROM menu WHERE id='$id'";
 		$this->set_query();
-		unlink($url);
+		if(file_exists($url)) unlink($url);
+		//	unlink($url);
 	}
 	public function modificacion(){
 
