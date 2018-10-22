@@ -42,18 +42,18 @@ class Router{
 	}
 
 	private function admin_operacion($operacion){
+		$menuModel = new MenuModel();
 		if($operacion=='eliminar'){
-			$menuModel = new MenuModel();
 			$menuModel->baja($_GET['id']);
 			$operacion = '';
 		}
 		if($operacion=='agregar'){
-			$menuModel = new MenuModel();
 			$menuModel->alta();
 			$operacion = '';
 		}
 		if($operacion=='modificar'){
-
+			$menuModel->modificacion();
+			$operacion = '';
 		}
 		return $operacion;
 	}

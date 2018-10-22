@@ -42,7 +42,19 @@ class MenuModel extends Conexion{
 		if(file_exists($url)) unlink($url);
 		//	unlink($url);
 	}
-	public function modificacion(){
 
+	public function modificacion(){
+		$id = $_POST['id'];
+		$descripcion = (isset($_POST['descripcion']) && $_POST['descripcion'] != "") ? $_POST['descripcion'] : $_POST['descripcionActual'];
+		$imagen = (isset($_FILES['fileImagen']) && $_FILES['fileImagen']['tmp_name'] != "") ? self::URL . $_FILES['fileImagen']['name'] : $_POST['fileImagenActual'];
+
+		if($_FILES['fileImagen']['tmp_name'] != ""){
+			unlink($_POST['fileImagenActual']);
+			if(file_exists($imagen)) unlink($imagen);
+			 move_uploaded_file($_FILES["fileImagen"]["tmp_name"], $imagen);
+		  }
+
+		$this->query = " UPDATE menu SET descripcion = '$descripcion', imagen = '$imagen' WHERE id = '$id' ";
+		$this->set_query();	
 	}
 }
