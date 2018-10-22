@@ -21,8 +21,13 @@ class MenuModel extends Conexion{
 
 	}
 	public function baja($id){
+		$this->query = "SELECT imagen FROM menu WHERE id = '$id'";
+		$resultado = $this->get_query();
+		$registro = $resultado->fetch_assoc();
+		$url = $registro['imagen'];
 		$this->query = "DELETE FROM menu WHERE id='$id'";
 		$this->set_query();
+		unlink($url);
 	}
 	public function modificacion(){
 
