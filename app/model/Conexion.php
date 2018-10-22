@@ -11,7 +11,7 @@ abstract class Conexion{
 	protected $rows = array();
 
 	abstract protected function alta();
-	abstract protected function baja();
+	abstract protected function baja($param);
 	abstract protected function modificacion();
 
 	private function db_open(){

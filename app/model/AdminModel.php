@@ -18,7 +18,7 @@ class AdminModel extends Conexion{
 	public function alta(){
 
 	}
-	public function baja(){
+	public function baja($email){
 
 	}
 	public function modificacion(){

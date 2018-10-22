@@ -8,10 +8,11 @@ class ViewController{
 		$this->pagina = $pagina;
 	}
 
-	public function load_view($view){
+	public function load_view($view,$operacion=''){
 		require_once(self::$view_path . $this->pagina . '/overall/head.php');
 		if($view == 'admin') require_once(self::$view_path . $this->pagina . '/overall/header.php');
-		require_once(self::$view_path . $this->pagina . '.php');
+		if($operacion=='')require_once(self::$view_path . $this->pagina . '.php');
+		else require_once(self::$view_path . $this->pagina . '/operaciones/'.$operacion.'.php');;
 		require_once(self::$view_path . $this->pagina .'/overall/footer.php');
 	}
 }

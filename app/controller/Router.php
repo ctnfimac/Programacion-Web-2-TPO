@@ -13,7 +13,13 @@ class Router{
 				$view_controller->load_view('home');
 				break;
 			case 'admin':
-				$view_controller->load_view('admin');
+				$operacion = (isset($_GET['operacion'])) ? $_GET['operacion'] : '';
+				if($operacion=='eliminar'){
+					$menuModel = new MenuModel();
+					$menuModel->baja($_GET['id']);
+					$operacion = '';
+				}
+				$view_controller->load_view('admin',$operacion);
 				break;
 			case 'salir':
 				$session = new SessionController();

@@ -85,7 +85,8 @@ create table Producto (
 
 create table Menu (
 	id int primary key,
-	descripcion varchar(60)
+	descripcion varchar(60),
+	imagen varchar(80)
 );
 
 create table Productos_Menu (
@@ -131,3 +132,10 @@ insert into Admin(id, id_usuario) values
 (1, 1),
 (2, 2),
 (3, 3);
+
+
+insert into Menu(id,descripcion,imagen) 
+values (1,'milanesa con ensalada de tomate y lechuga','./public/img/menu/menu01.jpg'),
+	   (2,'pizza de muzarella','./public/img/menu/menu02.jpg'),
+	   (3,'Hamburgueza completa con huevo','./public/img/menu/menu03.jpg'),
+	   (4,'cortado con dos tostadas de jamon y queso','./public/img/menu/menu04.jpg');
