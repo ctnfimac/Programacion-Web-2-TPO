@@ -4,8 +4,9 @@ class Router{
 	private $route;
 
 	public function __construct($route){
-		$this->route = $route;
-		$this->verificarSession();
+		$session = new SessionController();
+		$usuario = $session->iniciarSession();
+		$this->route = $usuario == true ? $route : 'home';
 		$view_controller = new ViewController($this->route);
 
 		switch($this->route){
@@ -27,19 +28,6 @@ class Router{
 		}
 	}
 
-
-	private function verificarSession(){
-		session_start();
-		if( isset($_POST['email']) && isset($_POST['password'])){
-			$session = new SessionController();
-			$usuario = $session->login($_POST['email'],$_POST['password']);
-			if ($usuario != false) {
-				$_SESSION['admin'] = $usuario;
-				//$this->route = 'admin';
-			} 
-		}
-		$this->route = !isset($_SESSION['admin']) ? 'home' : $this->route;
-	}
 
 	private function admin_operacion($operacion){
 		$menuModel = new MenuModel();

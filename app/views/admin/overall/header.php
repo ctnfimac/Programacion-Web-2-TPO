@@ -12,6 +12,8 @@ $cabecera = '
 			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
 				<a class="dropdown-item" href="#">%s</a>
 				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="index.php">Home</a>
+				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="index.php?route=salir">Cerrar Sesión</a>
 			</div>
 		</li>

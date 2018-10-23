@@ -1,4 +1,11 @@
 <?php
+    $result = '';
+	//if(isset($_COOKIE['session']) || isset($_SESSION['admin'])){
+	if(isset($_SESSION['admin'])){
+	$result .= '<a href="index.php?route=admin"  class="btn btn-info btn-block my-4" >Entrar</a>';
+	}else{
+		$result .='<button class="btn btn-info btn-block my-4" type="submit">Entrar</button>'; 
+	}
 
 $banner = '
 		<div class="view" style="background-image: url(\'public/img/home/banner01.jpg\'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
@@ -22,15 +29,16 @@ $banner = '
 							<div class="d-flex justify-content-around">
 								<div>
 									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
-										<label class="custom-control-label" for="defaultLoginFormRemember">Recordarme</label>
+										<input type="checkbox" name="recordarme" id="recordarme" class="custom-control-input">
+										<label class="custom-control-label" for="recordarme">Recordarme</label>
 									</div>
 								</div>
 								<div>
 									<a href="">Perdió su contraseña</a>
 								</div>
 							</div>
-							<button class="btn btn-info btn-block my-4" type="submit">Entrar</button>
+							%s
+							<!--<button class="btn btn-info btn-block my-4" type="submit">Entrar</button>-->
 							<p>¿No eres miembro aún?
 								<a href="" data-toggle="modal" data-target="#modalLRFormDemo" >Registrarse</a>
 							</p>
@@ -43,3 +51,4 @@ $banner = '
           </div>
 </header>
 ';
+
