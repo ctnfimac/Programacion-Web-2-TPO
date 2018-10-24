@@ -11,6 +11,10 @@ echo'
 						<input type="text" class="form-control" name="descripcion" placeholder="descripcion" required>
 					</div>
 					<div class="form-group">
+						<label for="precio">Precio</label>
+						<input type="text" class="form-control" name="precio" placeholder="precio" required>
+					</div>
+					<div class="form-group">
 						<label for="imgurl">Imagen</label>
 						<div class="custom-file">
 							<input type="file" class="custom-file-input" name="fileImagen" id="fileImagen" aria-describedby="inputGroupFileAddon01" required>

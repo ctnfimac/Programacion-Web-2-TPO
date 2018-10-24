@@ -24,6 +24,11 @@ echo'
 						<input type="text" class="form-control" name="descripcion" placeholder="'.$_GET['descripcion'].'">
 						<input type="hidden" class="form-control" name="descripcionActual" value="'.$_GET['descripcion'].'">	
 					</div>
+					<div class="form-group">
+						<label for="precio">Precio en pesos ($)</label>
+						<input type="text" class="form-control" name="precio" placeholder="'.$_GET['precio'].'">
+						<input type="hidden" class="form-control" name="precioActual" value="'.$_GET['precio'].'">	
+					</div>
 					<input type="submit" value="Modificar" class="btn btn-primary">
 					<a class="btn bg-warning text-white" href="index.php?route=admin">Cancelar</a>
 				</form>

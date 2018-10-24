@@ -79,10 +79,11 @@ foreach($menus as $menu){
 		<td>'.$menu->getId().'</td>
 		<td>'.$menu->getDescripcion().'</td>
 		<td class="align-middle justify-content-center"><img src="'.$menu->getImagen().'" width=125></td>
+		<td>$'.$menu->getPrecio().'</td>
 		<td class="align-middle">
 		<div class="btn-group" role="group">
-			<a href="index.php?route=admin&operacion=modificacion&descripcion='.$menu->getDescripcion().'&imagen='.$menu->getImagen().'&id='.$menu->getId().'" class="btn text-white btn-primary">Modificar</a>
-			<a href="index.php?route=admin&operacion=eliminacion&descripcion='.$menu->getDescripcion().'&imagen='.$menu->getImagen().'&id='.$menu->getId().'" class="btn text-white btn-danger">Eliminar</a>
+			<a href="index.php?route=admin&operacion=modificacion&descripcion='.$menu->getDescripcion().'&imagen='.$menu->getImagen().'&id='.$menu->getId().'&precio='.$menu->getPrecio().'" class="btn text-white btn-primary">Modificar</a>
+			<a href="index.php?route=admin&operacion=eliminacion&descripcion='.$menu->getDescripcion().'&imagen='.$menu->getImagen().'&id='.$menu->getId().'&precio='.$menu->getPrecio().'" class="btn text-white btn-danger">Eliminar</a>
 		</div></td>
 	</tr>';
 }
@@ -102,6 +103,7 @@ $tabla = '
 				<th>id</th>
 				<th>descripcion</th>
 				<th>imagen</th>
+				<th>precio</th>
 				<th>operación</th>
 				</tr>
 			</thead>

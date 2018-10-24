@@ -71,22 +71,23 @@ create table Sucursal (
 	CONSTRAINT FK_SUCURSAL_COMERCIO FOREIGN KEY (id_comercio) REFERENCES Comercio(id)
 );
 
-create table Precio (
-	id int primary key auto_increment,
-	valor double not null
-);
+-- create table Precio (
+-- 	id int primary key auto_increment,
+-- 	valor double not null
+-- );
 
 create table Producto (
 	id int primary key auto_increment,
-	descripcion varchar(50),
-	id_precio int,
-	CONSTRAINT FK_PRODUCTO_PRECIO FOREIGN KEY (id_precio) REFERENCES Precio(id)
+	descripcion varchar(50)
+	-- id_precio int,
+	-- CONSTRAINT FK_PRODUCTO_PRECIO FOREIGN KEY (id_precio) REFERENCES Precio(id)
 );
 
 create table Menu (
 	id int primary key auto_increment,
 	descripcion varchar(60),
-	imagen varchar(80)
+	imagen varchar(80),
+	precio double
 );
 
 create table Productos_Menu (
@@ -134,24 +135,24 @@ insert into Admin(id, id_usuario) values
 (3, 3);
 
 
-insert into Menu(descripcion,imagen) 
-values ('milanesa con ensalada de tomate y lechuga','./public/img/menu/menu01.jpg'),
-	   ('pizza de muzarella','./public/img/menu/menu02.jpg'),
-	   ('Hamburgueza completa con huevo','./public/img/menu/menu03.jpg'),
-	   ('cortado con dos tostadas de jamon y queso','./public/img/menu/menu04.jpg');
+insert into Menu(descripcion,imagen,precio) 
+values ('pizza de muzarella','./public/img/menu/menu02.jpg',220),
+	   ('Tostadas de jamon y queso','./public/img/menu/menu04.jpg',49.99),
+	   ('Empanadas','./public/img/menu/menu07.jpg',180),
+	   ('Saguchitos de miga','./public/img/menu/menu08.jpg',99.99);
 
 
-INSERT INTO Precio(valor)
-VALUES (100.00),
-	   (90.00),
-	   (150.00);
+-- INSERT INTO Precio(valor)
+-- VALUES (100.00),
+-- 	   (90.00),
+-- 	   (150.00);
 
-INSERT INTO  Producto(descripcion,id_precio)
-VALUES ('Queso',1),
-	   ('Harina',2),
-	   ('Morron',3),
-	   ('pan',2),
-	   ('Hamburguesa',3);
+-- INSERT INTO  Producto(descripcion,id_precio)
+-- VALUES ('Queso',1),
+-- 	   ('Harina',2),
+-- 	   ('Morron',3),
+-- 	   ('pan',2),
+-- 	   ('Hamburguesa',3);
 
 -- create table Precio (
 -- 	id int primary key auto_increment,

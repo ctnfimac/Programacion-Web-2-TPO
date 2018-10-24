@@ -6,12 +6,12 @@ $articulos = '';
 foreach($lista_de_menus as $menu){
 	$articulos .= '
 		<div class="card p-1 m-1">
-			<img class="card-img-top" src="'.$menu->getImagen().'" alt="'.$menu->getDescripcion().'">
+			<img class="card-img-top" src="'.$menu->getImagen().'" width="600px" alt="'.$menu->getDescripcion().'">
 			<div class="card-body">
 				<p class="card-title" style="font-size:1.2em">'.$menu->getDescripcion().'</p>
 				<p class="card-text mb-3">menu '.$menu->getId().'</p>
 				<div class="w-100 d-flex justify-content-center align-items-center">
-					<span class="float-right block-example border text-2 mr-2">$250</span>
+					<span class="float-right block-example border text-2 mr-2">$'.$menu->getPrecio().'</span>
 					<a href="#" class="fa fa-shopping-cart float-right block-example text-2 pl-2" style="font-size:1.6em;"></a>
 				</div>
 			</div>

@@ -30,7 +30,7 @@ if(isset($_SESSION['admin'])){
 			'.$_SESSION['admin'].'
 		</a>
 		<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-			<a class="dropdown-item" href="index.php?route=salir">Cerrar Sesión</a>
+			<a class="dropdown-item text-center" href="index.php?route=salir">Cerrar Sesión</a>
 		</div>
 	</li>';
 }else {
