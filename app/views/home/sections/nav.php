@@ -26,10 +26,12 @@ $nav = '
 if(isset($_SESSION['admin'])){
 	$nav_item = '
 	<li class="nav-item dropdown no-arrow">
-		<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			'.$_SESSION['admin'].'
 		</a>
 		<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+			<a class="dropdown-item text-center" href="index.php?route=admin">Administración</a>
+			<div class="dropdown-divider"></div>
 			<a class="dropdown-item text-center" href="index.php?route=salir">Cerrar Sesión</a>
 		</div>
 	</li>';

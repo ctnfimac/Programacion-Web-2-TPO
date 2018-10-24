@@ -14,9 +14,11 @@ class Router{
 				$view_controller->load_view('home');
 				break;
 			case 'admin':
+				$menuModel = new MenuModel();
 				$operacion = (isset($_GET['operacion'])) ? $_GET['operacion'] : '';
-				$operacion = $this->admin_operacion($operacion);
-				$view_controller->load_view('admin',$operacion);
+				$menuModel->setOperacion($operacion);// alta,baja,modificacion
+				$operacion_ejecutada = $menuModel->ejecutoOperacion();
+				$view_controller->load_view('admin',$operacion_ejecutada);
 				break;
 			case 'salir':
 				$session = new SessionController();
@@ -28,21 +30,4 @@ class Router{
 		}
 	}
 
-
-	private function admin_operacion($operacion){
-		$menuModel = new MenuModel();
-		if($operacion=='eliminar'){
-			$menuModel->baja($_GET['id']);
-			$operacion = '';
-		}
-		if($operacion=='agregar'){
-			$menuModel->alta();
-			$operacion = '';
-		}
-		if($operacion=='modificar'){
-			$menuModel->modificacion();
-			$operacion = '';
-		}
-		return $operacion;
-	}
 }

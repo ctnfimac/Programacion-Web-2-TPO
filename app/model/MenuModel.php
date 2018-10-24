@@ -5,6 +5,7 @@ require_once('class/Menu.php');
 class MenuModel extends Conexion{
 
 	const URL = './public/img/menu/';
+	private $operacion;
 
 	public function mostrarMenus(){
 		$matriz = array();
@@ -19,7 +20,7 @@ class MenuModel extends Conexion{
 		return $matriz;
 	}
 
-	public function alta(){
+	protected function alta(){
 		$descripcion = $_POST['descripcion'];
 		$precio = $_POST['precio'];
 		$url_img =  self::URL . $_FILES['fileImagen']['name'];
@@ -33,7 +34,8 @@ class MenuModel extends Conexion{
 	}
 
 
-	public function baja($id){
+	protected function baja(){
+		$id = $_GET['id'];
 		$this->query = "SELECT imagen FROM menu WHERE id = '$id'";
 		$resultado = $this->get_query();
 		$registro = $resultado->fetch_assoc();
@@ -44,7 +46,7 @@ class MenuModel extends Conexion{
 		//	unlink($url);
 	}
 
-	public function modificacion(){
+	protected function modificacion(){
 		$id = $_POST['id'];
 		$descripcion = (isset($_POST['descripcion']) && $_POST['descripcion'] != "") ? $_POST['descripcion'] : $_POST['descripcionActual'];
 		$imagen = (isset($_FILES['fileImagen']) && $_FILES['fileImagen']['tmp_name'] != "") ? self::URL . $_FILES['fileImagen']['name'] : $_POST['fileImagenActual'];
@@ -58,5 +60,28 @@ class MenuModel extends Conexion{
 
 		$this->query = " UPDATE menu SET descripcion = '$descripcion', imagen = '$imagen', precio = '$precio' WHERE id = '$id' ";
 		$this->set_query();	
+	}
+
+	public function setOperacion($operacion){
+		$this->operacion = $operacion;
+	}
+
+	public function ejecutoOperacion(){
+		$resultado = $this->operacion;
+		switch($resultado){
+			case 'agregar':
+				$this->alta();
+				$resultado = '';
+				break;
+			case 'eliminar':
+				$this->baja();
+				$resultado = '';
+				break;
+			case 'modificar':
+				$this->modificacion();
+				$resultado = '';
+				break;
+		}
+		return $resultado;//para que regrese al administrador
 	}
 }
