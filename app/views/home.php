@@ -8,8 +8,15 @@ require_once('home/sections/galeria.php');
 require_once('home/sections/contacto.php');
 require_once('home/sections/modal_registro.php');
 
-printf($nav);
-printf($banner,$result);
+// printf($nav,$_SESSION['admin']);
+
+if(isset($_SESSION['admin'])){
+	printf($nav,$_SESSION['admin']);
+	printf($banner,'');
+}else {
+	printf($nav,'Login');
+	printf($banner,$formulario);
+}
 printf($servicios);
 printf($promocion);
 printf($galeria);

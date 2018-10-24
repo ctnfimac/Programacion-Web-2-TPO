@@ -11,7 +11,7 @@ $galeria = '
 					<img class="card-img-top" src="./public/img/home/galeria/galeria01.jpg" alt="pizza">
 					<div class="card-body">
 					<h4 class="card-title float-left pt-3"><a>Pizza de Muzzarella</a></h4>
-					<span class="\text-info float-right p-3 block-example border border-warning\">$250</span>
+					<span class="float-right p-3 block-example border text-2">$250</span>
 					</div>
 				</div>
 			</div>
@@ -20,7 +20,7 @@ $galeria = '
 					<img class="card-img-top" src="./public/img/home/galeria/galeria01.jpg" alt="pizza">
 					<div class="card-body">
 					<h4 class="card-title float-left pt-3"><a>Pizza de Muzzarella</a></h4>
-					<span class="text-info float-right p-3 block-example border border-warning">$250</span>
+					<span class="float-right p-3 block-example border">$250</span>
 					</div>
 				</div>
 		</div>
@@ -29,7 +29,7 @@ $galeria = '
 					<img class="card-img-top" src="./public/img/home/galeria/galeria01.jpg" alt="pizza">
 					<div class="card-body">
 						<h4 class="card-title float-left pt-3"><a>Pizza de Muzzarella</a></h4>
-						<span class="text-info float-right p-3 block-example border border-warning">$250</span>
+						<span class="float-right p-3 block-example border">$250</span>
 					</div>
 				</div>
 		</div>
@@ -38,7 +38,7 @@ $galeria = '
 					<img class="card-img-top" src="./public/img/home/galeria/galeria01.jpg" alt="pizza">
 					<div class="card-body">
 						<h4 class="card-title float-left pt-3"><a>Pizza de Muzzarella</a></h4>
-						<span class="text-info float-right p-3 block-example border border-warning">$250</span>
+						<span class="float-right p-3 block-example border">$250</span>
 					</div>
 				</div>
 		</div>
@@ -49,7 +49,7 @@ $galeria = '
 					<img class="card-img-top" src="./public/img/home/galeria/galeria01.jpg" alt="pizza">
 					<div class="card-body">
 						<h4 class="card-title float-left pt-3"><a>Pizza de Muzzarella</a></h4>
-						<span class="text-info float-right p-3 block-example border border-warning">$250</span>
+						<span class="float-right p-3 block-example border">$250</span>
 					</div>
 				</div>
 			</div>
@@ -58,7 +58,7 @@ $galeria = '
 					<img class="card-img-top" src="./public/img/home/galeria/galeria01.jpg" alt="pizza">
 					<div class="card-body">
 						<h4 class="card-title float-left pt-3"><a>Pizza de Muzzarella</a></h4>
-						<span class="text-info float-right p-3 block-example border border-warning">$250</span>
+						<span class="float-right p-3 block-example border">$250</span>
 					</div>
 				</div>
 			</div>
@@ -67,7 +67,7 @@ $galeria = '
 					<img class="card-img-top" src="./public/img/home/galeria/galeria01.jpg" alt="pizza">
 					<div class="card-body">
 						<h4 class="card-title float-left pt-3"><a>Pizza de Muzzarella</a></h4>
-						<span class="text-info float-right p-3 block-example border border-warning">$250</span>
+						<span class="float-right p-3 block-example border">$250</span>
 					</div>
 				</div>
 			</div>
@@ -76,7 +76,7 @@ $galeria = '
 					<img class="card-img-top" src="./public/img/home/galeria/galeria01.jpg" alt="pizza">
 					<div class="card-body">
 						<h4 class="card-title float-left pt-3"><a>Pizza de Muzzarella</a></h4>
-						<span class="text-info float-right p-3 block-example border border-warning">$250</span>
+						<span class="float-right p-3 block-example border">$250</span>
 					</div>
 				</div>
 			</div>

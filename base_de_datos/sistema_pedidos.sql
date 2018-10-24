@@ -72,12 +72,12 @@ create table Sucursal (
 );
 
 create table Precio (
-	id int primary key,
+	id int primary key auto_increment,
 	valor double not null
 );
 
 create table Producto (
-	id int primary key,
+	id int primary key auto_increment,
 	descripcion varchar(50),
 	id_precio int,
 	CONSTRAINT FK_PRODUCTO_PRECIO FOREIGN KEY (id_precio) REFERENCES Precio(id)
@@ -139,3 +139,28 @@ values ('milanesa con ensalada de tomate y lechuga','./public/img/menu/menu01.jp
 	   ('pizza de muzarella','./public/img/menu/menu02.jpg'),
 	   ('Hamburgueza completa con huevo','./public/img/menu/menu03.jpg'),
 	   ('cortado con dos tostadas de jamon y queso','./public/img/menu/menu04.jpg');
+
+
+INSERT INTO Precio(valor)
+VALUES (100.00),
+	   (90.00),
+	   (150.00);
+
+INSERT INTO  Producto(descripcion,id_precio)
+VALUES ('Queso',1),
+	   ('Harina',2),
+	   ('Morron',3),
+	   ('pan',2),
+	   ('Hamburguesa',3);
+
+-- create table Precio (
+-- 	id int primary key auto_increment,
+-- 	valor double not null
+-- );
+
+-- create table Producto (
+-- 	id int primary key auto_increment,
+-- 	descripcion varchar(50),
+-- 	id_precio int,
+-- 	CONSTRAINT FK_PRODUCTO_PRECIO FOREIGN KEY (id_precio) REFERENCES Precio(id)
+-- );

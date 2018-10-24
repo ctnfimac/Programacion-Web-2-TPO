@@ -17,7 +17,7 @@ $nav = '
                     <a class="nav-link" href="#">Servicios</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
+                    <a class="nav-link" href="index.php?route=admin">%s</a>
                   </li>
                 </ul>
               </div>
