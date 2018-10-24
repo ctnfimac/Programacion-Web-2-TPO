@@ -6,7 +6,7 @@ header,
 .view {
   height: 100%;
   min-height: none;
-  max-height: 600px;
+  max-height: 670px;
 }
 
 /* @media (max-width: 740px) { */
@@ -116,4 +116,28 @@ h5 {
 }
 
 
+/*
+ * Estilo de la galeria
+ *
+ */
+ .card{
+	width:100%;
+} 
+@media screen and (min-width:30em){
+	.card{
+		width:46%;
+	} 
+}
 
+ @media screen and (min-width:45em){
+	.card{
+		width:30%;
+	} 
+}
+
+@media screen and (min-width:60em){
+	.card{
+		width:23%;
+	} 
+}
+ 
