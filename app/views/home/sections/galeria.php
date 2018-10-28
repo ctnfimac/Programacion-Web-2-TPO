@@ -12,7 +12,7 @@ foreach($lista_de_menus as $menu){
 				<p class="card-text mb-3">menu '.$menu->getId().'</p>
 				<div class="w-100 d-flex justify-content-center align-items-center">
 					<span class="float-right block-example border text-2 mr-2">$'.$menu->getPrecio().'</span>
-					<a href="#" class="fa fa-shopping-cart float-right block-example text-2 pl-2" style="font-size:1.6em;"></a>
+					<a href="index.php?route=home&operacion=agregar&id='.$menu->getId().'" class="fa fa-shopping-cart float-right block-example text-2 pl-2" style="font-size:1.6em;"></a>
 				</div>
 			</div>
 		</div>

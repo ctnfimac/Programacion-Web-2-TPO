@@ -1,5 +1,5 @@
 <?php
-
+$carrito = new CarritoModel();
 $nav = '
 <header>
           <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar ">
@@ -34,11 +34,17 @@ if(isset($_SESSION['admin'])){
 			<div class="dropdown-divider"></div>
 			<a class="dropdown-item text-center" href="index.php?route=salir">Cerrar Sesión</a>
 		</div>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link " href="#"><span class="fa fa-shopping-cart "></span>'.$carrito->divercidadDeMenues().'</a>
 	</li>';
 }else {
 	$nav_item = '
 	<li class="nav-item">
 		<a class="nav-link" href="#">Login</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link " href="#"><span class="fa fa-shopping-cart "></span>'.$carrito->divercidadDeMenues().'</a>
 	</li>
 	';
 }

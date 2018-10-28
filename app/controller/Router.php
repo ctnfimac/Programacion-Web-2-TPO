@@ -11,6 +11,12 @@ class Router{
 
 		switch($this->route){
 			case 'home':
+				$carrito = new CarritoModel();
+				$operacion = (isset($_GET['operacion'])) ? $_GET['operacion'] : '';
+				$carrito->setOperacion($operacion);
+				$carrito->ejecutarOperacion();
+				//echo $carrito->precioParcialDelCarrito();
+				//echo $carrito->divercidadDeMenues();
 				$view_controller->load_view('home');
 				break;
 			case 'admin':

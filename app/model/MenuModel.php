@@ -84,4 +84,14 @@ class MenuModel extends Conexion{
 		}
 		return $resultado;//para que regrese al administrador
 	}
+
+	public function precioPorId($id){
+		$this->query = "SELECT precio FROM menu WHERE id='$id' LIMIT 1";
+		$tabla = $this->get_query();
+		while($fila = $tabla->fetch_assoc()){
+			 $precio = $fila['precio'];
+		}
+		// return $matriz;
+		return $precio;
+	}
 }
