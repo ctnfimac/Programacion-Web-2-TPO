@@ -20,6 +20,19 @@ class MenuModel extends Conexion{
 		return $matriz;
 	}
 
+	public function mostrarRecomendaciones(){
+		$matriz = array();
+		$contador = 0;
+		$this->query = "SELECT * FROM menu LIMIT 3";
+		$tabla = $this->get_query();
+		while($fila = $tabla->fetch_assoc()){
+			 $menu = new Menu($fila['id'],$fila['descripcion'],$fila['imagen'],$fila['precio']);
+			 $matriz[$contador] = $menu;
+			 $contador++;
+		}
+		return $matriz;
+	}
+
 	protected function alta(){
 		$descripcion = $_POST['descripcion'];
 		$precio = $_POST['precio'];

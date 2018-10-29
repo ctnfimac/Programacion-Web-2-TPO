@@ -11,6 +11,7 @@ class ViewController{
 	public function load_view($view,$operacion=''){
 		$menu = new MenuModel();// se usa para la galeria dinamica
 		$lista_de_menus = $menu->mostrarMenus();
+		$menu_recomendaciones = $menu->mostrarRecomendaciones();
 
 		$oferta = new OfertaModel();
 		$menuDelDia = $oferta->buscarMenuDelDia();

@@ -1,0 +1,21 @@
+<?php
+
+require_once('carrito/sections/nav.php');
+require_once('carrito/sections/banner.php');
+require_once('carrito/sections/carrito_tabla.php');
+require_once('carrito/sections/galeria.php');
+require_once('carrito/sections/contacto.php');
+require_once('carrito/sections/modal_registro.php');
+
+printf($nav,$nav_item);
+
+if(isset($_SESSION['admin'])){
+	printf($banner,'');
+}else {
+	printf($banner,$formulario);
+}
+
+printf($carrito_tabla);
+printf($galeria,$articulos);
+printf($contacto);
+printf($modal_registro);
