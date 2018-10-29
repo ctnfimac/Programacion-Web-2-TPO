@@ -116,10 +116,11 @@ create table Entrega (
 	CONSTRAINT FK_ENTREGA_PEDIDO FOREIGN KEY (id_pedido) REFERENCES Pedido(id)
 );
 
+-- duran un dia
 create table Oferta (
-	id int primary key,
-	fecha_inicio datetime not null,
-	fecha_fin datetime not null,
+	id int primary key auto_increment,
+	fecha date not null unique,
+	-- fecha_fin datetime not null,
 	id_menu int not null,
 	CONSTRAINT FK_MENU_OFERTA FOREIGN KEY (id_menu) REFERENCES Menu(id)
 );
@@ -141,6 +142,16 @@ values ('pizza de muzarella','./public/img/menu/menu02.jpg',220),
 	   ('Empanadas','./public/img/menu/menu07.jpg',180),
 	   ('Saguchitos de miga','./public/img/menu/menu08.jpg',99.99);
 
+INSERT INTO Oferta(fecha, id_menu) 
+VALUES ("20181015", 1),
+	   ("20181029", 2);
+-- create table Oferta (
+-- 	id int primary key,
+-- 	fecha_inicio datetime not null,
+-- 	fecha_fin datetime not null,
+-- 	id_menu int not null,
+-- 	CONSTRAINT FK_MENU_OFERTA FOREIGN KEY (id_menu) REFERENCES Menu(id)
+-- );
 
 -- INSERT INTO Precio(valor)
 -- VALUES (100.00),

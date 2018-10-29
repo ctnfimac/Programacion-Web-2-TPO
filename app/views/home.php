@@ -16,7 +16,7 @@ if(isset($_SESSION['admin'])){
 	printf($banner,$formulario);
 }
 printf($servicios);
-printf($promocion);
+printf($promocion,$menuDelDia->getImagen(),$menuDelDia->getDescripcion(),$menuDelDia->getPrecio());
 printf($galeria,$articulos);
 printf($contacto);
 printf($modal_registro);
