@@ -32,10 +32,6 @@ class CarritoModel{
 				$this->eliminarProductoDelCarrito($id);
 				$resultado = '';
 				break;
-			// case 'precioParcial':
-			// 	$this->precioParcialDelCarrito();
-			// 	$resultado = '';
-			// 	break;
 			case 'incrementar':
 				$this->aumentarCantidadDelProducto();
 				break;
@@ -144,5 +140,11 @@ class CarritoModel{
 		}
 		//return sizeof($_SESSION['carrito']);
 		return $contador;
+	}
+
+	public function buscarMenusDelCarrito($id){
+		$MenuModel = new MenuModel();
+		$menu = $MenuModel->menuPorId($id);
+		return $menu;
 	}
 }

@@ -107,4 +107,15 @@ class MenuModel extends Conexion{
 		// return $matriz;
 		return $precio;
 	}
+
+	public function menuPorId($id){
+		$tabla = array();
+		$this->query = "SELECT * FROM menu WHERE id='$id' LIMIT 1";
+		$tabla = $this->get_query();
+		while($fila = $tabla->fetch_assoc()){
+			 $menu = new Menu($fila['id'],$fila['descripcion'],$fila['imagen'],$fila['precio']);
+		}
+		// return $matriz;
+		return $menu;
+	}
 }

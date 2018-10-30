@@ -6,7 +6,7 @@ class Router{
 	public function __construct($route){
 		$session = new SessionController();
 		$usuario = $session->iniciarSession();
-		$this->route = $usuario == true ? $route : 'home';
+		$this->route = ($usuario == true && $route == 'admin' )? 'admin' : $route;
 		$view_controller = new ViewController($this->route);
 
 		switch($this->route){
@@ -21,9 +21,9 @@ class Router{
 				break;
 			case 'carrito':
 				$carrito = new CarritoModel();
-				// $operacion = (isset($_GET['operacion'])) ? $_GET['operacion'] : '';
-				// $carrito->setOperacion($operacion);
-				// $carrito->ejecutarOperacion();
+				$operacion = (isset($_GET['operacion'])) ? $_GET['operacion'] : '';
+				$carrito->setOperacion($operacion);
+				$carrito->ejecutarOperacion();
 				//echo $carrito->precioParcialDelCarrito();
 				//echo $carrito->divercidadDeMenues();
 				$view_controller->load_view('carrito');
