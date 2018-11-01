@@ -7,27 +7,28 @@ create database sistema_de_comida;
 use sistema_de_comida;
 
 create table Localidad (
-	id int primary key,
+	id int primary key auto_increment,
 	descripcion varchar(30)
 );
 
-create table Telefono (
-	id int primary key,
-	numero varchar(30)
-);
+-- create table Telefono (
+-- 	id int primary key,
+-- 	numero varchar(30)
+-- );
 
 create table Usuario (
-	id int primary key,
+	id int primary key auto_increment,
 	nombre varchar(30) not null,
 	apellido varchar(30) not null,
 	email varchar(50) not null,
 	contrasenia varchar(32) not null,
-	id_telefono int,
-	CONSTRAINT FK_USUARIO_TELEFONO FOREIGN KEY (id_telefono) REFERENCES Telefono(id)
+	telefono varchar(30)
+	-- id_telefono int,
+	-- CONSTRAINT FK_USUARIO_TELEFONO FOREIGN KEY (id_telefono) REFERENCES Telefono(id)
 );
 
 create table Cliente (
-	id int primary key,
+	id int primary key auto_increment,
 	calle varchar(30) not null,
 	numero varchar(30) not null,
 	id_localidad int,
@@ -37,7 +38,7 @@ create table Cliente (
 );
 
 create table Repartidor (
-	id int primary key,
+	id int primary key auto_increment,
 	fecha_nacimiento date not null,
 	dni varchar(8) not null,
 	cuil varchar(11) not null,
@@ -46,7 +47,7 @@ create table Repartidor (
 );
 
 create table Comercio (
-	id int primary key,
+	id int primary key auto_increment,
 	cuit varchar(11) not null
 );
 
@@ -143,8 +144,15 @@ values ('pizza de muzarella','./public/img/menu/menu02.jpg',220),
 	   ('Saguchitos de miga','./public/img/menu/menu08.jpg',99.99);
 
 INSERT INTO Oferta(fecha, id_menu) 
-VALUES ("20181015", 1),
-	   ("20181029", 2);
+VALUES ("20181101", 1),
+	   ("20181030", 2);
+
+INSERT INTO localidad(descripcion)
+VALUES ('liniers'),
+	   ('villa luzuriaga'),
+	   ('casanova'),
+	   ('ramos mejia'),
+	   ('san justo');
 -- create table Oferta (
 -- 	id int primary key,
 -- 	fecha_inicio datetime not null,
