@@ -19,8 +19,11 @@ foreach($clientes as $cliente){
 		<td class="align-middle">
 			<div class="btn-group" role="group">
 				<a href="index.php?route=admin&opcion=cliente&operacion=eliminacion&nombre='.$cliente->getNombre().'&apellido='.$cliente->getApellido().'&email='.$cliente->getEmail().
-													'&telefono='.$cliente->getTelefono().'&calle='.$cliente->getCalle().'&numero='.$cliente->getNumero().
-													'&localidad='.$cliente->getLocalidad().'&id='.$cliente->getId().'." class="btn text-white btn-danger">Eliminar</a>
+							'&telefono='.$cliente->getTelefono().'&calle='.$cliente->getCalle().'&numero='.$cliente->getNumero().
+							'&localidad='.$cliente->getLocalidad().'&id='.$cliente->getId().'." class="btn text-white btn-danger">Eliminar</a>
+				<a href="index.php?route=admin&opcion=cliente&operacion=modificacion&nombre='.$cliente->getNombre().'&apellido='.$cliente->getApellido().'&email='.$cliente->getEmail().
+							'&telefono='.$cliente->getTelefono().'&calle='.$cliente->getCalle().'&numero='.$cliente->getNumero().
+							'&localidad='.$cliente->getLocalidad().'&id='.$cliente->getId().'." class="btn text-white btn-primary">Modificar</a>
 			</div>
 		</td>
 	</tr>';

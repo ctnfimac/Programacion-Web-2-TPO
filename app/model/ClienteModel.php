@@ -42,7 +42,7 @@ class ClienteModel extends Conexion{
 				$resultado = '';
 				break;
 			case 'modificar':
-				$this->modificar($id);
+				$this->modificacion($id);
 				$resultado = '';
 				break;
 			default :
@@ -97,7 +97,23 @@ class ClienteModel extends Conexion{
 	}
 
 	protected function modificacion(){
+		$id = $_POST['id'];
+		$nombre = (isset($_POST['nombre']) && $_POST['nombre'] != "") ? $_POST['nombre'] : $_POST['nombreActual'];
+		$apellido  = (isset($_POST['apellido']) && $_POST['apellido'] != "") ? $_POST['apellido'] : $_POST['apellidoActual'];
+		$email = (isset($_POST['email']) && $_POST['email'] != "") ? $_POST['email'] : $_POST['emailActual'];
+		$telefono = (isset($_POST['telefono']) && $_POST['telefono'] != "") ? $_POST['telefono'] : $_POST['telefonoActual'];
+		$calle = (isset($_POST['calle']) && $_POST['calle'] != "") ? $_POST['calle'] : $_POST['calleActual'];
+		$numero = (isset($_POST['numero']) && $_POST['numero'] != "") ? $_POST['numero'] : $_POST['numeroActual'];
+		$localidad = (isset($_POST['localidad']) && $_POST['localidad'] != "") ? $_POST['localidad'] : $_POST['localidadActual'];
 
+
+		$this->query = " UPDATE usuario SET nombre = '$nombre', apellido = '$apellido', email = '$email', 
+						 telefono = '$telefono' WHERE id = '$id' ";
+		$this->set_query();	
+		$this->query = " UPDATE cliente SET calle = '$calle', numero = '$numero', 
+						 id_localidad = (SELECT id FROM localidad where descripcion = '$localidad') 
+						 WHERE id_usuario = '$id' ";
+		$this->set_query();
 	}
 
 	private function verificaContrasenias(){
