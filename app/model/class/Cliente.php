@@ -1,6 +1,6 @@
 <?php
 
-require('Usuario.php');
+require_once('Usuario.php');
 
 class Cliente extends Usuario{
 	private $id;
@@ -22,9 +22,6 @@ class Cliente extends Usuario{
 		$this->id = $id;
 	}
 
-	// public function getId(){
-	// 	return $this->id = $id;
-	// }
 
 	public function getCalle(){
 		return $this->calle;

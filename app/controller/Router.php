@@ -41,6 +41,7 @@ class Router{
 						$seccion = new ClienteModel();
 						break;
 					case 'repartidor':
+						$seccion = new RepartidorModel();
 						break;
 					case 'comercio':
 						break;
@@ -58,7 +59,7 @@ class Router{
 				break;
 			case 'registrar':
 				if($_POST['opcion'] == 1 ) $usuario = new ClienteModel();
-				if($_POST['opcion'] == 2 ) $usuario = new DeliveryModel();
+				if($_POST['opcion'] == 2 ) $usuario = new RepartidorModel();
 				if($_POST['opcion'] == 3 ) $usuario = new ComercioModel();
 				$usuario->setOperacion($operacion);
 				$usuario->ejecutarOperacion();

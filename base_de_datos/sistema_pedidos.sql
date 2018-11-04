@@ -39,11 +39,10 @@ create table Cliente (
 );
 
 create table Repartidor (
-	id int primary key auto_increment,
-	fecha_nacimiento date not null,
+	id_usuario int primary key,
+	fecha_nacimiento date default '19870529',
 	dni varchar(8) not null,
 	cuil varchar(11) not null,
-    id_usuario int not null,
     CONSTRAINT FK_REPARTIDOR_USER FOREIGN KEY (id_usuario) REFERENCES Usuario(id)
 );
 
@@ -129,7 +128,7 @@ create table Oferta (
 
 insert into Usuario(id, nombre, apellido, email, contrasenia) values
 (1, 'Alexander', 'Prada', 'notengoemail@gmail.com', 'alex123'),
-(2, 'Christian', 'Peralta', 'notengoemail2@gmail.com', 'christian123'),
+(2, 'Christian', 'Peralta', 'notengoemail2@gmail.com', '123'),
 (3, 'Martin', 'Garra', 'notengoemail3@gmail.com', 'martin123');
 
 insert into Admin(id, id_usuario) values
@@ -145,7 +144,7 @@ values ('pizza de muzarella','./public/img/menu/menu02.jpg',220),
 	   ('Saguchitos de miga','./public/img/menu/menu08.jpg',99.99);
 
 INSERT INTO Oferta(fecha, id_menu) 
-VALUES ("20181102", 1),
+VALUES ("20181104", 1),
 	   ("20181030", 2);
 
 INSERT INTO localidad(descripcion)

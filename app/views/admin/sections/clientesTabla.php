@@ -5,6 +5,7 @@ $clientes = $clienteModel->mostrarClientes();
 
 $infoClientes = '';
 foreach($clientes as $cliente){
+	$habilitado = $cliente->getHabilitado() == 1 ? 'Si' : 'No';
 	$infoClientes .= '<tr>
 		<td>'.$cliente->getId().'</td>
 		<td>'.$cliente->getNombre().'</td>
@@ -15,7 +16,7 @@ foreach($clientes as $cliente){
 		<td>'.$cliente->getCalle().'</td>
 		<td>'.$cliente->getNumero().'</td>
 		<td>'.$cliente->getLocalidad().'</td>
-		<td>'.$cliente->getHabilitado().'</td>
+		<td>'.$habilitado.'</td>
 		<td class="align-middle">
 			<div class="btn-group" role="group">
 				<a href="index.php?route=admin&opcion=cliente&operacion=eliminacion&nombre='.$cliente->getNombre().'&apellido='.$cliente->getApellido().'&email='.$cliente->getEmail().
@@ -41,7 +42,7 @@ $tablaClientes = '
 			<table class="table table-bordered" id="dataTable" width="100%%" cellspacing="0">
 			<thead>
 				<tr>
-				<th>id usuario</th>
+				<th>id</th>
 				<th>nombre</th>
 				<th>apellido</th>
 				<th>email</th>
@@ -60,9 +61,6 @@ $tablaClientes = '
 			</table>
 		</div>
 		</div>
-		<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+		<!--<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>-->
 	</div>
-
-	</div>
-	<!-- /.container-fluid -->
 ';
