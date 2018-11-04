@@ -20,9 +20,10 @@ create table Usuario (
 	id int primary key auto_increment,
 	nombre varchar(30) not null,
 	apellido varchar(30) not null,
-	email varchar(50) not null,
+	email varchar(50) not null unique,
 	contrasenia varchar(32) not null,
-	telefono varchar(30)
+	telefono varchar(30),
+	habilitado smallint not null default 0
 	-- id_telefono int,
 	-- CONSTRAINT FK_USUARIO_TELEFONO FOREIGN KEY (id_telefono) REFERENCES Telefono(id)
 );
@@ -144,7 +145,7 @@ values ('pizza de muzarella','./public/img/menu/menu02.jpg',220),
 	   ('Saguchitos de miga','./public/img/menu/menu08.jpg',99.99);
 
 INSERT INTO Oferta(fecha, id_menu) 
-VALUES ("20181101", 1),
+VALUES ("20181102", 1),
 	   ("20181030", 2);
 
 INSERT INTO localidad(descripcion)

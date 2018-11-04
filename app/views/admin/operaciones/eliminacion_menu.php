@@ -25,7 +25,7 @@ echo'
 				</tbody>
 			</table>
 			
-			<a href="index.php?route=admin&operacion=eliminar&id='.$_GET['id'].'&imgUrl='.$_GET['imagen'].'" class="alert-link btn bg-success text-white">Aceptar</a>
+			<a href="index.php?route=admin&opcion=menu&operacion=eliminar&id='.$_GET['id'].'&imgUrl='.$_GET['imagen'].'" class="alert-link btn bg-success text-white">Aceptar</a>
 			<a href="index.php?route=admin" class="alert-link btn bg-warning text-white">Cancelar</a>
 		</div>
 		</div> 

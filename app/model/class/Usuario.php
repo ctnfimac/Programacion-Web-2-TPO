@@ -1,26 +1,28 @@
 <?php
 
 class Usuario{
-	//private $id;
+	private $id;
 	private $nombre;
 	private $apellido;
 	private $email;
 	private $contrasenia;
-	private $Telefono;
+	private $telefono;
+	private $habilitado;
 
-	public function __construct(/*$id,*/$nombre,$apellido,
-						$email,$contrasenia,$telefono){
-		//$this->id = $id;
+	public function __construct($id,$nombre,$apellido,
+						$email,$contrasenia,$telefono,$habilitado){
+		$this->id = $id;
 		$this->nombre = $nombre;
 		$this->apellido = $apellido;
 		$this->email = $email;
 		$this->contrasenia = $contrasenia;
-		$this->Telefono = $Telefono;					
+		$this->telefono = $telefono;
+		$this->habilitado = $habilitado;					
 	}
 
-	// public function getId(){
-	// 	return $this->id;
-	// }
+	public function getId(){
+		return $this->id;
+	}
 
 	public function getNombre(){
 		return $this->nombre;
@@ -39,6 +41,10 @@ class Usuario{
 	}
 
 	public function getTelefono(){
-		return $this->Telefono;
+		return $this->telefono;
+	}
+
+	public function getHabilitado(){
+		return $this->habilitado;
 	}
 }

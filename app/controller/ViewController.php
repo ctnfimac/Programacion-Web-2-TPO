@@ -3,7 +3,8 @@
 class ViewController{
 	private static $view_path = './views/';
 	private $pagina; // indica si estoy en la vista de usuario normal o administrador
-
+	private $seccion = '';
+	
 	public function __construct($pagina){
 		$this->pagina = $pagina;
 	}
@@ -19,7 +20,11 @@ class ViewController{
 		require_once(self::$view_path . $this->pagina . '/overall/head.php');
 		if($view == 'admin') require_once(self::$view_path . $this->pagina . '/overall/header.php');
 		if($operacion=='')require_once(self::$view_path . $this->pagina . '.php');
-		else require_once(self::$view_path . $this->pagina . '/operaciones/'.$operacion.'.php');;
+		else require_once(self::$view_path . $this->pagina . '/operaciones/'.$operacion.'_'.$this->seccion.'.php');;
 		require_once(self::$view_path . $this->pagina .'/overall/footer.php');
+	}
+
+	public function set_section($seccion){
+		$this->seccion = $seccion;
 	}
 }

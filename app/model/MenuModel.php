@@ -66,7 +66,7 @@ class MenuModel extends Conexion{
 		$precio = (isset($_POST['precio']) && $_POST['precio'] != "") ? $_POST['precio'] : $_POST['precioActual'];
 
 		if($_FILES['fileImagen']['tmp_name'] != ""){
-			unlink($_POST['fileImagenActual']);
+			if(file_exists($_POST['fileImagenActual'])) unlink($_POST['fileImagenActual']);
 			if(file_exists($imagen)) unlink($imagen);
 			 move_uploaded_file($_FILES["fileImagen"]["tmp_name"], $imagen);
 		  }
@@ -79,7 +79,7 @@ class MenuModel extends Conexion{
 		$this->operacion = $operacion;
 	}
 
-	public function ejecutoOperacion(){
+	public function ejecutarOperacion(){
 		$resultado = $this->operacion;
 		switch($resultado){
 			case 'agregar':

@@ -5,7 +5,7 @@ echo'
 			<div class="col-xs-12 col-md-6 ">
 				<div class="card p-4">
 				<h2 class="text-center text-success">Agregar un nuevo Menu</h2>
-				<form action="index.php?route=admin&operacion=agregar" method="POST" enctype="multipart/form-data">
+				<form action="index.php?route=admin&opcion=menu&operacion=agregar" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="descripcion">Descripcion</label>
 						<input type="text" class="form-control" name="descripcion" placeholder="descripcion" required>

@@ -1,20 +1,30 @@
 <?php
 
+require('Usuario.php');
+
 class Cliente extends Usuario{
-	//private $id;
+	private $id;
 	private $calle;
 	private $numero;
 	private $localidad;
 	// private $id_usuario;
 
-	public function __construct($nombre,$apellido,
+	public function __construct($id_usuario,$nombre,$apellido,
 				$email,$contrasenia,$telefono,$calle,
-				$numero,$localidad){
-		parent::__construct($nombre,$apellido,$email,$contrasenia,$telefono);
+				$numero,$localidad,$habilitado){
+		parent::__construct($id_usuario,$nombre,$apellido,$email,$contrasenia,$telefono,$habilitado);
 		$this->calle = $calle;
 		$this->numero = $numero;
 		$this->localidad = $localidad;
 	}
+
+	public function setId($id){
+		$this->id = $id;
+	}
+
+	// public function getId(){
+	// 	return $this->id = $id;
+	// }
 
 	public function getCalle(){
 		return $this->calle;

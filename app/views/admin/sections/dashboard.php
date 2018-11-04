@@ -88,6 +88,7 @@ foreach($menus as $menu){
 	</tr>';
 }
 
+
 $tabla = '
 <!-- DataTables Example -->
 	<div class="card mb-3">
