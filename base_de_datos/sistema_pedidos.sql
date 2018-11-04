@@ -47,8 +47,9 @@ create table Repartidor (
 );
 
 create table Comercio (
-	id int primary key auto_increment,
-	cuit varchar(11) not null
+	id_comercio int primary key,
+	cuit varchar(11) not null,
+	CONSTRAINT FK_COMERCIO_USER FOREIGN KEY (id_comercio) REFERENCES Usuario(id)
 );
 
 create table Gerente (
@@ -56,7 +57,7 @@ create table Gerente (
 	id_usuario int not null,
 	id_comercio int not null,
 	CONSTRAINT FK_GERENTE_USER FOREIGN KEY (id_usuario) REFERENCES Usuario(id),
-	CONSTRAINT FK_COMERCIO_ADMIN FOREIGN KEY (id_comercio) REFERENCES Comercio(id)
+	CONSTRAINT FK_COMERCIO_ADMIN FOREIGN KEY (id_comercio) REFERENCES Comercio(id_comercio)
 );
 
 create table Admin (
@@ -69,7 +70,7 @@ create table Sucursal (
 	id int primary key,
 	cuit varchar(11),
 	id_comercio int not null,
-	CONSTRAINT FK_SUCURSAL_COMERCIO FOREIGN KEY (id_comercio) REFERENCES Comercio(id)
+	CONSTRAINT FK_SUCURSAL_COMERCIO FOREIGN KEY (id_comercio) REFERENCES Comercio(id_comercio)
 );
 
 -- create table Precio (
@@ -138,10 +139,10 @@ insert into Admin(id, id_usuario) values
 
 
 insert into Menu(descripcion,imagen,precio) 
-values ('pizza de muzarella','./public/img/menu/menu02.jpg',220),
-	   ('Tostadas de jamon y queso','./public/img/menu/menu04.jpg',49.99),
-	   ('Empanadas','./public/img/menu/menu07.jpg',180),
-	   ('Saguchitos de miga','./public/img/menu/menu08.jpg',99.99);
+values ('pizza de muzarella','./public/img/menu/menu03.jpg',220),
+	   ('Tostadas de jamon y queso','./public/img/menu/menu05.jpg',49.99),
+	   ('Empanadas','./public/img/menu/menu06.jpg',180),
+	   ('Saguchitos de miga','./public/img/menu/menu07.jpg',99.99);
 
 INSERT INTO Oferta(fecha, id_menu) 
 VALUES ("20181104", 1),

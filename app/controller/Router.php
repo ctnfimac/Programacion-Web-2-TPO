@@ -44,6 +44,7 @@ class Router{
 						$seccion = new RepartidorModel();
 						break;
 					case 'comercio':
+						$seccion = new ComercioModel();
 						break;
 					default:
 						$seccion = new MenuModel();

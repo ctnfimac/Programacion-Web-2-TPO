@@ -5,8 +5,8 @@ echo'
 		<div class="row justify-content-center">
 			<div class="col-xs-12 col-md-6 ">
 				<div class="card p-4">
-				<h2 class="text-center">Modificación de Repartidor</h2>
-				<form action="index.php?route=admin&opcion=repartidor&operacion=modificar" method="POST" enctype="multipart/form-data">
+				<h2 class="text-center">Modificación del Comercio</h2>
+				<form action="index.php?route=admin&opcion=comercio&operacion=modificar" method="POST" enctype="multipart/form-data">
 					<div class="form-group d-flex align-items-center">
 						<input type="hidden" class="form-control" name="id" value="'.$_GET['id'].'">				
 					</div>
@@ -31,19 +31,9 @@ echo'
 						<input type="hidden" class="form-control" name="telefonoActual" value="'.$_GET['telefono'].'">	
 					</div>
 					<div class="form-group">
-						<label for="dni">Dni</label>
-						<input type="text" class="form-control" name="dni" placeholder="'.$_GET['dni'].'">
-						<input type="hidden" class="form-control" name="dniActual" value="'.$_GET['dni'].'">	
-					</div>
-					<div class="form-group">
-						<label for="cuil">Cuil</label>
-						<input type="text" class="form-control" name="cuil" placeholder="'.$_GET['cuil'].'">
-						<input type="hidden" class="form-control" name="cuilActual" value="'.$_GET['cuil'].'">	
-					</div>
-					<div class="form-group">
-						<label for="fecha_nacimiento">nacimiento</label>
-						<input type="text" class="form-control" name="fecha_nacimiento" placeholder="'.$_GET['fecha_nacimiento'].'">
-						<input type="hidden" class="form-control" name="nacimientoActual" value="'.$_GET['fecha_nacimiento'].'">	
+						<label for="cuit">Cuit</label>
+						<input type="text" class="form-control" name="cuit" placeholder="'.$_GET['cuit'].'">
+						<input type="hidden" class="form-control" name="cuitActual" value="'.$_GET['cuit'].'">	
 					</div>
 					<input type="submit" value="Modificar" class="btn btn-primary">
 					<a class="btn bg-warning text-white" href="index.php?route=admin">Cancelar</a>

@@ -5,7 +5,7 @@ echo'
 		<div class= "row justify-content-center mt-4">
 		<div class="alert alert-dismissible alert-warning p-2">
 			<h4 class="alert-heading">Precaución!</h4>
-			<p class="mb-0">Realmente quiere eliminar el menu de la base de datos?
+			<p class="mb-0">Realmente quiere eliminar el cliente de la base de datos?
 			
 			<table class="table table-hover">
 				<thead>
