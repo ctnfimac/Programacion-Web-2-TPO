@@ -133,4 +133,13 @@ class ClienteModel extends Conexion{
 	}
 
 	
+	public function habilitar($habilitar){
+		if(isset($_GET['id'])){
+			$id = $_GET['id'];
+			if($habilitar == 1) $this->query = "UPDATE usuario SET habilitado = 1 WHERE id='$id'";
+			else $this->query = "UPDATE usuario SET habilitado = 0 WHERE id='$id'";
+			$this->set_query();
+		}
+	}		
+	
 }

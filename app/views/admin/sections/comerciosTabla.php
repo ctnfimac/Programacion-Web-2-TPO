@@ -6,6 +6,11 @@ $Comercios = $comercioModel->mostrarComercios();
 $infoComercios = '';
 foreach($Comercios as $comercio){
 	$habilitado = $comercio->getHabilitado() == 1 ? 'Si' : 'No';
+	if(!$comercio->getHabilitado()){
+		$btn = '<a href="index.php?route=admin&opcion=comercio&habilitar=1&id='.$comercio->getId().'." class="btn text-white btn-success">Habilitar</a>';
+	}else{
+		$btn = '<a href="index.php?route=admin&opcion=comercio&habilitar=0&id='.$comercio->getId().'." class="btn text-white btn-warning">Desabilitar</a>';
+	}
 	$infoComercios .= '<tr>
 		<td>'.$comercio->getId().'</td>
 		<td>'.$comercio->getNombre().'</td>
@@ -21,6 +26,7 @@ foreach($Comercios as $comercio){
 							'&telefono='.$comercio->getTelefono().'&cuit='.$comercio->getCuit().'&id='.$comercio->getId().'." class="btn text-white btn-danger">Eliminar</a>
 				<a href="index.php?route=admin&opcion=comercio&operacion=modificacion&nombre='.$comercio->getNombre().'&apellido='.$comercio->getApellido().'&email='.$comercio->getEmail().
 							'&telefono='.$comercio->getTelefono().'&cuit='.$comercio->getCuit().'&id='.$comercio->getId().'." class="btn text-white btn-primary">Modificar</a>
+				'.$btn.'
 			</div>
 		</td>
 	</tr>';

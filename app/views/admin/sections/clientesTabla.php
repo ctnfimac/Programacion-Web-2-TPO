@@ -6,6 +6,11 @@ $clientes = $clienteModel->mostrarClientes();
 $infoClientes = '';
 foreach($clientes as $cliente){
 	$habilitado = $cliente->getHabilitado() == 1 ? 'Si' : 'No';
+	if(!$cliente->getHabilitado()){
+		$btn = '<a href="index.php?route=admin&opcion=cliente&habilitar=1&id='.$cliente->getId().'." class="btn text-white btn-success">Habilitar</a>';
+	}else{
+		$btn = '<a href="index.php?route=admin&opcion=cliente&habilitar=0&id='.$cliente->getId().'." class="btn text-white btn-warning">Desabilitar</a>';
+	}
 	$infoClientes .= '<tr>
 		<td>'.$cliente->getId().'</td>
 		<td>'.$cliente->getNombre().'</td>
@@ -25,6 +30,7 @@ foreach($clientes as $cliente){
 				<a href="index.php?route=admin&opcion=cliente&operacion=modificacion&nombre='.$cliente->getNombre().'&apellido='.$cliente->getApellido().'&email='.$cliente->getEmail().
 							'&telefono='.$cliente->getTelefono().'&calle='.$cliente->getCalle().'&numero='.$cliente->getNumero().
 							'&localidad='.$cliente->getLocalidad().'&id='.$cliente->getId().'." class="btn text-white btn-primary">Modificar</a>
+				'.$btn.'
 			</div>
 		</td>
 	</tr>';

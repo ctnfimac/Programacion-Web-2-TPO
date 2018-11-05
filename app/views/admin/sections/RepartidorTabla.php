@@ -6,6 +6,11 @@ $repartidores = $repartidorModel->mostrarRepartidores();
 $infoRepartidores = '';
 foreach($repartidores as $repartidor){
 	$habilitado = $repartidor->getHabilitado() == 1 ? 'Si' : 'No';
+	if(!$repartidor->getHabilitado()){
+		$btn = '<a href="index.php?route=admin&opcion=repartidor&habilitar=1&id='.$repartidor->getId().'." class="btn text-white btn-success">Habilitar</a>';
+	}else{
+		$btn = '<a href="index.php?route=admin&opcion=repartidor&habilitar=0&id='.$repartidor->getId().'." class="btn text-white btn-warning">Desabilitar</a>';
+	}
 	$infoRepartidores .= '<tr>
 		<td>'.$repartidor->getId().'</td>
 		<td>'.$repartidor->getNombre().'</td>
@@ -25,6 +30,7 @@ foreach($repartidores as $repartidor){
 				<a href="index.php?route=admin&opcion=repartidor&operacion=modificacion&nombre='.$repartidor->getNombre().'&apellido='.$repartidor->getApellido().'&email='.$repartidor->getEmail().
 							'&telefono='.$repartidor->getTelefono().'&fecha_nacimiento='.$repartidor->getFechaNacimiento().'&dni='.$repartidor->getDni().
 							'&cuil='.$repartidor->getCuil().'&id='.$repartidor->getId().'." class="btn text-white btn-primary">Modificar</a>
+				'.$btn.'
 			</div>
 		</td>
 	</tr>';

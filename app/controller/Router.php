@@ -54,6 +54,7 @@ class Router{
 				//$menuModel->setOperacion($operacion);// alta,baja,modificacion
 				//$operacion_ejecutada = $menuModel->ejecutoOperacion();
 				//$menuModel = new MenuModel();
+				if(isset($_GET['habilitar'])) $seccion->habilitar($_GET['habilitar']);
 				$seccion->setOperacion($operacion);// alta,baja,modificacion
 				$operacion_ejecutada = $seccion->ejecutarOperacion();
 				$view_controller->load_view('admin',$operacion_ejecutada);
