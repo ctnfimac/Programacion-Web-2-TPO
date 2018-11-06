@@ -42,9 +42,15 @@ class AdminModel extends Conexion{
 			$_SESSION['usuario'] = 'comercio';
 		}
 
-		// $RepartidorModel = new RepartidorModel();
-		// $RepartidorModel->query = "SELECT * FROM repartidor WHERE id_usuario = '$id'";
-		// if($RepartidorModel->get_query() != null) $this->seccion = 'repartidor';
+		$repartidorModel = new RepartidorModel();
+		$repartidorModel->query = "SELECT * FROM repartidor WHERE id_usuario = '$id'";
+		$tabla = $repartidorModel->get_query() ;
+		//echo 'antes';
+		while($fila = $tabla->fetch_assoc()) {
+			$this->seccion = 'repartidor';
+			$_SESSION['usuario'] = 'repartidor';
+		}
+	
 	}
 
 	public function alta(){
