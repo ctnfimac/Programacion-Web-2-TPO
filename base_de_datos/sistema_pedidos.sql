@@ -43,6 +43,7 @@ create table Repartidor (
 	fecha_nacimiento date default '19870529',
 	dni varchar(8) not null,
 	cuil varchar(11) not null,
+	estado int(1) default 0,
     CONSTRAINT FK_REPARTIDOR_USER FOREIGN KEY (id_usuario) REFERENCES Usuario(id)
 );
 

@@ -6,6 +6,7 @@ $repartidores = $repartidorModel->mostrarRepartidores();
 $infoRepartidores = '';
 foreach($repartidores as $repartidor){
 	$habilitado = $repartidor->getHabilitado() == 1 ? 'Si' : 'No';
+	$estado= $repartidor->getEstado() == 1 ? 'Si' : 'No';
 	if(!$repartidor->getHabilitado()){
 		$btn = '<a href="index.php?route=admin&opcion=repartidor&habilitar=1&id='.$repartidor->getId().'." class="btn text-white btn-success">Habilitar</a>';
 	}else{
@@ -21,6 +22,7 @@ foreach($repartidores as $repartidor){
 		<td>'.$repartidor->getFechaNacimiento().'</td>
 		<td>'.$repartidor->getDni().'</td>
 		<td>'.$repartidor->getCuil().'</td>
+		<td>'.$estado.'</td>
 		<td>'.$habilitado.'</td>
 		<td class="align-middle">
 			<div class="btn-group" role="group">
@@ -56,6 +58,7 @@ $tablaRepartidores = '
 						<th>fecha de nacimiento</th>
 						<th>d.n.i</th>
 						<th>CUIL</th>
+						<th>activo</th>
 						<th>habilitado</th>
 						<th>Operación</th>
 					</tr>

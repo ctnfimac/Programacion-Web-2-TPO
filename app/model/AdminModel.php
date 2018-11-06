@@ -49,6 +49,8 @@ class AdminModel extends Conexion{
 		while($fila = $tabla->fetch_assoc()) {
 			$this->seccion = 'repartidor';
 			$_SESSION['usuario'] = 'repartidor';
+			$repartidorModel = new RepartidorModel();
+			//$repartidorModel->activar();
 		}
 	
 	}

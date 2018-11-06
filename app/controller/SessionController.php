@@ -19,6 +19,10 @@ class SessionController{
 					$this->ruta = $this->session->getSeccion();
 					if($usuario_buscado != false) {
 						$_SESSION['admin'] = $usuario_buscado ;
+						if($_SESSION['usuario'] == 'repartidor'){
+							$repartidorModel = new RepartidorModel();
+							$repartidorModel->activar();
+						}
 						if($recordarme == 1) setcookie("session",$usuario_buscado , time()+30);
 					}
 				}
@@ -43,6 +47,10 @@ class SessionController{
 
 	public function logout(){
 		session_start();
+		if($_SESSION['usuario'] == 'repartidor'){
+			$repartidorModel = new RepartidorModel();
+			$repartidorModel->desactivar();
+		}
 		session_unset();
 		session_destroy();
 		setcookie ("session", "", time() - 3600);

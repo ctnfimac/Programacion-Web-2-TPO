@@ -117,13 +117,13 @@ class RepartidorModel extends Conexion{
 		$matriz = array();
 		$contador = 0;
 		$this->query = "SELECT  u.id, u.nombre, u.apellido, u.email, u.contrasenia, u.telefono, u.habilitado,
-								r.fecha_nacimiento, r.dni, r.cuil
+								r.fecha_nacimiento, r.dni, r.cuil , r.estado
 						FROM usuario u JOIN 
 							 repartidor r ON r.id_usuario = u.id";
 		$tabla = $this->get_query();
 		while($fila = $tabla->fetch_assoc()){
 			 $repartidor = new Repartidor($fila['id'],$fila['nombre'],$fila['apellido'],$fila['email'],$fila['contrasenia'],$fila['telefono'],
-									$fila['fecha_nacimiento'],$fila['dni'], $fila['cuil'],$fila['habilitado']);
+									$fila['fecha_nacimiento'],$fila['dni'], $fila['cuil'],$fila['habilitado'], $fila['estado']);
 			 $matriz[$contador] = $repartidor;
 			 $contador++;
 		}
@@ -139,4 +139,37 @@ class RepartidorModel extends Conexion{
 			header('location:index.php?route=admin&tabla=repartidores');
 		}
 	}	
+
+	public function getEstado(){
+		$nombre = $_SESSION['admin'];
+		$this->query = "SELECT r.estado 
+						FROM repartidor r JOIN
+							 usuario u ON u.id = r.id_usuario
+						WHERE u.nombre ='$nombre'";
+		$tabla = $this->get_query();
+		while($fila = $tabla->fetch_assoc()){
+			$habilitado = $fila['estado'];
+		}
+		return $habilitado;
+	}
+
+	public function activar(){
+		$nombre = $_SESSION['admin'];
+		$this->query = "UPDATE repartidor SET estado = 1 
+						WHERE id_usuario = (
+							SELECT u.id FROM usuario u
+							WHERE u.nombre = '$nombre'
+						)";
+		$this->set_query();
+	}
+
+	public function desactivar(){
+		$nombre = $_SESSION['admin'];
+		$this->query = "UPDATE repartidor SET estado = 0 
+						WHERE id_usuario = (
+							SELECT u.id FROM usuario u
+							WHERE u.nombre = '$nombre'
+						)";
+		$this->set_query();
+	}
 }

@@ -8,5 +8,5 @@ if(isset($_GET['tabla']) && $_GET['tabla'] == 'pedidos'){
 	//printf($tablaMenus);
 }else{
 	require_once('repartidor/sections/estado.php');
-	printf($estado);
+	printf($estado,$actividad);
 }
