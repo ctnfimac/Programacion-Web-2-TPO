@@ -2,9 +2,11 @@
 
 class SessionController{
 	private $session;
+	private $ruta = null;
 
 	public function __construct(){
 		$this->session = new AdminModel();
+		//$this->ruta = 'home';
 		session_start();
 	}
 
@@ -14,6 +16,7 @@ class SessionController{
 				$recordarme = (isset($_POST['recordarme'])) ? 1 : 0 ;
 				if(isset($_POST['email']) && isset($_POST['password'])){
 					$usuario_buscado =  $this->session->buscarUsuario($_POST['email'],$_POST['password']);
+					$this->ruta = $this->session->getSeccion();
 					if($usuario_buscado != false) {
 						$_SESSION['admin'] = $usuario_buscado ;
 						if($recordarme == 1) setcookie("session",$usuario_buscado , time()+30);
@@ -21,6 +24,10 @@ class SessionController{
 				}
 			return $usuario_buscado;
 		}else return true;
+	}
+
+	public function getRuta(){
+		return $this->ruta;
 	}
 
 	private function verificarSession(){
@@ -36,6 +43,7 @@ class SessionController{
 
 	public function logout(){
 		session_start();
+		session_unset();
 		session_destroy();
 		setcookie ("session", "", time() - 3600);
 		header('location: ./');

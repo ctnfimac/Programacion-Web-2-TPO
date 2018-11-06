@@ -10,15 +10,39 @@ class MenuModel extends Conexion{
 	public function mostrarMenus(){
 		$matriz = array();
 		$contador = 0;
-		$this->query = "SELECT * FROM menu";
+		// $this->query = "SELECT * FROM menu";
+		$this->query = "SELECT m.id, m.descripcion, m.imagen, m.precio, u.nombre as comercio
+						FROM menu m JOIN
+							 comercio c ON c.id_comercio = m.id_comercio JOIN
+							 usuario u ON u.id = c.id_comercio ";
 		$tabla = $this->get_query();
 		while($fila = $tabla->fetch_assoc()){
-			 $menu = new Menu($fila['id'],$fila['descripcion'],$fila['imagen'],$fila['precio']);
+			 $menu = new Menu($fila['id'],$fila['descripcion'],$fila['imagen'],$fila['precio'],$fila['comercio']);
 			 $matriz[$contador] = $menu;
 			 $contador++;
 		}
 		return $matriz;
 	}
+
+	public function mostrarMenusDeUnComercio(){
+		$comercio = isset($_SESSION['admin']) ?  $_SESSION['admin'] : '';
+		$matriz = array();
+		$contador = 0;
+		// $this->query = "SELECT * FROM menu";
+		$this->query = "SELECT m.id, m.descripcion, m.imagen, m.precio, u.nombre as comercio
+						FROM menu m JOIN
+							 comercio c ON c.id_comercio = m.id_comercio JOIN
+							 usuario u ON u.id = c.id_comercio ";
+		if($comercio != '') $this->query .= " WHERE u.nombre = '$comercio'";
+		$tabla = $this->get_query();
+		while($fila = $tabla->fetch_assoc()){
+			 $menu = new Menu($fila['id'],$fila['descripcion'],$fila['imagen'],$fila['precio'],$fila['comercio']);
+			 $matriz[$contador] = $menu;
+			 $contador++;
+		}
+		return $matriz;
+	}
+
 
 	public function mostrarRecomendaciones(){
 		$matriz = array();
@@ -26,7 +50,7 @@ class MenuModel extends Conexion{
 		$this->query = "SELECT * FROM menu LIMIT 3";
 		$tabla = $this->get_query();
 		while($fila = $tabla->fetch_assoc()){
-			 $menu = new Menu($fila['id'],$fila['descripcion'],$fila['imagen'],$fila['precio']);
+			 $menu = new Menu($fila['id'],$fila['descripcion'],$fila['imagen'],$fila['precio'],$fila['id_comercio']);
 			 $matriz[$contador] = $menu;
 			 $contador++;
 		}
@@ -42,8 +66,15 @@ class MenuModel extends Conexion{
 		if(file_exists($url_img)) unlink($url_img);
 			move_uploaded_file($_FILES["fileImagen"]["tmp_name"], $url_img);
 
-		$this->query = "INSERT INTO menu (descripcion,imagen,precio) VALUES ('$descripcion','$url_img','$precio')";
+		$comercio = $_SESSION['admin'];
+		$this->query = "INSERT INTO menu (descripcion,imagen,precio,id_comercio) VALUES ('$descripcion','$url_img','$precio',
+											(SELECT u.id 
+											 FROM usuario u
+											 WHERE u.nombre = '$comercio'))";
 		$this->set_query();
+
+		$route = $_GET['route'];
+		header('location:index.php?route='.$route.'&tabla=menus');
 	}
 
 
@@ -53,10 +84,17 @@ class MenuModel extends Conexion{
 		$resultado = $this->get_query();
 		$registro = $resultado->fetch_assoc();
 		$url = $registro['imagen'];
+
+		// primero elimino la oferta si es que existe
+		$this->query = "DELETE FROM oferta WHERE id_menu='$id'";
+		$this->set_query();
+
 		$this->query = "DELETE FROM menu WHERE id='$id'";
 		$this->set_query();
 		if(file_exists($url)) unlink($url);
-		//	unlink($url);
+
+		$route = $_GET['route'];
+		header('location:index.php?route='.$route.'&tabla=menus');
 	}
 
 	protected function modificacion(){
@@ -73,6 +111,10 @@ class MenuModel extends Conexion{
 
 		$this->query = " UPDATE menu SET descripcion = '$descripcion', imagen = '$imagen', precio = '$precio' WHERE id = '$id' ";
 		$this->set_query();	
+		//header('location:index.php?route=admin&tabla=menus');
+		$route = $_GET['route'];
+		//echo 'ruta: ' . $route;
+		header('location:index.php?route='.$route.'&tabla=menus');
 	}
 
 	public function setOperacion($operacion){
@@ -104,7 +146,6 @@ class MenuModel extends Conexion{
 		while($fila = $tabla->fetch_assoc()){
 			 $precio = $fila['precio'];
 		}
-		// return $matriz;
 		return $precio;
 	}
 
@@ -113,9 +154,8 @@ class MenuModel extends Conexion{
 		$this->query = "SELECT * FROM menu WHERE id='$id' LIMIT 1";
 		$tabla = $this->get_query();
 		while($fila = $tabla->fetch_assoc()){
-			 $menu = new Menu($fila['id'],$fila['descripcion'],$fila['imagen'],$fila['precio']);
+			 $menu = new Menu($fila['id'],$fila['descripcion'],$fila['imagen'],$fila['precio'],$fila['id_comercio']);
 		}
-		// return $matriz;
 		return $menu;
 	}
 }

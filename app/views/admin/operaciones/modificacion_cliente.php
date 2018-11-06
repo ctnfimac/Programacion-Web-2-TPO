@@ -46,7 +46,7 @@ echo'
 						<input type="hidden" class="form-control" name="localidadActual" value="'.$_GET['localidad'].'">	
 					</div>
 					<input type="submit" value="Modificar" class="btn btn-primary">
-					<a class="btn bg-warning text-white" href="index.php?route=admin">Cancelar</a>
+					<a class="btn bg-warning text-white" href="index.php?route=admin&tabla=clientes">Cancelar</a>
 				</form>
 				</div>
 			</div>

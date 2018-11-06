@@ -31,7 +31,7 @@ echo'
 			</table>
 			
 			<a href="index.php?route=admin&opcion=repartidor&operacion=eliminar&id='.$_GET['id'].'" class="alert-link btn bg-success text-white">Aceptar</a>
-			<a href="index.php?route=admin" class="alert-link btn bg-warning text-white">Cancelar</a>
+			<a href="index.php?route=admin&tabla=repartidores" class="alert-link btn bg-warning text-white">Cancelar</a>
 		</div>
 		</div> 
 	</div>

@@ -29,11 +29,11 @@ create table Usuario (
 );
 
 create table Cliente (
-	id int primary key auto_increment,
+	-- id int primary key auto_increment,
+	id_usuario int primary key,
 	calle varchar(30) not null,
 	numero varchar(30) not null,
 	id_localidad int,
-    id_usuario int not null,
     CONSTRAINT FK_CLIENTE_USER FOREIGN KEY (id_usuario) REFERENCES Usuario(id),
 	CONSTRAINT FK_USUARIO_LOCALIDAD FOREIGN KEY (id_localidad) REFERENCES Localidad(id)
 );
@@ -60,9 +60,9 @@ create table Gerente (
 	CONSTRAINT FK_COMERCIO_ADMIN FOREIGN KEY (id_comercio) REFERENCES Comercio(id_comercio)
 );
 
-create table Admin (
-	id int primary key,
-	id_usuario int not null,
+create table Administrador (
+	id_usuario int primary key,
+	usuario varchar(20) not null,
 	CONSTRAINT FK_ADMIN_USER FOREIGN KEY (id_usuario) REFERENCES Usuario(id)
 );
 
@@ -89,7 +89,9 @@ create table Menu (
 	id int primary key auto_increment,
 	descripcion varchar(60),
 	imagen varchar(80),
-	precio double
+	precio double not null,
+	id_comercio int,
+	CONSTRAINT FK_COMERCIO_ID FOREIGN KEY (id_comercio) REFERENCES Comercio(id_comercio)
 );
 
 create table Productos_Menu (
@@ -105,7 +107,7 @@ create table Pedido (
 	id_cliente int,
 	id_menu int,
 	CONSTRAINT FK_PEDIDO_MENU FOREIGN KEY (id_menu) REFERENCES Menu(id),
-	CONSTRAINT FK_PEDIDO_CLIENTE FOREIGN KEY (id_menu) REFERENCES Cliente(id),
+	CONSTRAINT FK_PEDIDO_CLIENTE FOREIGN KEY (id_cliente) REFERENCES Cliente(id_usuario),
 	CONSTRAINT FK_PEDIDO_SUCURSAL FOREIGN KEY (id_sucursal) REFERENCES Sucursal(id)
 );
 
@@ -122,31 +124,10 @@ create table Entrega (
 create table Oferta (
 	id int primary key auto_increment,
 	fecha date not null unique,
-	-- fecha_fin datetime not null,
 	id_menu int not null,
 	CONSTRAINT FK_MENU_OFERTA FOREIGN KEY (id_menu) REFERENCES Menu(id)
 );
 
-insert into Usuario(id, nombre, apellido, email, contrasenia) values
-(1, 'Alexander', 'Prada', 'notengoemail@gmail.com', 'alex123'),
-(2, 'Christian', 'Peralta', 'notengoemail2@gmail.com', '123'),
-(3, 'Martin', 'Garra', 'notengoemail3@gmail.com', 'martin123');
-
-insert into Admin(id, id_usuario) values
-(1, 1),
-(2, 2),
-(3, 3);
-
-
-insert into Menu(descripcion,imagen,precio) 
-values ('pizza de muzarella','./public/img/menu/menu03.jpg',220),
-	   ('Tostadas de jamon y queso','./public/img/menu/menu05.jpg',49.99),
-	   ('Empanadas','./public/img/menu/menu06.jpg',180),
-	   ('Saguchitos de miga','./public/img/menu/menu07.jpg',99.99);
-
-INSERT INTO Oferta(fecha, id_menu) 
-VALUES ("20181104", 1),
-	   ("20181030", 2);
 
 INSERT INTO localidad(descripcion)
 VALUES ('liniers'),
@@ -154,6 +135,51 @@ VALUES ('liniers'),
 	   ('casanova'),
 	   ('ramos mejia'),
 	   ('san justo');
+
+insert into Usuario(nombre, apellido, email, contrasenia, telefono, habilitado ) values
+('Alexander', 'Prada', 'notengoemail@gmail.com', 'alex123','',''),
+('Christian', 'Peralta', 'notengoemail2@gmail.com', '123','',''),
+('Martin', 'Garra', 'notengoemail3@gmail.com', 'martin123','',''),
+('juan', 'Boliche', 'juan@hotmail.com', 'jun','46446645',1),
+('eli', 'Pradas', 'eli@gmail.com', 'abc','46446646',1),
+('Luz', 'Moreno', 'luz@gmail.com', 'luz','46446647',1),
+('Carrefour', '', 'carrefour@gmail.com', 'car','56446640',''),
+('Jumbo', '', 'jumbo@gmail.com', 'jum','56446641',''),
+('hugo', 'Perez', 'hugo@gmail.com', 'hug','1560010001',''),
+('Mario', 'Bros', 'mario@gmail.com', 'mar','1560010001','');
+
+
+INSERT INTO repartidor(id_usuario, fecha_nacimiento, dni, cuil)
+VALUES (9,'19900821','40320123','20403201231'),
+	   (10,'20000115','45600120','20200001158');
+
+INSERT INTO comercio(id_comercio,cuit)
+VALUES(7,'401234567991'),
+	  (8,'501234567994');
+
+INSERT INTO cliente(id_usuario,calle,numero,id_localidad) 
+VALUES (4,'las tunas','11122',1),
+	   (5,'Arieta','546',3),
+	   (6,'Lartigay','2800',4);
+
+insert into Administrador(id_usuario, usuario) values
+(1,'ap'),
+(2,'ctn'),
+(3,'mg');
+
+
+insert into Menu(descripcion,imagen,precio,id_comercio) 
+values ('pizza de muzarella','./public/img/menu/menu03.jpg',220,7),
+	   ('Tostadas de jamon y queso','./public/img/menu/menu05.jpg',49.99,8),
+	   ('Empanadas','./public/img/menu/menu06.jpg',180,8),
+	   ('Saguchitos de miga','./public/img/menu/menu07.jpg',99.99,7);
+
+INSERT INTO Oferta(fecha, id_menu) 
+VALUES ("20181106", 1),
+	   ("20181030", 2);
+
+
+
 -- create table Oferta (
 -- 	id int primary key,
 -- 	fecha_inicio datetime not null,

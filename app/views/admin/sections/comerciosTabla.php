@@ -14,7 +14,6 @@ foreach($Comercios as $comercio){
 	$infoComercios .= '<tr>
 		<td>'.$comercio->getId().'</td>
 		<td>'.$comercio->getNombre().'</td>
-		<td>'.$comercio->getApellido().'</td>
 		<td>'.$comercio->getEmail().'</td>
 		<td>'.$comercio->getContrasenia().'</td>
 		<td>'.$comercio->getTelefono().'</td>
@@ -44,8 +43,7 @@ $tablaComercios = '
 				<thead>
 					<tr>
 						<th>id</th>
-						<th>nombre</th>
-						<th>apellido</th>
+						<th>Comercio</th>
 						<th>email</th>
 						<th>contrasenia</th>
 						<th>teléfono</th>

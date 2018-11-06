@@ -46,7 +46,7 @@ echo'
 						<input type="hidden" class="form-control" name="nacimientoActual" value="'.$_GET['fecha_nacimiento'].'">	
 					</div>
 					<input type="submit" value="Modificar" class="btn btn-primary">
-					<a class="btn bg-warning text-white" href="index.php?route=admin">Cancelar</a>
+					<a class="btn bg-warning text-white" href="index.php?route=admin&tabla=repartidores">Cancelar</a>
 				</form>
 				</div>
 			</div>

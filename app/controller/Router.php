@@ -9,6 +9,9 @@ class Router{
 		//echo $usuario == true ? 'existe' : 'no existe';
 		//echo '<br>' .$_SESSION['admin'] . '<br>';
 		//$this->route = ($usuario == true && $route == 'admin' )? 'admin' : $route;
+		$route = $session->getRuta() != null ? $session->getRuta() : $route;
+		//$route = isset($_SESSION['usuario']) ?  $_SESSION['usuario'] : $route;
+		//echo 'route: ' . $route . '<br>';
 		$this->route($route,$usuario);
 		//echo 'route: ' . $this->route;
 		$view_controller = new ViewController($this->route);
@@ -28,13 +31,6 @@ class Router{
 				break;
 			case 'admin':
 				$opcion = isset($_GET['opcion']) ? $_GET['opcion'] : 'menu';
-				// if(!isset($_POST['opcion'])) $seccion = new MenuModel();
-				// else{
-				// 	//if($_POST['opcion'] == 1 ) $usuario = new ClienteModel();
-				// 	if($_POST['opcion'] == 'cliente' ) $usuario = new ClienteModel();
-				// 	//if($_POST['opcion'] == 3 ) $usuario = new ComercioModel();
-				// }
-				//echo 'opcion: ' . $opcion;
 				$view_controller->set_section($opcion);
 				switch($opcion){
 					case 'cliente':
@@ -46,18 +42,36 @@ class Router{
 					case 'comercio':
 						$seccion = new ComercioModel();
 						break;
+					case 'menu':
+						$seccion = new MenuModel();
+						break;
 					default:
 						$seccion = new MenuModel();
 						break;
 				}
-				//$menuModel = new MenuModel();
-				//$menuModel->setOperacion($operacion);// alta,baja,modificacion
-				//$operacion_ejecutada = $menuModel->ejecutoOperacion();
-				//$menuModel = new MenuModel();
 				if(isset($_GET['habilitar'])) $seccion->habilitar($_GET['habilitar']);
 				$seccion->setOperacion($operacion);// alta,baja,modificacion
 				$operacion_ejecutada = $seccion->ejecutarOperacion();
 				$view_controller->load_view('admin',$operacion_ejecutada);
+				break;
+			case 'comercio':
+				$opcion = isset($_GET['opcion']) ? $_GET['opcion'] : 'menu';
+				$view_controller->set_section($opcion);
+				switch($opcion){
+					case 'comercio':
+						$seccion = new ComercioModel();
+						break;
+					case 'menu':
+						$seccion = new MenuModel();
+						break;
+					default:
+						$seccion = new MenuModel();
+						break;
+				}
+				if(isset($_GET['habilitar'])) $seccion->habilitar($_GET['habilitar']);
+				$seccion->setOperacion($operacion);// alta,baja,modificacion
+				$operacion_ejecutada = $seccion->ejecutarOperacion();
+				$view_controller->load_view('comercio',$operacion_ejecutada);
 				break;
 			case 'registrar':
 				if($_POST['opcion'] == 1 ) $usuario = new ClienteModel();
@@ -83,6 +97,9 @@ class Router{
 		if($usuario == false && $route != 'admin') $this->route = $route;
 		if($usuario == false && $route == 'admin') $this->route = 'home';
 		if($usuario == true && $route != 'admin')  $this->route = $route;
+		if(isset($_SESSION['usuario']) && $route == 'admin') $this->route = $_SESSION['usuario'];
+		if(isset($_SESSION['usuario']) && $route == 'comercio') $this->route = $_SESSION['usuario'];
+		//echo $_SESSION['usuario'] , $this->route , $route ;
 		//$this->route = ($usuario == true && $route == 'admin' )? 'admin' : $route;
 	}
 }

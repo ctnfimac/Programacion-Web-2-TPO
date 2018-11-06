@@ -5,12 +5,14 @@ class Menu{
 	private $descripcion;
 	private $imagen;
 	private $precio;
+	private $comercio;
 
-	public function __construct($id,$descripcion,$imagen,$precio){
+	public function __construct($id,$descripcion,$imagen,$precio,$comercio){
 		$this->id = $id;
 		$this->descripcion = $descripcion;
 		$this->imagen = $imagen;
 		$this->precio = $precio;
+		$this->comercio = $comercio;
 	}
 
 	public function getId(){
@@ -27,5 +29,9 @@ class Menu{
 
 	public function getPrecio(){
 		return $this->precio;
+	}
+
+	public function getComercio(){
+		return $this->comercio;
 	}
 }

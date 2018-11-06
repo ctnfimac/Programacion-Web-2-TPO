@@ -6,7 +6,7 @@ echo'
 			<div class="col-xs-12 col-md-6 ">
 				<div class="card p-4">
 				<h2 class="text-center">Modificación del Comercio</h2>
-				<form action="index.php?route=admin&opcion=comercio&operacion=modificar" method="POST" enctype="multipart/form-data">
+				<form action="index.php?route=comercio&opcion=comercio&operacion=modificar" method="POST" enctype="multipart/form-data">
 					<div class="form-group d-flex align-items-center">
 						<input type="hidden" class="form-control" name="id" value="'.$_GET['id'].'">				
 					</div>
@@ -36,7 +36,7 @@ echo'
 						<input type="hidden" class="form-control" name="cuitActual" value="'.$_GET['cuit'].'">	
 					</div>
 					<input type="submit" value="Modificar" class="btn btn-primary">
-					<a class="btn bg-warning text-white" href="index.php?route=admin&tabla=comercios">Cancelar</a>
+					<a class="btn bg-warning text-white" href="index.php?route=comercio&tabla=comercios">Cancelar</a>
 				</form>
 				</div>
 			</div>

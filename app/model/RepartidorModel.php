@@ -66,7 +66,7 @@ class RepartidorModel extends Conexion{
 		$this->set_query();
 		$this->query = "DELETE FROM usuario WHERE id='$id'";
 		$this->set_query();
-
+		header('location:index.php?route=admin&tabla=repartidores');
 	}
 
 	protected function modificacion(){
@@ -87,6 +87,7 @@ class RepartidorModel extends Conexion{
 						 fecha_nacimiento = '$fecha_nacimiento' 
 						 WHERE id_usuario = '$id' ";
 		$this->set_query();
+		header('location:index.php?route=admin&tabla=repartidores');
 	}
 
 	private function verificaContrasenias(){
@@ -135,6 +136,7 @@ class RepartidorModel extends Conexion{
 			if($habilitar == 1) $this->query = "UPDATE usuario SET habilitado = 1 WHERE id='$id'";
 			else $this->query = "UPDATE usuario SET habilitado = 0 WHERE id='$id'";
 			$this->set_query();
+			header('location:index.php?route=admin&tabla=repartidores');
 		}
 	}	
 }

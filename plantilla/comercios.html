@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Administración</title>
+	<title>Panel Comercios</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<!-- <link rel="stylesheet" href="css/style.css"> -->
@@ -14,7 +14,7 @@
 <body>
 	
 		<nav class="navbar navbar-expand navbar-dark bg-dark static-top d-flex justify-content-between">
-			<a class="navbar-brand mr-1" href="index.html">Administración</a>  
+			<a class="navbar-brand mr-1" href="index.html">Comercio</a>  
 			<!-- Navbar -->
 			<ul class="navbar-nav ml-auto ml-md-0">
 				<li class="nav-item dropdown no-arrow">
@@ -41,23 +41,13 @@
 				  </li>
 				  <li class="nav-item">
 					<a class="nav-link" href="tables.html">
-					  <i class="fas fa-fw fa-chart-area"></i>
-					  <span>Solicitudes</span></a>
+					  <i class="fas fa-fw fa-table"></i>
+					  <span>Menus</span></a>
 				  </li>
 				  <li class="nav-item">
 					<a class="nav-link" href="tables.html">
 					  <i class="fas fa-fw fa-table"></i>
-					  <span>Clientes</span></a>
-				  </li>
-				  <li class="nav-item">
-					<a class="nav-link" href="tables.html">
-					  <i class="fas fa-fw fa-table"></i>
-					  <span>Repartidores</span></a>
-				  </li>
-				  <li class="nav-item">
-					<a class="nav-link" href="tables.html">
-					  <i class="fas fa-fw fa-table"></i>
-					  <span>Comercios</span></a>
+					  <span>Administradores</span></a>
 				  </li>
 				</ul>
 		  
@@ -144,8 +134,9 @@
 					<!-- DataTables Example -->
 					<div class="card mb-3">
 					  <div class="card-header">
-						<i class="fas fa-table"></i>
-						Data Table Example</div>
+							<i class="fas fa-table"></i>
+							Tabla de los Menus <a href="index.php?route=admin&operacion=agregacion" class="btn btn-success float-right">agregar menu</a>
+					  </div>
 					  <div class="card-body">
 						<div class="table-responsive">
 						  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -157,6 +148,7 @@
 								<th>Age</th>
 								<th>Start date</th>
 								<th>Salary</th>
+								<th>Operacion</th>
 							  </tr>
 							</thead>
 							<tbody>
@@ -167,6 +159,12 @@
 								<td>61</td>
 								<td>2011/04/25</td>
 								<td>$320,800</td>
+								<td class="align-middle">
+									<div class="btn-group" role="group">
+										<a href="#" class="btn text-white btn-primary">Modificar</a>
+										<a href="#" class="btn text-white btn-danger">Eliminar</a>
+									</div>
+							    </td>
 							  </tr>
 							  <tr>
 								<td>Garrett Winters</td>
@@ -175,6 +173,12 @@
 								<td>63</td>
 								<td>2011/07/25</td>
 								<td>$170,750</td>
+								<td class="align-middle">
+									<div class="btn-group" role="group">
+										<a href="#" class="btn text-white btn-primary">Modificar</a>
+										<a href="#" class="btn text-white btn-danger">Eliminar</a>
+									</div>
+							    </td>
 							  </tr>
 							  <tr>
 								<td>Ashton Cox</td>
@@ -183,6 +187,12 @@
 								<td>66</td>
 								<td>2009/01/12</td>
 								<td>$86,000</td>
+								<td class="align-middle">
+									<div class="btn-group" role="group">
+										<a href="#" class="btn text-white btn-primary">Modificar</a>
+										<a href="#" class="btn text-white btn-danger">Eliminar</a>
+									</div>
+							    </td>
 							  </tr>
 							  
 							</tbody>
