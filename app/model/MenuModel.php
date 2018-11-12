@@ -151,11 +151,27 @@ class MenuModel extends Conexion{
 
 	public function menuPorId($id){
 		$tabla = array();
-		$this->query = "SELECT * FROM menu WHERE id='$id' LIMIT 1";
+		//$this->query = "SELECT * FROM menu WHERE id='$id' LIMIT 1";
+		$this->query = "SELECT m.id, m.descripcion, m.imagen, m.precio , u.nombre comercio
+						FROM menu m JOIN
+							 usuario u ON u.id = m.id_comercio
+						WHERE m.id='$id' LIMIT 1";
 		$tabla = $this->get_query();
+		$menu = null;
 		while($fila = $tabla->fetch_assoc()){
-			 $menu = new Menu($fila['id'],$fila['descripcion'],$fila['imagen'],$fila['precio'],$fila['id_comercio']);
+			 $menu = new Menu($fila['id'],$fila['descripcion'],$fila['imagen'],$fila['precio'],$fila['comercio']);
 		}
 		return $menu;
 	}
+
+	public function buscoIdDeComercioPorMenu($id_menu){
+		$this->query = "SELECT id_comercio FROM menu WHERE id='$id_menu' LIMIT 1";
+		$tabla = $this->get_query();
+		$id_comercio = null;
+		while($fila = $tabla->fetch_assoc()){
+			$id_comercio = $fila['id_comercio'];
+	    }
+	   return $id_comercio;
+	}
+
 }

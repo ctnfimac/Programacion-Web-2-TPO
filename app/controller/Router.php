@@ -6,11 +6,9 @@ class Router{
 	public function __construct($route){
 		$session = new SessionController();
 		$usuario = $session->iniciarSession();
-		//echo $usuario == true ? 'existe' : 'no existe';
-		//echo '<br>' .$_SESSION['admin'] . '<br>';
-		//$this->route = ($usuario == true && $route == 'admin' )? 'admin' : $route;
+		//echo $usuario == true ? 'encontrado' : 'no encontrado' , '<br>';
 		$route = $session->getRuta() != null ? $session->getRuta() : $route;
-		//$route = isset($_SESSION['usuario']) ?  $_SESSION['usuario'] : $route;
+		//echo $session->getRuta() != null ? 'no es null' : 'es null';
 		//echo 'route: ' . $route . '<br>';
 		$this->route($route,$usuario);
 		//echo 'route: ' . $this->route;
@@ -89,6 +87,13 @@ class Router{
 				$operacion_ejecutada = $seccion->ejecutarOperacion();
 				$view_controller->load_view('comercio',$operacion_ejecutada);
 				break;
+			case 'cliente':
+				$opcion = isset($_GET['opcion']) ? $_GET['opcion'] : 'menu';
+				$view_controller->set_section($opcion);
+				$seccion = new ClienteModel();
+				$operacion_ejecutada = $seccion->ejecutarOperacion();
+				$view_controller->load_view('cliente',$operacion_ejecutada);
+				break;
 			case 'registrar':
 				if($_POST['opcion'] == 1 ) $usuario = new ClienteModel();
 				if($_POST['opcion'] == 2 ) $usuario = new RepartidorModel();
@@ -96,6 +101,13 @@ class Router{
 				$usuario->setOperacion($operacion);
 				$usuario->ejecutarOperacion();
 				header('location:index.php');
+				break;
+			case 'pedido':
+				$pedido= new PedidoModel();
+				$pedido->setOperacion($operacion);
+				$pedido->ejecutarOperacion();
+				// $view_controller->load_view('carrito');
+				//header('location:index.php?route=carrito');
 				break;
 			case 'salir':
 				$session = new SessionController();
@@ -113,6 +125,8 @@ class Router{
 		if($usuario == false && $route != 'admin') $this->route = $route;
 		if($usuario == false && $route == 'admin') $this->route = 'home';
 		if($usuario == true && $route != 'admin')  $this->route = $route;
+		if($usuario == false) $this->route = 'home';
+		if($usuario == false && $route == 'carrito')  $this->route = $route;
 		if(isset($_SESSION['usuario']) && $route == 'admin') $this->route = $_SESSION['usuario'];
 		if(isset($_SESSION['usuario']) && $route == 'comercio') $this->route = $_SESSION['usuario'];
 		if(isset($_SESSION['repartidor']) && $route == 'repartidor') $this->route = $_SESSION['usuario'];

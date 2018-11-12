@@ -50,7 +50,7 @@ class CarritoModel{
 
 	private function agregarMenuNuevoAlCarrito($id){
 		//verifico que no exista en la session
-		if(!$this->existeElProductoEnElCarrito($id)){
+		if(!$this->existeElProductoEnElCarrito($id) && $this->perteneceAlMismoComercio($id)){
 			$itemNuevo = array('id' => $id , 'cantidad' => 1);
 			$arrayNuevo = array();
 			foreach($_SESSION['carrito'] as $clave => $valor){
@@ -129,6 +129,26 @@ class CarritoModel{
 			}
 		//}
 		return $existe_producto;
+	}
+
+	private function perteneceAlMismoComercio($id_menu_nuevo){
+		$pertenece = true;
+
+		if(!$this->Vacio()){
+			//aca busco si son del mismo comercio
+			$menu = new MenuModel();
+			$id_comercio = $menu->buscoIdDeComercioPorMenu($id_menu_nuevo);
+			foreach($_SESSION['carrito'] as $clave => $valor){
+				$id_actual = $menu->buscoIdDeComercioPorMenu($valor['id']);
+				if($id_actual != $id_comercio) $pertenece= false;
+			}
+		}//else $pertenece = true;
+		//echo $pertenece == true ? 'pertenece':'no pertenece';
+		return $pertenece;
+	}
+
+	private function Vacio(){
+		return count($_SESSION['carrito']) == 0 ? true : false;
 	}
 
 	public function divercidadDeMenues(){

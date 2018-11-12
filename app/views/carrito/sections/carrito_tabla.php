@@ -13,7 +13,7 @@ $items_carrito = '';
 		<tr>
 			<td><img src="'.$menu->getImagen().'" width=125></td>
 			<td class="align-middle">'.$menu->getDescripcion().'</td>
-			<td class="align-middle">Comercio</td>
+			<td class="align-middle">'.$menu->getComercio().'</td>
 			<td>
 			<div class="btn-group pt-4" role="group" aria-label="Basic example">
 				<input type="text" class="text-center" value="'.$value['cantidad'].'" disabled>
@@ -58,7 +58,7 @@ $carrito_tabla = '
 				<tr>
 				<th class="text-right text-2" colspan="4">TOTAL:</th>
 				<th>'.$carrito->precioParcialDelCarrito().'</th>
-				<th><button class="btn btn-default" class="text-right" type="button">Confirmar pedido</button></th>
+				<th><a href="index.php?route=pedido&operacion=agregar" class="btn btn-default" class="text-right">Confirmar pedido</a></th>
 				</tr>
 			</thead>
 			</table>

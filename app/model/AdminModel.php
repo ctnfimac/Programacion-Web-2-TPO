@@ -49,10 +49,18 @@ class AdminModel extends Conexion{
 		while($fila = $tabla->fetch_assoc()) {
 			$this->seccion = 'repartidor';
 			$_SESSION['usuario'] = 'repartidor';
-			$repartidorModel = new RepartidorModel();
+			//$repartidorModel = new RepartidorModel();
 			//$repartidorModel->activar();
 		}
-	
+
+		$clienteModel = new ClienteModel();
+		$clienteModel->query = "SELECT * FROM cliente WHERE id_usuario = '$id'";
+		$tabla = $clienteModel->get_query() ;
+		//echo 'antes';
+		while($fila = $tabla->fetch_assoc()) {
+			$this->seccion = 'cliente';
+			$_SESSION['usuario'] = 'cliente';
+		}
 	}
 
 	public function alta(){

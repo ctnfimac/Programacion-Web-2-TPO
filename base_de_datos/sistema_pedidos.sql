@@ -67,12 +67,12 @@ create table Administrador (
 	CONSTRAINT FK_ADMIN_USER FOREIGN KEY (id_usuario) REFERENCES Usuario(id)
 );
 
-create table Sucursal (
-	id int primary key,
-	cuit varchar(11),
-	id_comercio int not null,
-	CONSTRAINT FK_SUCURSAL_COMERCIO FOREIGN KEY (id_comercio) REFERENCES Comercio(id_comercio)
-);
+-- create table Sucursal (
+-- 	id int primary key,
+-- 	cuit varchar(11),
+-- 	id_comercio int not null,
+-- 	CONSTRAINT FK_SUCURSAL_COMERCIO FOREIGN KEY (id_comercio) REFERENCES Comercio(id_comercio)
+-- );
 
 -- create table Precio (
 -- 	id int primary key auto_increment,
@@ -103,13 +103,25 @@ create table Productos_Menu (
 );
 
 create table Pedido (
-	id int primary key,
-	id_sucursal int,
+	id int primary key auto_increment,
+	-- id_sucursal int,
+	id_comercio int,
 	id_cliente int,
-	id_menu int,
-	CONSTRAINT FK_PEDIDO_MENU FOREIGN KEY (id_menu) REFERENCES Menu(id),
+	fecha_alta DATE NOT NULL,
+	id_repartidor int,
 	CONSTRAINT FK_PEDIDO_CLIENTE FOREIGN KEY (id_cliente) REFERENCES Cliente(id_usuario),
-	CONSTRAINT FK_PEDIDO_SUCURSAL FOREIGN KEY (id_sucursal) REFERENCES Sucursal(id)
+	-- CONSTRAINT FK_PEDIDO_SUCURSAL FOREIGN KEY (id_sucursal) REFERENCES Sucursal(id)
+	CONSTRAINT FK_PEDIDO_COMERCIO FOREIGN KEY (id_comercio) REFERENCES Comercio(id_comercio),
+	CONSTRAINT FK_PEDIDO_REPARTIDOR FOREIGN KEY (id_repartidor) REFERENCES Repartidor(id_usuario)
+);
+
+
+create table pedido_menus(
+	id_pedido int,
+	id_menu int,
+	primary key(id_pedido,id_menu),
+	CONSTRAINT FK_PEDIDO_MENUS_MENU FOREIGN KEY (id_menu) REFERENCES Menu(id),
+	CONSTRAINT FK_PEDIDO_MENUS_PEDIDO FOREIGN KEY (id_pedido) REFERENCES Pedido(id)
 );
 
 create table Entrega (
@@ -176,7 +188,7 @@ values ('pizza de muzarella','./public/img/menu/menu03.jpg',220,7),
 	   ('Saguchitos de miga','./public/img/menu/menu07.jpg',99.99,7);
 
 INSERT INTO Oferta(fecha, id_menu) 
-VALUES ("20181106", 1),
+VALUES ("20181112", 1),
 	   ("20181030", 2);
 
 

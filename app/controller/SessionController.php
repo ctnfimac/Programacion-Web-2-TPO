@@ -41,7 +41,6 @@ class SessionController{
 			$_SESSION['admin'] = $_COOKIE['session'];
 			$resultado = true;
 		}
-		
 		return $resultado;
 	}
 

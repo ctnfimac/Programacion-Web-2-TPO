@@ -19,7 +19,7 @@ class ViewController{
 		///echo $menuDelDia;
 
 		require_once(self::$view_path . $this->pagina . '/overall/head.php');
-		if($view == 'admin' || $view == 'comercio') require_once(self::$view_path . $this->pagina . '/overall/header.php');
+		if($view == 'admin' || $view == 'comercio' || $view == 'cliente') require_once(self::$view_path . $this->pagina . '/overall/header.php');
 		if($operacion=='')require_once(self::$view_path . $this->pagina . '.php');
 		else require_once(self::$view_path . $this->pagina . '/operaciones/'.$operacion.'_'.$this->seccion.'.php');;
 		require_once(self::$view_path . $this->pagina .'/overall/footer.php');

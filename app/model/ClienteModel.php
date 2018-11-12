@@ -142,6 +142,16 @@ class ClienteModel extends Conexion{
 			$this->set_query();
 			header('location:index.php?route=admin&tabla=clientes');
 		}
-	}		
+	}
+	
+	public function buscarIdPorNombre($nombre){
+		$this->query = "SELECT id FROM Usuario WHERE nombre = '$nombre' LIMIT 1";
+		$tabla = $this->get_query();
+		$id = '';
+		while($fila = $tabla->fetch_assoc()){
+			$id = $fila['id'];
+		}
+		return $id;
+	}
 	
 }
