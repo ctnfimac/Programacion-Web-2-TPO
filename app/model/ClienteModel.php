@@ -153,5 +153,15 @@ class ClienteModel extends Conexion{
 		}
 		return $id;
 	}
+
+	public function obtenerNombreDelCliente($id_cliente){
+		$resultado = false;
+		$this->query = "SELECT nombre FROM usuario WHERE id = '$id_cliente' LIMIT 1";
+		$tabla = $this->get_query();
+		while($row = $tabla->fetch_assoc()){
+			$resultado = $row['nombre'];
+		}
+		return $resultado;
+	}
 	
 }

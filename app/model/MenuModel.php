@@ -157,7 +157,7 @@ class MenuModel extends Conexion{
 							 usuario u ON u.id = m.id_comercio
 						WHERE m.id='$id' LIMIT 1";
 		$tabla = $this->get_query();
-		$menu = null;
+		//$menu = null;
 		while($fila = $tabla->fetch_assoc()){
 			 $menu = new Menu($fila['id'],$fila['descripcion'],$fila['imagen'],$fila['precio'],$fila['comercio']);
 		}

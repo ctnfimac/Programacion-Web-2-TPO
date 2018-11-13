@@ -58,7 +58,7 @@ $carrito_tabla = '
 				<tr>
 				<th class="text-right text-2" colspan="4">TOTAL:</th>
 				<th>'.$carrito->precioParcialDelCarrito().'</th>
-				<th><a href="index.php?route=pedido&operacion=agregar" class="btn btn-default" class="text-right">Confirmar pedido</a></th>
+				<th><a href="index.php?route=pedido&operacion=agregar&precio_total='.$carrito->precioParcialDelCarrito().'" class="btn btn-default" class="text-right">Confirmar pedido</a></th>
 				</tr>
 			</thead>
 			</table>

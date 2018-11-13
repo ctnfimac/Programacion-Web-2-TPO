@@ -108,7 +108,9 @@ create table Pedido (
 	id_comercio int,
 	id_cliente int,
 	fecha_alta DATE NOT NULL,
+	hora_alta TIME not null,
 	id_repartidor int,
+	precio Double,
 	CONSTRAINT FK_PEDIDO_CLIENTE FOREIGN KEY (id_cliente) REFERENCES Cliente(id_usuario),
 	-- CONSTRAINT FK_PEDIDO_SUCURSAL FOREIGN KEY (id_sucursal) REFERENCES Sucursal(id)
 	CONSTRAINT FK_PEDIDO_COMERCIO FOREIGN KEY (id_comercio) REFERENCES Comercio(id_comercio),
@@ -119,6 +121,7 @@ create table Pedido (
 create table pedido_menus(
 	id_pedido int,
 	id_menu int,
+	cantidad int default 1,
 	primary key(id_pedido,id_menu),
 	CONSTRAINT FK_PEDIDO_MENUS_MENU FOREIGN KEY (id_menu) REFERENCES Menu(id),
 	CONSTRAINT FK_PEDIDO_MENUS_PEDIDO FOREIGN KEY (id_pedido) REFERENCES Pedido(id)
@@ -185,7 +188,7 @@ insert into Menu(descripcion,imagen,precio,id_comercio)
 values ('pizza de muzarella','./public/img/menu/menu03.jpg',220,7),
 	   ('Tostadas de jamon y queso','./public/img/menu/menu05.jpg',49.99,8),
 	   ('Empanadas','./public/img/menu/menu06.jpg',180,8),
-	   ('Saguchitos de miga','./public/img/menu/menu07.jpg',99.99,7);
+	   ('Saguchitos de miga','./public/img/menu/menu08.jpg',99.99,7);
 
 INSERT INTO Oferta(fecha, id_menu) 
 VALUES ("20181112", 1),

@@ -134,5 +134,15 @@ class ComercioModel extends Conexion{
 			header('location:index.php?route=admin&tabla=comercios');
 		}
 	}	
+
+	public function obtenerNombreDelComercio($id_comercio){
+		$resultado = false;
+		$this->query = "SELECT nombre FROM usuario WHERE id = '$id_comercio' LIMIT 1";
+		$tabla = $this->get_query();
+		while($row = $tabla->fetch_assoc()){
+			$resultado = $row['nombre'];
+		}
+		return $resultado;
+	}
 	
 }

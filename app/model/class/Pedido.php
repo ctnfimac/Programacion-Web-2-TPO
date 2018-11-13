@@ -3,6 +3,7 @@
 class Pedido{
 	//definir constantes de porcentajes de penalizaciones 0.5 y 
 	//definir constantes de estado del pedido
+	private $id;
 	private $fecha;
 	private $hora;
 	private $cliente;
@@ -16,15 +17,25 @@ class Pedido{
 	private $precio_total;
 	private $menus = array(); //array de id
 
-	public function __construct($fecha, $hora, $cliente, $comercio, $repartidor,
-					$precio_total, $menus){
-		$this->fecha = $fecha;
-		$this->hora = $hora;
+	// public function __construct($fecha, $hora, $cliente, $comercio, $repartidor,
+	// 				$precio_total, $menus){
+	public function __construct($id, $comercio, $cliente, $fecha_alta, $hora_alta ,$repartidor,$precio_total){
+		$this->id = $id;
+		$this->fecha = $fecha_alta;
+		$this->hora = $hora_alta;
 		$this->cliente = $cliente;
 		$this->comercio = $comercio;
 		$this->repartidor = $repartidor;
 		$this->precio_total = $precio_total;
-		$this->menus = $menus;			
+		//$this->menus = $menus;			
+	}
+
+	public function setId($id){
+		$this->id = $id;
+	}
+
+	public function getId(){
+		return $this->id;
 	}
 
 	public function getFecha(){
@@ -79,6 +90,16 @@ class Pedido{
 	
 	public function getEstadoDelPedido(){
 		return $this->estado_del_pedido;
+	}
+
+	public function getEstadoDelPedidoStr(){
+		$estado = 'No tomado';
+
+		if($this->estado_del_pedido == 1 ) $estado = 'No tomado';
+		if($this->estado_del_pedido == 2 ) $estado = 'En proceso';
+		if($this->estado_del_pedido == 3 ) $estado = 'Finalizado';
+
+		return $estado;
 	}
 	
 	public function getPrecioTotal(){
