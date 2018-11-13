@@ -26,6 +26,15 @@ class RepartidorModel extends Conexion{
 				$this->modificacion($id);
 				$resultado = '';
 				break;
+			case 'tomar_pedido':
+				$this->tomar_pedido();
+				break;
+			case 'cancelar_pedido':
+				$this->cancelar_pedido();
+				break;
+			case 'finalizar_pedido':
+				$this->finalizar_pedido();
+				break;
 			default :
 			    //echo 'no hago nada';
 				break;
@@ -171,5 +180,44 @@ class RepartidorModel extends Conexion{
 							WHERE u.nombre = '$nombre'
 						)";
 		$this->set_query();
+	}
+
+
+	private function tomar_pedido(){
+		//cambio el estado 
+		///echo 'estoy en tomar pedido';
+		require_once('PedidoModel.php');
+		$pedido = new PedidoModel();
+		//echo $_SESSION['admin'];
+		$pedido->estadoPedidoTomar($_GET['id_pedido']);
+		header('location:index.php?route=admin&tabla=pedidos_realizados');
+	}
+
+	private function cancelar_pedido(){
+		//cambio el estado 
+		///echo 'estoy en tomar pedido';
+		require_once('PedidoModel.php');
+		$pedido = new PedidoModel();
+		$pedido->estadoPedidoCancelar($_GET['id_pedido']);
+		header('location:index.php?route=admin&tabla=pedidos_realizados');
+	}
+
+	private function finalizar_pedido(){
+		//cambio el estado 
+		///echo 'estoy en tomar pedido';
+		require_once('PedidoModel.php');
+		$pedido = new PedidoModel();
+		$pedido->estadoPedidoFinalizar($_GET['id_pedido']);
+		header('location:index.php?route=admin&tabla=pedidos_realizados');
+	}
+
+	public function obtenerNombreDelRepartidor($id_repartidor){
+		$resultado = false;
+		$this->query = "SELECT nombre FROM usuario WHERE id = '$id_repartidor' LIMIT 1";
+		$tabla = $this->get_query();
+		while($row = $tabla->fetch_assoc()){
+			$resultado = $row['nombre'];
+		}
+		return $resultado;
 	}
 }

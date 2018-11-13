@@ -23,10 +23,15 @@ $cabecera = '
   <div id="wrapper">
 	<!-- Sidebar -->
 	<ul class="sidebar navbar-nav">
-	  <li class="nav-item">
+	  <!--<li class="nav-item">
 			<a class="nav-link" href="index.php?route=admin&tabla=solicitudes">
 			<i class="fas fa-fw fa-chart-area"></i>
 			<span>Solicitudes</span></a>
+		</li>-->
+		<li class="nav-item">
+			<a class="nav-link" href="index.php?route=admin&tabla=tabla_pedidos">
+			<i class="fas fa-fw fa-chart-area"></i>
+			<span>Pedidos</span></a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link" href="index.php?route=admin&tabla=clientes">

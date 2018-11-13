@@ -3,6 +3,7 @@
 $pedidoModel = new PedidoModel();
 $comercioModel = new ComercioModel();
 $clienteModel = new ClienteModel();
+$repartidorModel = new RepartidorModel();
 
 $pedidos = $pedidoModel->mostrarPedidos();
 
@@ -12,8 +13,19 @@ $cont_id = 1;
 foreach($pedidos as $pedido){
 	$comercio = $comercioModel->obtenerNombreDelComercio($pedido->getComercio());
 	$cliente = $clienteModel->obtenerNombreDelCliente($pedido->getCliente());
+	$repartidor =  $repartidorModel->obtenerNombreDelRepartidor($pedido->getRepartidor()) == false ? 'sin asignar' : $repartidorModel->obtenerNombreDelRepartidor($pedido->getRepartidor()) ;
 	$id_pedido = $pedido->getId();
-	$repartidor = $pedido->getRepartidor() == null ? 'sin asignar': $pedido->getRepartidor();
+	//$repartidor = $pedido->getRepartidor() == null ? 'sin asignar': $pedido->getRepartidor();
+	// $disabled = $pedido->getRepartidor() == null ? 'disabled': 'ctn';
+	// $disabled2 = $pedido->getEstadoDelPedido() == 2 ? 'disabled': 'ctn';
+
+	$button = '';
+	if($pedido->getEstadoDelPedido() == 1 )
+		$button = '<a href="index.php?route=repartidor&operacion=tomar_pedido&id_pedido='.$pedido->getId().'" class="btn text-white btn-success mr-2">Tomar Pedido</a>';
+	if($pedido->getEstadoDelPedido() == 2 )	
+		$button = '<a href="index.php?route=repartidor&operacion=cancelar_pedido&id_pedido='.$pedido->getId().'" class="btn text-white btn-danger mr-2">Cancelar</a>
+				   <a href="index.php?route=repartidor&operacion=finalizar_pedido&id_pedido='.$pedido->getId().'" class="btn text-white btn-warning ml-2">Finalizar</a>';
+
 	$info .= '<tr>
 		<td>'.$pedido->getId().'</td>
 		<td>'.$comercio.'</td>
@@ -27,11 +39,10 @@ foreach($pedidos as $pedido){
 			</button> 
 		</td>
 		<td>'.$pedido->getEstadoDelPedidoStr().'</td>
-		<td>$ '.$pedido->getPrecioTotal().'</td>
+		<td>$'.$pedido->getPrecioTotal().'</td>
 		<td class="align-middle">
 			<div class="btn-group" role="group">
-				<a href="#" class="btn text-white btn-success">Tomar Pedido</a>
-				<!--<a href="#" class="btn text-white btn-danger disabled">Eliminar</a>-->
+				'.$button.'
 			</div>
 		</td>
 	</tr>';
@@ -45,7 +56,7 @@ $tablaPedidos = '
 	<div class="card mb-3">
 		<div class="card-header">
 		<i class="fas fa-table"></i>
-		Mis Pedidos
+		Pedidos
 		</div>
 		<div class="card-body">
 		<div class="table-responsive">

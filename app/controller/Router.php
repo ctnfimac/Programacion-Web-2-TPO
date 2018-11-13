@@ -74,14 +74,14 @@ class Router{
 			case 'repartidor':
 				$opcion = isset($_GET['opcion']) ? $_GET['opcion'] : 'menu';
 				$view_controller->set_section($opcion);
-				switch($opcion){
-					case 'repartidor':
+				//switch($opcion){
+				//	case 'repartidor':
 						$seccion = new RepartidorModel();
-						break;
-					default:
-						$seccion = new MenuModel();
-						break;
-				}
+				//		break;
+				//	default:
+				//		$seccion = new MenuModel();
+				//		break;
+				//}
 				if(isset($_GET['habilitar'])) $seccion->habilitar($_GET['habilitar']);
 				$seccion->setOperacion($operacion);// alta,baja,modificacion
 				$operacion_ejecutada = $seccion->ejecutarOperacion();

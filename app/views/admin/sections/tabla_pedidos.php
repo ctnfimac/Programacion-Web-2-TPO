@@ -5,7 +5,7 @@ $comercioModel = new ComercioModel();
 $clienteModel = new ClienteModel();
 $repartidorModel = new RepartidorModel();
 
-$pedidos = $pedidoModel->mostrarPedidosPorCliente();
+$pedidos = $pedidoModel->mostrarPedidos();
 
 $info = '';
 $id_pedido = '';
@@ -95,7 +95,7 @@ function asignarMenus($cont_id, $id_pedido , $pedidoModel){
 			<div class="card mb-3">
 				<div class="card-header">
 				<i class="fas fa-table"></i>
-				Mis Menus
+				Mis Pedidos
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
@@ -131,7 +131,3 @@ function asignarMenus($cont_id, $id_pedido , $pedidoModel){
 		</div>
 		</div>';
 }
-
-
-
-

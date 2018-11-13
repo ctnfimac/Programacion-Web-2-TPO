@@ -13,13 +13,14 @@ class Pedido{
 	private $penalizacion_por_no_tomarPedido = false;
 	private $costo_por_demora = 0;
 	private $costo_por_no_tomarPedido = 0;
-	private $estado_del_pedido = 1; // no tomado, en proceso, no tomado (0,1,2)
+	private $estado_del_pedido; // no tomado, en proceso, no tomado (0,1,2)
 	private $precio_total;
 	private $menus = array(); //array de id
 
 	// public function __construct($fecha, $hora, $cliente, $comercio, $repartidor,
 	// 				$precio_total, $menus){
-	public function __construct($id, $comercio, $cliente, $fecha_alta, $hora_alta ,$repartidor,$precio_total){
+	public function __construct($id, $comercio, $cliente, $fecha_alta, $hora_alta ,
+					$repartidor,$precio_total,$estado_del_pedido = 1){
 		$this->id = $id;
 		$this->fecha = $fecha_alta;
 		$this->hora = $hora_alta;
@@ -27,6 +28,7 @@ class Pedido{
 		$this->comercio = $comercio;
 		$this->repartidor = $repartidor;
 		$this->precio_total = $precio_total;
+		$this->estado_del_pedido = $estado_del_pedido;
 		//$this->menus = $menus;			
 	}
 

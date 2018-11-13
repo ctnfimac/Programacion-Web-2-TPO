@@ -91,23 +91,14 @@ class PedidoModel extends Conexion{
 	public function mostrarPedidos(){
 		$matriz = array();
 		$contador = 0;
-		// $this->query = "SELECT * FROM menu";
-		// $this->query = "SELECT m.id, m.descripcion, m.imagen, m.precio, u.nombre as comercio
-		// 				FROM menu m JOIN
-		// 					 comercio c ON c.id_comercio = m.id_comercio JOIN
-		// 					 usuario u ON u.id = c.id_comercio ";
-		
-	
-		$this->query = "SELECT id, id_comercio, id_cliente, fecha_alta, hora_alta, id_repartidor ,precio
-						FROM pedido";
 
-		// $this->query = "SELECT id, (select nombre from usuario where id = '') id_cliente, fecha_alta, hora_alta, id_repartidor
-		// 				FROM pedido";
+		$this->query = "SELECT id, id_comercio, id_cliente, fecha_alta, hora_alta, id_repartidor ,precio, estado
+						FROM pedido";
 							 
 		$tabla = $this->get_query();
 		while($fila = $tabla->fetch_assoc()){
 			 $pedido = new Pedido($fila['id'],$fila['id_comercio'],$fila['id_cliente'],$fila['fecha_alta'],
-			 				  $fila['hora_alta'],$fila['id_repartidor'],$fila['precio']);
+			 				  $fila['hora_alta'],$fila['id_repartidor'],$fila['precio'],$fila['estado']);
 			 $matriz[$contador] = $pedido;
 			 $contador++;
 		}
@@ -122,6 +113,25 @@ class PedidoModel extends Conexion{
 		$this->query = "SELECT id, id_comercio, id_cliente, fecha_alta, hora_alta, id_repartidor ,precio
 						FROM pedido
 						WHERE id_comercio = (select id from usuario where nombre = '$comercio')";
+							 
+		$tabla = $this->get_query();
+		while($fila = $tabla->fetch_assoc()){
+			 $pedido = new Pedido($fila['id'],$fila['id_comercio'],$fila['id_cliente'],$fila['fecha_alta'],
+			 				  $fila['hora_alta'],$fila['id_repartidor'],$fila['precio']);
+			 $matriz[$contador] = $pedido;
+			 $contador++;
+		}
+		return $matriz;
+	}
+
+	public function mostrarPedidosPorCliente(){
+		$matriz = array();
+		$contador = 0;
+		
+		$cliente = $_SESSION['admin'];
+		$this->query = "SELECT id, id_comercio, id_cliente, fecha_alta, hora_alta, id_repartidor ,precio
+						FROM pedido
+						WHERE id_cliente = (select id from usuario where nombre = '$cliente')";
 							 
 		$tabla = $this->get_query();
 		while($fila = $tabla->fetch_assoc()){
@@ -149,5 +159,24 @@ class PedidoModel extends Conexion{
 			 $contador++;
 		}
 		return $matriz;
+	}
+
+	public function estadoPedidoTomar($id_pedido){
+		$repartidor = $_SESSION['admin'];
+		$this->query = "UPDATE pedido SET estado = 2, id_repartidor = (SELECT id FROM usuario WHERE nombre = '$repartidor' ) 
+						WHERE id = '$id_pedido'";
+		$this->set_query();
+	}
+
+	public function estadoPedidoCancelar($id_pedido){
+		$this->query = "UPDATE pedido SET estado = 1, id_repartidor = null 
+						WHERE id = '$id_pedido'";
+		$this->set_query();
+	}
+
+	public function estadoPedidoFinalizar($id_pedido){
+		$this->query = "UPDATE pedido SET estado = 3 
+						WHERE id = '$id_pedido'";
+		$this->set_query();
 	}
 }
