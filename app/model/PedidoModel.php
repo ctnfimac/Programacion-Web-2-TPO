@@ -114,6 +114,25 @@ class PedidoModel extends Conexion{
 		return $matriz;
 	}
 
+	public function mostrarPedidosPorComercio(){
+		$matriz = array();
+		$contador = 0;
+		
+		$comercio = $_SESSION['admin'];
+		$this->query = "SELECT id, id_comercio, id_cliente, fecha_alta, hora_alta, id_repartidor ,precio
+						FROM pedido
+						WHERE id_comercio = (select nombre from usuario where nombre = '$comercio')";
+							 
+		$tabla = $this->get_query();
+		while($fila = $tabla->fetch_assoc()){
+			 $pedido = new Pedido($fila['id'],$fila['id_comercio'],$fila['id_cliente'],$fila['fecha_alta'],
+			 				  $fila['hora_alta'],$fila['id_repartidor'],$fila['precio']);
+			 $matriz[$contador] = $pedido;
+			 $contador++;
+		}
+		return $matriz;
+	}
+
 	public function getMenuDePedido($id_pedido){
 		$matriz = array();
 		$contador = 0;
