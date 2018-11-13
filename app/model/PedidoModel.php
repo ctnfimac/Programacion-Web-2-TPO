@@ -121,7 +121,7 @@ class PedidoModel extends Conexion{
 		$comercio = $_SESSION['admin'];
 		$this->query = "SELECT id, id_comercio, id_cliente, fecha_alta, hora_alta, id_repartidor ,precio
 						FROM pedido
-						WHERE id_comercio = (select nombre from usuario where nombre = '$comercio')";
+						WHERE id_comercio = (select id from usuario where nombre = '$comercio')";
 							 
 		$tabla = $this->get_query();
 		while($fila = $tabla->fetch_assoc()){

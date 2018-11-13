@@ -28,12 +28,12 @@ $cabecera = '
 			<i class="fas fa-fw fa-chart-area"></i>
 			<span>Solicitudes</span></a>
 		</li>
-		<!--<li class="nav-item">
-			<a class="nav-link" href="index.php?route=admin&tabla=clientes">
-			<i class="fas fa-fw fa-table"></i>
-			<span>Clientes</span></a>
-		</li>
 		<li class="nav-item">
+			<a class="nav-link" href="index.php?route=admin&tabla=pedidos_realizados">
+			<i class="fas fa-fw fa-table"></i>
+			<span>Pedidos</span></a>
+		</li>
+		<!--<li class="nav-item">
 			<a class="nav-link" href="index.php?route=admin&tabla=repartidores">
 			<i class="fas fa-fw fa-table"></i>
 			<span>Repartidores</span></a>

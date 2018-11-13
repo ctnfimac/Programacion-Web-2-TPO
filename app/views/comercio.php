@@ -3,8 +3,11 @@
 if(isset($_GET['tabla']) && $_GET['tabla'] == 'menus'){
 	require_once('comercio/sections/menusTabla.php');
 	printf($tablaMenus);	
+}elseif(isset($_GET['tabla']) && $_GET['tabla'] == 'pedidos_realizados'){
+	require_once('comercio/sections/pedidos_realizados.php');
+	printf($tablaPedidos);
 }
-
+/*
 elseif(isset($_GET['tabla']) && $_GET['tabla'] == 'clientes'){
 	require_once('comercio/sections/clientesTabla.php');
 	printf($tablaClientes);
@@ -25,4 +28,4 @@ elseif(isset($_GET['tabla']) && $_GET['tabla'] == 'solicitudes'){
 }else{
 	require_once('comercio/sections/tablero.php');
 	printf($tablero);
-}
+}*/
