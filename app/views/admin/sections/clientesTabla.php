@@ -16,7 +16,6 @@ foreach($clientes as $cliente){
 		<td>'.$cliente->getNombre().'</td>
 		<td>'.$cliente->getApellido().'</td>
 		<td>'.$cliente->getEmail().'</td>
-		<td>'.$cliente->getContrasenia().'</td>
 		<td>'.$cliente->getTelefono().'</td>
 		<td>'.$cliente->getCalle().'</td>
 		<td>'.$cliente->getNumero().'</td>
@@ -52,7 +51,6 @@ $tablaClientes = '
 				<th>nombre</th>
 				<th>apellido</th>
 				<th>email</th>
-				<th>contrasenia</th>
 				<th>teléfono</th>
 				<th>calle</th>
 				<th>número</th>

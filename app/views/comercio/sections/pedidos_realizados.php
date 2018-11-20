@@ -3,6 +3,7 @@
 $pedidoModel = new PedidoModel();
 $comercioModel = new ComercioModel();
 $clienteModel = new ClienteModel();
+$repartidorModel = new RepartidorModel();
 
 $pedidos = $pedidoModel->mostrarPedidosPorComercio();
 
@@ -13,7 +14,9 @@ foreach($pedidos as $pedido){
 	$comercio = $comercioModel->obtenerNombreDelComercio($pedido->getComercio());
 	$cliente = $clienteModel->obtenerNombreDelCliente($pedido->getCliente());
 	$id_pedido = $pedido->getId();
-	$repartidor = $pedido->getRepartidor() == null ? 'sin asignar': $pedido->getRepartidor();
+	$repartidor =  $repartidorModel->obtenerNombreDelRepartidor($pedido->getRepartidor()) == false ? 'sin asignar' : $repartidorModel->obtenerNombreDelRepartidor($pedido->getRepartidor()) ;
+
+	//$repartidor = $pedido->getRepartidor() == null ? 'sin asignar': $pedido->getRepartidor();
 	$info .= '<tr>
 		<!-- <td>'.$pedido->getId().'</td>-->
 		<td>'.$cliente.'</td>

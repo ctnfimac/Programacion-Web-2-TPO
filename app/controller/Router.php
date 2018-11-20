@@ -106,8 +106,6 @@ class Router{
 				$pedido= new PedidoModel();
 				$pedido->setOperacion($operacion);
 				$pedido->ejecutarOperacion();
-				// $view_controller->load_view('carrito');
-				//header('location:index.php?route=carrito');
 				break;
 			case 'salir':
 				$session = new SessionController();
@@ -127,6 +125,7 @@ class Router{
 		if($usuario == true && $route != 'admin')  $this->route = $route;
 		if($usuario == false) $this->route = 'home';
 		if($usuario == false && $route == 'carrito')  $this->route = $route;
+		if($usuario == false && $route == 'registrar')  $this->route = $route;
 		if(isset($_SESSION['usuario']) && $route == 'admin') $this->route = $_SESSION['usuario'];
 		if(isset($_SESSION['usuario']) && $route == 'comercio') $this->route = $_SESSION['usuario'];
 		if(isset($_SESSION['repartidor']) && $route == 'repartidor') $this->route = $_SESSION['usuario'];

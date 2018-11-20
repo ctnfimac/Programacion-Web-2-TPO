@@ -44,7 +44,9 @@ class ClienteModel extends Conexion{
 			echo 'error en las contraseñas';
 		}else{
 			if(!$this->existeUsuario($email)){
-				$contrasenia = $_POST['pass'];
+				$contrasenia = password_hash($_POST['pass'], PASSWORD_BCRYPT);
+				//$contrasenia = $_POST['pass'];
+				//echo $contrasenia;
 				$this->query = "INSERT INTO usuario(nombre,apellido,email,contrasenia,telefono,habilitado)
 								VALUES ('$nombre','$apellido','$email','$contrasenia','$telefono',1)";
 				$this->set_query();

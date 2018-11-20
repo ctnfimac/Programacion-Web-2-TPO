@@ -17,7 +17,6 @@ foreach($repartidores as $repartidor){
 		<td>'.$repartidor->getNombre().'</td>
 		<td>'.$repartidor->getApellido().'</td>
 		<td>'.$repartidor->getEmail().'</td>
-		<td>'.$repartidor->getContrasenia().'</td>
 		<td>'.$repartidor->getTelefono().'</td>
 		<td>'.$repartidor->getFechaNacimiento().'</td>
 		<td>'.$repartidor->getDni().'</td>
@@ -53,7 +52,6 @@ $tablaRepartidores = '
 						<th>nombre</th>
 						<th>apellido</th>
 						<th>email</th>
-						<th>contrasenia</th>
 						<th>teléfono</th>
 						<th>fecha de nacimiento</th>
 						<th>d.n.i</th>

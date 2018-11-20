@@ -110,14 +110,14 @@ class PedidoModel extends Conexion{
 		$contador = 0;
 		
 		$comercio = $_SESSION['admin'];
-		$this->query = "SELECT id, id_comercio, id_cliente, fecha_alta, hora_alta, id_repartidor ,precio
+		$this->query = "SELECT id, id_comercio, id_cliente, fecha_alta, hora_alta, id_repartidor ,precio,estado
 						FROM pedido
 						WHERE id_comercio = (select id from usuario where nombre = '$comercio')";
 							 
 		$tabla = $this->get_query();
 		while($fila = $tabla->fetch_assoc()){
 			 $pedido = new Pedido($fila['id'],$fila['id_comercio'],$fila['id_cliente'],$fila['fecha_alta'],
-			 				  $fila['hora_alta'],$fila['id_repartidor'],$fila['precio']);
+			 				  $fila['hora_alta'],$fila['id_repartidor'],$fila['precio'],$fila['estado']);
 			 $matriz[$contador] = $pedido;
 			 $contador++;
 		}
@@ -129,14 +129,14 @@ class PedidoModel extends Conexion{
 		$contador = 0;
 		
 		$cliente = $_SESSION['admin'];
-		$this->query = "SELECT id, id_comercio, id_cliente, fecha_alta, hora_alta, id_repartidor ,precio
+		$this->query = "SELECT id, id_comercio, id_cliente, fecha_alta, hora_alta, id_repartidor ,precio, estado
 						FROM pedido
 						WHERE id_cliente = (select id from usuario where nombre = '$cliente')";
 							 
 		$tabla = $this->get_query();
 		while($fila = $tabla->fetch_assoc()){
 			 $pedido = new Pedido($fila['id'],$fila['id_comercio'],$fila['id_cliente'],$fila['fecha_alta'],
-			 				  $fila['hora_alta'],$fila['id_repartidor'],$fila['precio']);
+			 				  $fila['hora_alta'],$fila['id_repartidor'],$fila['precio'],$fila['estado']);
 			 $matriz[$contador] = $pedido;
 			 $contador++;
 		}

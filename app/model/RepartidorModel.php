@@ -54,7 +54,7 @@ class RepartidorModel extends Conexion{
 			echo 'error en las contraseñas';
 		}else{
 			if(!$this->existeUsuario($email)){
-				$contrasenia = $_POST['pass'];
+				$contrasenia = password_hash($_POST['pass'], PASSWORD_BCRYPT);
 				$this->query = "INSERT INTO usuario(nombre,apellido,email,contrasenia,telefono)
 								VALUES ('$nombre','$apellido','$email','$contrasenia','$telefono')";
 				$this->set_query();
@@ -220,4 +220,28 @@ class RepartidorModel extends Conexion{
 		}
 		return $resultado;
 	}
+
+	// si o si muestro los pedidos que no estan tomados
+	// si esta tomado y no soy el repartidor que lo tomo => no lo muestro
+
+	// obtener estado del repartidor de la cuenta
+	public function estadoDelRepartidorDeLaCuenta(){
+		$resultado = false;
+		if(isset($_SESSION['admin'])){
+			$repartidor = $_SESSION['admin'];
+			$this->query = "SELECT p.estado 
+							FROM pedido P JOIN
+								 repartidor r ON r.id_usuario = p.id_repartidor JOIN
+								 usuario u ON u.id = r.id_usuario 
+							WHERE u.nombre = '$repartidor' and DATE(p.fecha_alta)= CURDATE()";
+			$tabla = $this->get_query();
+			while($fila = $tabla->fetch_assoc()){
+				if($fila['estado'] == 2) $resultado = true;
+			}
+		}
+		//echo ($resultado == true)? 'true':'false';
+		return $resultado;
+	}
+
+	
 }

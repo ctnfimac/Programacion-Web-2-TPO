@@ -21,7 +21,7 @@ create table Usuario (
 	nombre varchar(30) not null,
 	apellido varchar(30) not null,
 	email varchar(50) not null unique,
-	contrasenia varchar(32) not null,
+	contrasenia varchar(60) not null,
 	telefono varchar(30),
 	habilitado smallint not null default 0
 	-- id_telefono int,
@@ -155,15 +155,16 @@ VALUES ('liniers'),
 
 insert into Usuario(nombre, apellido, email, contrasenia, telefono, habilitado ) values
 ('Alexander', 'Prada', 'notengoemail@gmail.com', 'alex123','',''),
-('Christian', 'Peralta', 'notengoemail2@gmail.com', '123','',''),
+('Christian', 'Peralta', 'notengoemail2@gmail.com', '$2y$10$oiAZLkt7DpnuLwEksfX4MeMqSilJuVLYuYvQjsxbD1hsLvW5sy0mu','',''),
 ('Martin', 'Garra', 'notengoemail3@gmail.com', 'martin123','',''),
-('juan', 'Boliche', 'juan@hotmail.com', 'jun','46446645',1),
-('eli', 'Pradas', 'eli@gmail.com', 'abc','46446646',1),
-('Luz', 'Moreno', 'luz@gmail.com', 'luz','46446647',1),
-('Carrefour', '', 'carrefour@gmail.com', 'car','56446640',''),
-('Jumbo', '', 'jumbo@gmail.com', 'jum','56446641',''),
-('hugo', 'Perez', 'hugo@gmail.com', 'hug','1560010001',''),
-('Mario', 'Bros', 'mario@gmail.com', 'mar','1560010001','');
+('juan', 'Boliche', 'juan@hotmail.com', '$2y$10$0SxshydvVYCJwBKCpm5WQuAYABDa95HRaf7F9FlqwWWnUNKKYS2ke','46446645',1),
+('eli', 'Pradas', 'eli@gmail.com', '$2y$10$KquJc6ZBXCcwFBeK7Tko/OZaBKpadpI5E040Hc/kQLJON8qGx1JqK','46446646',1),
+('Luz', 'Moreno', 'luz@gmail.com', '$2y$10$C36nH6GzqlLOgq3xa7tVp.IEOzl6Z/RYTB94aeI6lXyNoqfshUeyq','46446647',1),
+('Carrefour', '', 'carrefour@gmail.com', '$2y$10$LuSZKkymsBM8nuaqQiHU8OEQnENJYK2DfAPdqTNxEm9pud/KGIj3y','56446640',''),
+('Jumbo', '', 'jumbo@gmail.com', '$2y$10$fxxdscKETA7vAp.XgPrux.rQQ/T8dCg5n1r4UiQKwDFKbcBsH3XxG','56446641',''),
+('hugo', 'Perez', 'hugo@gmail.com', '$2y$10$eRs.y/W/9Bk6e.4aFcO/xexMHW9rv3gWtDzAuG1NEVW3CLCXYllQq','1560010001',''),
+('Mario', 'Bros', 'mario@gmail.com', '$2y$10$H0f5M3gDfSP34Myp4TMm8ep5oC7C4km/jog2PbLg70z23Vn5WSLei','1560010001','');
+-- 123
 
 
 INSERT INTO repartidor(id_usuario, fecha_nacimiento, dni, cuil)
@@ -196,8 +197,8 @@ VALUES (CURDATE(), 1),
 	   ("20181030", 2);
 
 INSERT INTO pedido(id_comercio, id_cliente, fecha_alta, hora_alta, precio)
-VALUES (7, 4, '2018-11-13', '03:36:23', 859.98),
-	   (8, 4, '2018-11-13', '03:43:46', 720);
+VALUES (7, 4, CURDATE() , '03:36:23', 859.98),
+	   (8, 4, CURDATE() , '03:43:46', 720);
 
 
 INSERT INTO pedido_menus(id_pedido, id_menu, cantidad)

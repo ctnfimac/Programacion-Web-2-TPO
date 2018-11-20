@@ -15,7 +15,6 @@ foreach($Comercios as $comercio){
 		<td>'.$comercio->getId().'</td>
 		<td>'.$comercio->getNombre().'</td>
 		<td>'.$comercio->getEmail().'</td>
-		<td>'.$comercio->getContrasenia().'</td>
 		<td>'.$comercio->getTelefono().'</td>
 		<td>'.$comercio->getCuit().'</td>
 		<td>'.$habilitado.'</td>
@@ -45,7 +44,6 @@ $tablaComercios = '
 						<th>id</th>
 						<th>Comercio</th>
 						<th>email</th>
-						<th>contrasenia</th>
 						<th>teléfono</th>
 						<th>CUIT</th>
 						<th>habilitado</th>

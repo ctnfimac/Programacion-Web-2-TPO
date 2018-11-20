@@ -43,7 +43,7 @@ class ComercioModel extends Conexion{
 			echo 'error en las contraseñas';
 		}else{
 			if(!$this->existeUsuario($email)){
-				$contrasenia = $_POST['pass'];
+				$contrasenia = password_hash($_POST['pass'], PASSWORD_BCRYPT);
 				$this->query = "INSERT INTO usuario(nombre,apellido,email,contrasenia,telefono)
 								VALUES ('$nombre','$apellido','$email','$contrasenia','$telefono')";
 				$this->set_query();
