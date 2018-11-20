@@ -190,7 +190,24 @@ class RepartidorModel extends Conexion{
 		$pedido = new PedidoModel();
 		//echo $_SESSION['admin'];
 		$pedido->estadoPedidoTomar($_GET['id_pedido']);
-		header('location:index.php?route=admin&tabla=pedidos_realizados');
+		$cliente = isset($_GET['cliente']) ?  $_GET['cliente'] : '';
+		$this->query = "SELECT DISTINCT c.calle, c.numero, l.descripcion 
+						FROM cliente c JOIN
+							 pedido p ON p.id_cliente = c.id_usuario JOIN
+							 localidad l ON c.id_localidad = l.id
+						WHERE c.id_usuario = '$cliente'";
+		$tabla = $this->get_query();
+		$entro = false;
+		$direccion = '';
+		while($row = $tabla->fetch_assoc()){
+			
+				$calle = $row['calle'];
+				$numero = $row['numero'];
+				$localidad = $row['descripcion'];
+	
+				 $direccion = $calle . ' ' .$numero . ' ' . $localidad;
+		}
+		header('location:index.php?route=admin&tabla=pedidos_realizados&direccion='.$direccion);
 	}
 
 	private function cancelar_pedido(){

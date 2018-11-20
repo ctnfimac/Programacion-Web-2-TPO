@@ -6,12 +6,8 @@ class Router{
 	public function __construct($route){
 		$session = new SessionController();
 		$usuario = $session->iniciarSession();
-		//echo $usuario == true ? 'encontrado' : 'no encontrado' , '<br>';
 		$route = $session->getRuta() != null ? $session->getRuta() : $route;
-		//echo $session->getRuta() != null ? 'no es null' : 'es null';
-		//echo 'route: ' . $route . '<br>';
 		$this->route($route,$usuario);
-		//echo 'route: ' . $this->route;
 		$view_controller = new ViewController($this->route);
 		$operacion = (isset($_GET['operacion'])) ? $_GET['operacion'] : '';
 		switch($this->route){
@@ -74,14 +70,7 @@ class Router{
 			case 'repartidor':
 				$opcion = isset($_GET['opcion']) ? $_GET['opcion'] : 'menu';
 				$view_controller->set_section($opcion);
-				//switch($opcion){
-				//	case 'repartidor':
-						$seccion = new RepartidorModel();
-				//		break;
-				//	default:
-				//		$seccion = new MenuModel();
-				//		break;
-				//}
+				$seccion = new RepartidorModel();
 				if(isset($_GET['habilitar'])) $seccion->habilitar($_GET['habilitar']);
 				$seccion->setOperacion($operacion);// alta,baja,modificacion
 				$operacion_ejecutada = $seccion->ejecutarOperacion();
@@ -118,7 +107,6 @@ class Router{
 	}
 
 	private function route($route,$usuario){
-		//$this->route = 'home';
 		if($usuario == true && $route == 'admin')  $this->route = $route;
 		if($usuario == false && $route != 'admin') $this->route = $route;
 		if($usuario == false && $route == 'admin') $this->route = 'home';
@@ -129,7 +117,5 @@ class Router{
 		if(isset($_SESSION['usuario']) && $route == 'admin') $this->route = $_SESSION['usuario'];
 		if(isset($_SESSION['usuario']) && $route == 'comercio') $this->route = $_SESSION['usuario'];
 		if(isset($_SESSION['repartidor']) && $route == 'repartidor') $this->route = $_SESSION['usuario'];
-		//echo $_SESSION['usuario'] , $this->route , $route ;
-		//$this->route = ($usuario == true && $route == 'admin' )? 'admin' : $route;
 	}
 }

@@ -11,36 +11,18 @@ $info = '';
 $id_pedido = '';
 $cont_id = 1;
 
-// $pass = 'mar';
-// $buscado = 'christia';    
-// $passHash = password_hash($pass, PASSWORD_BCRYPT);
-// echo $passHash;
-// echo password_verify($buscado, $passHash);
-//echo password_verify($buscado, $passHash) == null ? 'es null' : 'correcto';
-// if (hash_equals($hashed_password, crypt($user_input, $hashed_password))) {
-//    echo "¡Contraseña verificada!";
-// }
-
 $estado_del_delivery_de_la_cuenta = $repartidorModel->estadoDelRepartidorDeLaCuenta();
-if($estado_del_delivery_de_la_cuenta) echo 'esta haciendo un pedido';
 
 foreach($pedidos as $pedido){
 	$comercio = $comercioModel->obtenerNombreDelComercio($pedido->getComercio());
 	$cliente = $clienteModel->obtenerNombreDelCliente($pedido->getCliente());
 	$repartidor =  $repartidorModel->obtenerNombreDelRepartidor($pedido->getRepartidor()) == false ? 'sin asignar' : $repartidorModel->obtenerNombreDelRepartidor($pedido->getRepartidor()) ;
 	$id_pedido = $pedido->getId();
-	//$repartidor = $pedido->getRepartidor() == null ? 'sin asignar': $pedido->getRepartidor();
-	// $disabled = $pedido->getRepartidor() == null ? 'disabled': 'ctn';
-	// $disabled2 = $pedido->getEstadoDelPedido() == 2 ? 'disabled': 'ctn';
 
 	$button = '';
 	$estado_clase = '';
-	if($pedido->getEstadoDelPedido() == 1 && $estado_del_delivery_de_la_cuenta == false){
-		//echo $repartidorModel->tienePedidoEnProceso($pedido->getRepartidor()) == true ? 'en proceso ' : 'no en proceso';
-		//if($repartidorModel->tienePedidoEnProceso($pedido->getRepartidor()) == true) $estado_clase = ' disabled ';
-		$button = '<a href="index.php?route=repartidor&operacion=tomar_pedido&id_pedido='.$pedido->getId().'" class="btn text-white btn-success mr-2 '.$estado_clase.'">Tomar Pedido</a>';
-	
-	}
+	if($pedido->getEstadoDelPedido() == 1 && $estado_del_delivery_de_la_cuenta == false)
+		$button = '<a href="index.php?route=repartidor&operacion=tomar_pedido&id_pedido='.$pedido->getId().'&cliente='.$pedido->getCliente().'" class="btn text-white btn-success mr-2 '.$estado_clase.'">Tomar Pedido</a>';
 		
 	if($pedido->getEstadoDelPedido() == 2 && $repartidor == $_SESSION['admin'])	
 		$button = '<a href="index.php?route=repartidor&operacion=cancelar_pedido&id_pedido='.$pedido->getId().'" class="btn text-white btn-danger mr-2">Cancelar</a>

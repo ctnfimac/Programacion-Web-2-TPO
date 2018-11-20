@@ -155,7 +155,7 @@ VALUES ('liniers'),
 
 insert into Usuario(nombre, apellido, email, contrasenia, telefono, habilitado ) values
 ('Alexander', 'Prada', 'notengoemail@gmail.com', 'alex123','',''),
-('Christian', 'Peralta', 'notengoemail2@gmail.com', '$2y$10$oiAZLkt7DpnuLwEksfX4MeMqSilJuVLYuYvQjsxbD1hsLvW5sy0mu','',''),
+('Christian', 'Peralta', 'notengoemail2@gmail.com', '$2y$10$oiAZLkt7DpnuLwEksfX4MeMqSilJuVLYuYvQjsxbD1hsLvW5sy0mu','',1),
 ('Martin', 'Garra', 'notengoemail3@gmail.com', 'martin123','',''),
 ('juan', 'Boliche', 'juan@hotmail.com', '$2y$10$0SxshydvVYCJwBKCpm5WQuAYABDa95HRaf7F9FlqwWWnUNKKYS2ke','46446645',1),
 ('eli', 'Pradas', 'eli@gmail.com', '$2y$10$KquJc6ZBXCcwFBeK7Tko/OZaBKpadpI5E040Hc/kQLJON8qGx1JqK','46446646',1),
@@ -177,8 +177,8 @@ VALUES(7,'401234567991'),
 
 INSERT INTO cliente(id_usuario,calle,numero,id_localidad) 
 VALUES (4,'las tunas','11122',1),
-	   (5,'Arieta','546',3),
-	   (6,'Lartigay','2800',4);
+	   (5,'Arieta','546',2),
+	   (6,'Belgrano','1704',4);
 
 insert into Administrador(id_usuario, usuario) values
 (1,'ap'),
