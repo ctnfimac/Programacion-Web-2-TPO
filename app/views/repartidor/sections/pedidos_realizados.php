@@ -11,6 +11,8 @@ $info = '';
 $id_pedido = '';
 $cont_id = 1;
 
+//$pedidoModel->actualizarPenalizaciones();
+
 $estado_del_delivery_de_la_cuenta = $repartidorModel->estadoDelRepartidorDeLaCuenta();
 
 foreach($pedidos as $pedido){
@@ -29,7 +31,6 @@ foreach($pedidos as $pedido){
 				   <a href="index.php?route=repartidor&operacion=finalizar_pedido&id_pedido='.$pedido->getId().'" class="btn text-white btn-warning ml-2">Finalizar</a>';
 
 	$info .= '<tr>
-		<td>'.$pedido->getId().'</td>
 		<td>'.$comercio.'</td>
 		<td>'.$cliente.'</td>
 		<td>'.$pedido->getFecha().'</td>
@@ -50,9 +51,35 @@ foreach($pedidos as $pedido){
 	</tr>';
 	asignarMenus($cont_id, $id_pedido,$pedidoModel);
 	$cont_id++;
+	// $hora = date("H:i:s",time());
+	// echo 'hola actual: ' . $hora . '<br>';
+	// $diferencia = $hora - $pedido->getHora();
+	// echo 'diferencia: ' . $diferencia;
 }
+/*
+function calcular_tiempo_trasnc($hora1,$hora2){
+	//echo $hora1 . ' - ' . $hora2 .'<br>' ;
+    $separar[1]=explode(':',$hora1);
+    $separar[2]=explode(':',$hora2);
 
-
+	$total_minutos_trasncurridos[1] = ($separar[1][0] * 60) + $separar[1][1];
+	$total_minutos_trasncurridos[2] = ($separar[2][0] * 60) + $separar[2][1];
+	$total_minutos_trasncurridos = $total_minutos_trasncurridos[1]  - $total_minutos_trasncurridos[2];
+	if($total_minutos_trasncurridos<=59) return $total_minutos_trasncurridos;//minutos
+	// elseif($total_minutos_trasncurridos>59){
+	// 	$HORA_TRANSCURRIDA = round($total_minutos_trasncurridos/60);
+	// 	if($HORA_TRANSCURRIDA<=9) $HORA_TRANSCURRIDA='0'.$HORA_TRANSCURRIDA;
+	// 	$MINUITOS_TRANSCURRIDOS = $total_minutos_trasncurridos%60;
+	// 	if($MINUITOS_TRANSCURRIDOS<=9) $MINUITOS_TRANSCURRIDOS='0'.$MINUITOS_TRANSCURRIDOS;
+	// 	return ($HORA_TRANSCURRIDA.':'.$MINUITOS_TRANSCURRIDOS.' Horas');
+	// } 
+}
+//llamamos la función e imprimimos
+$fecha = date("Y-m-d H:i:s",time());
+$date = new DateTime($fecha, new DateTimeZone('America/Argentina/Buenos_Aires'));
+date_default_timezone_set('America/Argentina/Buenos_Aires');
+//echo calcular_tiempo_trasnc('16:50',date("H:i",time()));
+*/
 $tablaPedidos = '
 <!-- DataTables Example -->
 	<div class="card mb-3">
@@ -65,7 +92,6 @@ $tablaPedidos = '
 			<table class="table table-bordered text-center table-dark" id="dataTable" width="100%%" cellspacing="0">
 			<thead>
 				<tr>
-				<th>id</th>
 				<th>comercio</th>
 				<th>cliente</th>
 				<th>fecha</th>

@@ -4,12 +4,14 @@ class Router{
 	private $route = 'home';
 
 	public function __construct($route){
+		
 		$session = new SessionController();
 		$usuario = $session->iniciarSession();
 		$route = $session->getRuta() != null ? $session->getRuta() : $route;
 		$this->route($route,$usuario);
 		$view_controller = new ViewController($this->route);
 		$operacion = (isset($_GET['operacion'])) ? $_GET['operacion'] : '';
+		$this->actualizarPedidos();
 		switch($this->route){
 			case 'home':
 				$carrito = new CarritoModel();
@@ -117,5 +119,10 @@ class Router{
 		if(isset($_SESSION['usuario']) && $route == 'admin') $this->route = $_SESSION['usuario'];
 		if(isset($_SESSION['usuario']) && $route == 'comercio') $this->route = $_SESSION['usuario'];
 		if(isset($_SESSION['repartidor']) && $route == 'repartidor') $this->route = $_SESSION['usuario'];
+	}
+
+	private function actualizarPedidos(){
+		$pedido= new PedidoModel();
+		$pedido->actualizarPenalizaciones();
 	}
 }

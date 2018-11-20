@@ -68,9 +68,12 @@ create table Administrador (
 );
 
 -- create table Sucursal (
--- 	id int primary key,
--- 	cuit varchar(11),
+-- 	id int primary key auto_increment,
+-- 	calle varchar(30) not null,
+-- 	numero varchar(30) not null,
 -- 	id_comercio int not null,
+-- 	id_localidad int,
+-- 	CONSTRAINT FK_SUCURSAL_LOCALIDAD FOREIGN KEY (id_localidad) REFERENCES Localidad(id),
 -- 	CONSTRAINT FK_SUCURSAL_COMERCIO FOREIGN KEY (id_comercio) REFERENCES Comercio(id_comercio)
 -- );
 
@@ -102,6 +105,7 @@ create table Productos_Menu (
 	CONSTRAINT FK_MENU_ID FOREIGN KEY (id_menu) REFERENCES Menu(id)
 );
 
+
 create table Pedido (
 	id int primary key auto_increment,
 	-- id_sucursal int,
@@ -111,6 +115,7 @@ create table Pedido (
 	hora_alta TIME not null,
 	id_repartidor int,
 	precio Double,
+	penalizado decimal(6,2) default 0, 
 	estado int default 1,
 	CONSTRAINT FK_PEDIDO_CLIENTE FOREIGN KEY (id_cliente) REFERENCES Cliente(id_usuario),
 	-- CONSTRAINT FK_PEDIDO_SUCURSAL FOREIGN KEY (id_sucursal) REFERENCES Sucursal(id)
@@ -205,30 +210,14 @@ INSERT INTO pedido_menus(id_pedido, id_menu, cantidad)
 VALUES (1, 1, 3),
 	   (1, 4, 2),
 	   (2, 3, 4);
--- create table Oferta (
--- 	id int primary key,
--- 	fecha_inicio datetime not null,
--- 	fecha_fin datetime not null,
--- 	id_menu int not null,
--- 	CONSTRAINT FK_MENU_OFERTA FOREIGN KEY (id_menu) REFERENCES Menu(id)
--- );
 
--- INSERT INTO Precio(valor)
--- VALUES (100.00),
--- 	   (90.00),
--- 	   (150.00);
 
--- INSERT INTO  Producto(descripcion,id_precio)
--- VALUES ('Queso',1),
--- 	   ('Harina',2),
--- 	   ('Morron',3),
--- 	   ('pan',2),
--- 	   ('Hamburguesa',3);
+-- INSERT INTO sucursal(calle,numero,id_comercio,id_localidad)
+-- VALUES ('rivadavia','11200',1,1),
+-- 	   ('rivadavia','11200',1,1),
+-- 	   ('rivadavia','11200',1,1);
 
--- create table Precio (
--- 	id int primary key auto_increment,
--- 	valor double not null
--- );
+
 
 -- create table Producto (
 -- 	id int primary key auto_increment,

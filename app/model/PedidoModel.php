@@ -179,4 +179,36 @@ class PedidoModel extends Conexion{
 						WHERE id = '$id_pedido'";
 		$this->set_query();
 	}
+
+	public function actualizarPenalizaciones(){
+		$fecha = date("Y-m-d H:i:s",time());
+		$date = new DateTime($fecha, new DateTimeZone('America/Argentina/Buenos_Aires'));
+		date_default_timezone_set('America/Argentina/Buenos_Aires');
+		
+		$this->query = "SELECT * FROM pedido";
+		$tabla = $this->get_query();
+		//echo $tabla;
+		while($row = $tabla->fetch_assoc()){
+			//echo 'hora alta: ' . $row['hora_alta'] . '<br>';
+			//echo 'hora actual: ' . date("H:i",time()) . '<br>';
+			$minutos = $this->calcular_tiempo_trasnc(date("H:i",time()),$row['hora_alta']);
+			//echo 'minutos transcurridos: ' . $minutos .'<br>';
+			if($minutos > 30){ //si pasan 20 minutos hago la penalizacion
+				$costo =  $row['precio'] * 0.005;
+				$id_pedido = $row['id']; 
+				$this->query = "UPDATE pedido SET penalizado = '$costo' WHERE id= '$id_pedido' ";
+				$this->set_query();
+			}
+		}
+	}
+
+	public function calcular_tiempo_trasnc($hora1,$hora2){
+		$separar[1]=explode(':',$hora1);
+		$separar[2]=explode(':',$hora2);
+	
+		$total_minutos_trasncurridos[1] = ($separar[1][0] * 60) + $separar[1][1];
+		$total_minutos_trasncurridos[2] = ($separar[2][0] * 60) + $separar[2][1];
+		$total_minutos_trasncurridos = $total_minutos_trasncurridos[1]  - $total_minutos_trasncurridos[2];
+		return $total_minutos_trasncurridos;
+	}
 }

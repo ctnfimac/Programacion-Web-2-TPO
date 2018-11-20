@@ -38,14 +38,13 @@ mapa = {
 	          // Llamamos a la función geodecode pasandole la dirección que hemos introducido en la caja de texto.
 	         geocoder.geocode({ 'address': destino}, function(results, status){
 	         	 var directionsService = new google.maps.DirectionsService;
-       		 var directionsDisplay = new google.maps.DirectionsRenderer;
+       		 	 var directionsDisplay = new google.maps.DirectionsRenderer;
 	             if (status == 'OK'){
 	              // Mostramos las coordenadas obtenidas en el p con id coordenadas
 	                // document.getElementById("coordenadas").innerHTML='Coordenadas:   '+results[0].geometry.location.lat()+', '+results[0].geometry.location.lng();
-	             
 	             	 waypts = [{ location: { lat: -34.6698856, lng: -58.56260529999997 }, stopover: true }, { location: { lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng() }, stopover: true }];
 
-				        // //api map
+				     //api map
 				     var map = new google.maps.Map(document.getElementById('mapa'), {
 				            zoom: 10,
 				            center: { lat: waypts[0].location.lat, lng: waypts[1].location.lng }
