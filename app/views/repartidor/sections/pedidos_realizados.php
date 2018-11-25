@@ -23,7 +23,6 @@ foreach($pedidos as $pedido){
 
 	$button = '';
 	//$estado_clase = '';
-	echo $estado_del_delivery_de_la_cuenta == false ? 'false' : 'true';
 	if($pedido->getEstadoDelPedido() == 1 && $estado_del_delivery_de_la_cuenta == false)
 		$button = '<a href="index.php?route=repartidor&operacion=tomar_pedido&id_pedido='.$pedido->getId().'&cliente='.$pedido->getCliente().'" class="btn text-white btn-success mr-2">Tomar Pedido</a>';
 		

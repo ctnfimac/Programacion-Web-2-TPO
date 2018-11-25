@@ -119,6 +119,7 @@ class Router{
 		if(isset($_SESSION['usuario']) && $route == 'admin') $this->route = $_SESSION['usuario'];
 		if(isset($_SESSION['usuario']) && $route == 'comercio') $this->route = $_SESSION['usuario'];
 		if(isset($_SESSION['repartidor']) && $route == 'repartidor') $this->route = $_SESSION['usuario'];
+		if(isset($_SESSION['usuario']) && $route == 'cliente') $this->route = 'home';
 	}
 
 	private function actualizarPedidos(){
