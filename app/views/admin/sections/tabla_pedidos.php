@@ -29,7 +29,9 @@ foreach($pedidos as $pedido){
 			</button> 
 		</td>
 		<td>'.$pedido->getEstadoDelPedidoStr().'</td>
+		<td>$ '.$pedido->getPenalizado().'</td>
 		<td>$ '.$pedido->getPrecioTotal().'</td>
+		
 		<!--<td class="align-middle">
 		<div class="btn-group" role="group">
 			<a href="#" class="btn text-white btn-primary disabled">Modificar</a>
@@ -61,6 +63,7 @@ $tablaPedidos = '
 				<th>repartidor asignado</th>
 				<th>detalles</th>
 				<th>Estado</th>
+				<th>penalizado</th>
 				<th>precio</th>
 				</tr>
 			</thead>

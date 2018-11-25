@@ -9,7 +9,7 @@ class Pedido{
 	private $cliente;
 	private $comercio;
 	private $repartidor;
-	private $penalizacion_por_demora = false;
+	private $penalizado;
 	private $penalizacion_por_no_tomarPedido = false;
 	private $costo_por_demora = 0;
 	private $costo_por_no_tomarPedido = 0;
@@ -20,7 +20,7 @@ class Pedido{
 	// public function __construct($fecha, $hora, $cliente, $comercio, $repartidor,
 	// 				$precio_total, $menus){
 	public function __construct($id, $comercio, $cliente, $fecha_alta, $hora_alta ,
-					$repartidor,$precio_total,$estado_del_pedido = 1){
+					$repartidor,$precio_total,$penalizado = 0.0, $estado_del_pedido = 1){
 		$this->id = $id;
 		$this->fecha = $fecha_alta;
 		$this->hora = $hora_alta;
@@ -28,8 +28,8 @@ class Pedido{
 		$this->comercio = $comercio;
 		$this->repartidor = $repartidor;
 		$this->precio_total = $precio_total;
-		$this->estado_del_pedido = $estado_del_pedido;
-		//$this->menus = $menus;			
+		$this->penalizado = $penalizado;
+		$this->estado_del_pedido = $estado_del_pedido;		
 	}
 
 	public function setId($id){
@@ -60,13 +60,13 @@ class Pedido{
 		return $this->repartidor;
 	}
 
-	public function setPenalizacionPorDemora($penalizacion_por_demora){
-		$this->costo_por_demora = 0.05 * $this->precio_total;
-		$this->penalizacion_por_demora = $penalizacion_por_demora;
-	}
+	// public function setPenalizado($penalizado){
+	// 	// $this->costo_por_demora = 0.05 * $this->precio_total;
+	// 	$this->penalizado = $penalizado;
+	// }
 
-	public function getPenalizacionPorDemora(){
-		return $this->penalizacion_por_demora;
+	public function getPenalizado(){
+		return $this->penalizado;
 	}
 
 	public function setPenalizacionPorNoTomarPedido($penalizacion_por_no_tomarPedido){

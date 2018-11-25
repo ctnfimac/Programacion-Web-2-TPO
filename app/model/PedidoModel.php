@@ -92,13 +92,13 @@ class PedidoModel extends Conexion{
 		$matriz = array();
 		$contador = 0;
 
-		$this->query = "SELECT id, id_comercio, id_cliente, fecha_alta, hora_alta, id_repartidor ,precio, estado
+		$this->query = "SELECT id, id_comercio, id_cliente, fecha_alta, hora_alta, id_repartidor ,precio,penalizado, estado
 						FROM pedido";
 							 
 		$tabla = $this->get_query();
 		while($fila = $tabla->fetch_assoc()){
 			 $pedido = new Pedido($fila['id'],$fila['id_comercio'],$fila['id_cliente'],$fila['fecha_alta'],
-			 				  $fila['hora_alta'],$fila['id_repartidor'],$fila['precio'],$fila['estado']);
+			 				  $fila['hora_alta'],$fila['id_repartidor'],$fila['precio'],$fila['penalizado'],$fila['estado']);
 			 $matriz[$contador] = $pedido;
 			 $contador++;
 		}
@@ -117,7 +117,7 @@ class PedidoModel extends Conexion{
 		$tabla = $this->get_query();
 		while($fila = $tabla->fetch_assoc()){
 			 $pedido = new Pedido($fila['id'],$fila['id_comercio'],$fila['id_cliente'],$fila['fecha_alta'],
-			 				  $fila['hora_alta'],$fila['id_repartidor'],$fila['precio'],$fila['estado']);
+			 				  $fila['hora_alta'],$fila['id_repartidor'],$fila['precio'],'',$fila['estado']);
 			 $matriz[$contador] = $pedido;
 			 $contador++;
 		}
@@ -129,14 +129,14 @@ class PedidoModel extends Conexion{
 		$contador = 0;
 		
 		$cliente = $_SESSION['admin'];
-		$this->query = "SELECT id, id_comercio, id_cliente, fecha_alta, hora_alta, id_repartidor ,precio, estado
-						FROM pedido
+		$this->query = "SELECT p.id, p.id_comercio, p.id_cliente, p.fecha_alta, p.hora_alta, p.id_repartidor ,p.precio, p.estado
+						FROM pedido p
 						WHERE id_cliente = (select id from usuario where nombre = '$cliente')";
 							 
 		$tabla = $this->get_query();
 		while($fila = $tabla->fetch_assoc()){
 			 $pedido = new Pedido($fila['id'],$fila['id_comercio'],$fila['id_cliente'],$fila['fecha_alta'],
-			 				  $fila['hora_alta'],$fila['id_repartidor'],$fila['precio'],$fila['estado']);
+			 				  $fila['hora_alta'],$fila['id_repartidor'],$fila['precio'],'',$fila['estado']);
 			 $matriz[$contador] = $pedido;
 			 $contador++;
 		}

@@ -22,9 +22,10 @@ foreach($pedidos as $pedido){
 	$id_pedido = $pedido->getId();
 
 	$button = '';
-	$estado_clase = '';
+	//$estado_clase = '';
+	echo $estado_del_delivery_de_la_cuenta == false ? 'false' : 'true';
 	if($pedido->getEstadoDelPedido() == 1 && $estado_del_delivery_de_la_cuenta == false)
-		$button = '<a href="index.php?route=repartidor&operacion=tomar_pedido&id_pedido='.$pedido->getId().'&cliente='.$pedido->getCliente().'" class="btn text-white btn-success mr-2 '.$estado_clase.'">Tomar Pedido</a>';
+		$button = '<a href="index.php?route=repartidor&operacion=tomar_pedido&id_pedido='.$pedido->getId().'&cliente='.$pedido->getCliente().'" class="btn text-white btn-success mr-2">Tomar Pedido</a>';
 		
 	if($pedido->getEstadoDelPedido() == 2 && $repartidor == $_SESSION['admin'])	
 		$button = '<a href="index.php?route=repartidor&operacion=cancelar_pedido&id_pedido='.$pedido->getId().'" class="btn text-white btn-danger mr-2">Cancelar</a>
@@ -43,6 +44,7 @@ foreach($pedidos as $pedido){
 		</td>
 		<td>'.$pedido->getEstadoDelPedidoStr().'</td>
 		<td>$'.$pedido->getPrecioTotal().'</td>
+		<td>$'.$pedido->getPenalizado().'</td>
 		<td class="align-middle">
 			<div class="btn-group" role="group">
 				'.$button.'
@@ -100,6 +102,7 @@ $tablaPedidos = '
 				<th>detalles</th>
 				<th>Estado</th>
 				<th>precio</th>
+				<th>penalizado</th>
 				<th>operacion</th>
 				</tr>
 			</thead>

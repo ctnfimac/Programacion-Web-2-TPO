@@ -202,8 +202,8 @@ VALUES (CURDATE(), 1),
 	   ("20181030", 2);
 
 INSERT INTO pedido(id_comercio, id_cliente, fecha_alta, hora_alta, precio)
-VALUES (7, 4, CURDATE() , '03:36:23', 859.98),
-	   (8, 4, CURDATE() , '03:43:46', 720);
+VALUES (7, 4, CURDATE() , CURTIME(), 859.98),
+	   (8, 4, CURDATE() , CURTIME(), 720);
 
 
 INSERT INTO pedido_menus(id_pedido, id_menu, cantidad)
