@@ -4,11 +4,11 @@ $menus = $menuModel->mostrarMenusDeUnComercio();
 $info = '';
 foreach($menus as $menu){
 	$info .= '<tr>
-		<td>'.$menu->getId().'</td>
-		<td>'.$menu->getDescripcion().'</td>
+		<td class="align-middle">'.$menu->getId().'</td>
+		<td class="align-middle">'.$menu->getDescripcion().'</td>
 		<td class="align-middle justify-content-center"><img src="'.$menu->getImagen().'" width=125></td>
-		<td>'.$menu->getComercio().'</td>
-		<td>$'.$menu->getPrecio().'</td>
+		<td class="align-middle">'.$menu->getComercio().'</td>
+		<td class="align-middle">$'.$menu->getPrecio().'</td>
 		<td class="align-middle">
 		<div class="btn-group" role="group">
 			<a href="index.php?route=comercio&operacion=modificacion&descripcion='.$menu->getDescripcion().'&imagen='.$menu->getImagen().'&id='.$menu->getId().'&precio='.$menu->getPrecio().'&comercio='.$menu->getComercio().'" class="btn text-white btn-primary">Modificar</a>

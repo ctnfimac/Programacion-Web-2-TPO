@@ -11,26 +11,26 @@ $info = '';
 $id_pedido = '';
 $cont_id = 1;
 foreach($pedidos as $pedido){
-	$comercio = $comercioModel->obtenerNombreDelComercio($pedido->getComercio());
-	$cliente = $clienteModel->obtenerNombreDelCliente($pedido->getCliente());
+	//$comercio = $comercioModel->obtenerNombreDelComercio($pedido->getComercio());
+	//$cliente = $clienteModel->obtenerNombreDelCliente($pedido->getCliente());
 	$id_pedido = $pedido->getId();
-	$repartidor =  $repartidorModel->obtenerNombreDelRepartidor($pedido->getRepartidor()) == false ? 'sin asignar' : $repartidorModel->obtenerNombreDelRepartidor($pedido->getRepartidor()) ;
-	//$repartidor = $pedido->getRepartidor() == null ? 'sin asignar': $pedido->getRepartidor();
+	//$repartidor =  $repartidorModel->obtenerNombreDelRepartidor($pedido->getRepartidor()) == false ? 'sin asignar' : $repartidorModel->obtenerNombreDelRepartidor($pedido->getRepartidor()) ;
+	$repartidor = $pedido->getRepartidor() == null ? 'sin asignar': $pedido->getRepartidor();
 	$info .= '<tr>
-		<td>'.$pedido->getId().'</td>
-		<td>'.$comercio.'</td>
-		<td>'.$cliente.'</td>
-		<td>'.$pedido->getFecha().'</td>
-		<td>'.$pedido->getHora().'</td>
-		<td>'.$repartidor.'</td>
+		<td class="align-middle">'.$pedido->getId().'</td>
+		<td class="align-middle">'.$pedido->getComercio().'</td>
+		<td class="align-middle">'.$pedido->getCliente().'</td>
+		<td class="align-middle">'.$pedido->getFecha().'</td>
+		<td class="align-middle">'.$pedido->getHora().'</td>
+		<td class="align-middle">'.$repartidor.'</td>
 		<td>
 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-'.$cont_id.'">
 				Ver Detalles
 			</button> 
 		</td>
-		<td>'.$pedido->getEstadoDelPedidoStr().'</td>
-		<td>$ '.$pedido->getPenalizado().'</td>
-		<td>$ '.$pedido->getPrecioTotal().'</td>
+		<td class="align-middle">'.$pedido->getEstadoDelPedidoStr().'</td>
+		<td class="align-middle">$ '.$pedido->getPenalizado().'</td>
+		<td class="align-middle">$ '.$pedido->getPrecioTotal().'</td>
 		
 		<!--<td class="align-middle">
 		<div class="btn-group" role="group">
@@ -87,10 +87,10 @@ function asignarMenus($cont_id, $id_pedido , $pedidoModel){
 
 	foreach($tabla_menus as $menu){
 		$menus .= '<tr>
-			<td>'.$menu->getDescripcion().'</td>
+			<td class="align-middle">'.$menu->getDescripcion().'</td>
 			<td class="align-middle justify-content-center"><img src="'.$menu->getImagen().'" width=125></td>
-			<td>$'.$menu->getPrecio().'</td>
-			<td>'.$menu->getCantidad().'</td>
+			<td class="align-middle">$'.$menu->getPrecio().'</td>
+			<td class="align-middle">'.$menu->getCantidad().'</td>
 			</tr>';
 		}
 
@@ -127,8 +127,7 @@ function asignarMenus($cont_id, $id_pedido , $pedidoModel){
 			<div class="modal-content">
 				'.$tablaMenus.'
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 			</div>
 			</div>
 		</div>

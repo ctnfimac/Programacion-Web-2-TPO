@@ -27,32 +27,66 @@ class PedidoModel extends Conexion{
 		$dia = date("Y-m-d",time());
 		$hora = date("H:i:s",time());
 		//completar la tabla pedido
-		$this->query = "INSERT INTO pedido(id_comercio,id_cliente,fecha_alta, hora_alta, precio)
-						VALUES ('$id_comercio','$id_cliente',CURDATE(), '$hora' , '$precio')";
+		// $this->query = "INSERT INTO pedido(id_comercio,id_cliente,fecha_alta, hora_alta, precio)
+		// 				VALUES ('$id_comercio','$id_cliente',CURDATE(), '$hora' , '$precio')";
+		// $this->set_query();
+
+		// $this->query = "SELECT id 
+		// 				FROM pedido 
+		// 				WHERE fecha_alta = '$dia' AND hora_alta = '$hora' 
+		// 					  AND id_comercio = '$id_comercio' AND id_cliente='$id_cliente'";
+		// $tabla = $this->get_query();
+		// while($row = $tabla->fetch_assoc()){
+		// 	$id_pedido = $row['id'];
+		// }
+
+		// // por cada menu agregar el menu y el id del menu
+		// foreach($_SESSION['carrito'] as $key => $value){
+		// 	$id_menu = $value['id'];
+		// 	$cantidad = $value['cantidad'];
+		// 	$this->query = "INSERT INTO pedido_menus(id_pedido,id_menu,cantidad)
+		// 					VALUES ('$id_pedido','$id_menu','$cantidad')";
+		// 	$this->set_query();
+		// }
+		// $_SESSION['carrito'] = null;
+		
+		//iniciar timer para la penalizacion
+		/**nuevo */
+		$comercio = $menu->buscoNombreDeComercioIdDeComercio($id_comercio);
+		$cliente = $_SESSION['admin'];
+        $this->query = "INSERT INTO pedido(comercio,cliente,fecha_alta, hora_alta, precio)
+		 				VALUES ('$comercio','$cliente',CURDATE(), '$hora' , '$precio')";
 		$this->set_query();
 
-		
-		
 		$this->query = "SELECT id 
-						FROM pedido 
-						WHERE fecha_alta = '$dia' AND hora_alta = '$hora' 
-							  AND id_comercio = '$id_comercio' AND id_cliente='$id_cliente'";
+		 				FROM  pedido
+		 				WHERE fecha_alta = '$dia' AND hora_alta = '$hora' 
+		 					  AND comercio = '$comercio' AND cliente='$cliente'";
 		$tabla = $this->get_query();
 		while($row = $tabla->fetch_assoc()){
-			$id_pedido = $row['id'];
+			$id_reg_pedido = $row['id'];
 		}
 
-		// por cada menu agregar el menu y el id del menu
 		foreach($_SESSION['carrito'] as $key => $value){
-			$id_menu = $value['id'];
+			// echo 'id: ' . $value['id'] . '<br>';
+			$menu_aux = $menu->menuPorId($value['id']);
+			$descripcion = $menu_aux->getDescripcion();
+			$imagen = $menu_aux->getImagen();
+			$price = $menu_aux->getPrecio();
 			$cantidad = $value['cantidad'];
-			$this->query = "INSERT INTO pedido_menus(id_pedido,id_menu,cantidad)
-							VALUES ('$id_pedido','$id_menu','$cantidad')";
-			$this->set_query();
+
+			$origen = $imagen;
+			$destino = str_replace("menu/", "pedidos/", $menu_aux->getImagen());
+			if(!file_exists ($destino)) 	copy($origen, $destino);
+
+			$imagen = str_replace("menu/", "pedidos/", $imagen);
+			// echo $descripcion . ', ' . $imagen . ', ' . $price . ', '. $cantidad . ', ' . $id_reg_pedido . '<br>';
+			$this->query = "INSERT INTO pedido_menus(id,menu,imagen,precio,cantidad)
+							VALUES ('$id_reg_pedido','$descripcion','$imagen','$price','$cantidad')";
+			$this->set_query();			
 		}
 		$_SESSION['carrito'] = null;
 		header('location:index.php?route=carrito');
-		//iniciar timer para la penalizacion
 	}
 
 	protected function baja(){}
@@ -89,17 +123,33 @@ class PedidoModel extends Conexion{
 	}
 
 	public function mostrarPedidos(){
+		// $matriz = array();
+		// $contador = 0;
+
+		// $this->query = "SELECT id, id_comercio, id_cliente, fecha_alta, hora_alta, id_repartidor ,precio,penalizado, estado
+		// 				FROM pedido";
+							 
+		// $tabla = $this->get_query();
+		// while($fila = $tabla->fetch_assoc()){
+		// 	 $pedido = new Pedido($fila['id'],$fila['id_comercio'],$fila['id_cliente'],$fila['fecha_alta'],
+		// 	 				  $fila['hora_alta'],$fila['id_repartidor'],$fila['precio'],$fila['penalizado'],$fila['estado']);
+		// 	 $matriz[$contador] = $pedido;
+		// 	 $contador++;
+		// }
+		// return $matriz;
 		$matriz = array();
 		$contador = 0;
 
-		$this->query = "SELECT id, id_comercio, id_cliente, fecha_alta, hora_alta, id_repartidor ,precio,penalizado, estado
+		$this->query = "SELECT id, comercio, cliente, fecha_alta, hora_alta, repartidor ,precio,penalizado, estado
 						FROM pedido";
 							 
 		$tabla = $this->get_query();
 		while($fila = $tabla->fetch_assoc()){
-			 $pedido = new Pedido($fila['id'],$fila['id_comercio'],$fila['id_cliente'],$fila['fecha_alta'],
-			 				  $fila['hora_alta'],$fila['id_repartidor'],$fila['precio'],$fila['penalizado'],$fila['estado']);
-			 $matriz[$contador] = $pedido;
+			// ($id, $comercio, $cliente, $fecha_alta, $hora_alta ,
+			// 		$repartidor,$precio_total,$penalizado = 0.0, $estado_del_pedido = 1){
+			 $RegistroDePedido = new Pedido($fila['id'],$fila['comercio'],$fila['cliente'],$fila['fecha_alta'],
+			 				  $fila['hora_alta'],$fila['repartidor'],$fila['precio'],$fila['penalizado'],$fila['estado']);
+			 $matriz[$contador] = $RegistroDePedido;
 			 $contador++;
 		}
 		return $matriz;
@@ -110,14 +160,17 @@ class PedidoModel extends Conexion{
 		$contador = 0;
 		
 		$comercio = $_SESSION['admin'];
-		$this->query = "SELECT id, id_comercio, id_cliente, fecha_alta, hora_alta, id_repartidor ,precio,estado
+		// $this->query = "SELECT id, id_comercio, id_cliente, fecha_alta, hora_alta, id_repartidor ,precio,estado
+		// 				FROM pedido
+		// 				WHERE id_comercio = (select id from usuario where nombre = '$comercio')";
+		$this->query = "SELECT id, comercio, cliente, fecha_alta, hora_alta, repartidor,precio,estado
 						FROM pedido
-						WHERE id_comercio = (select id from usuario where nombre = '$comercio')";
+						WHERE comercio = '$comercio'";
 							 
 		$tabla = $this->get_query();
 		while($fila = $tabla->fetch_assoc()){
-			 $pedido = new Pedido($fila['id'],$fila['id_comercio'],$fila['id_cliente'],$fila['fecha_alta'],
-			 				  $fila['hora_alta'],$fila['id_repartidor'],$fila['precio'],'',$fila['estado']);
+			 $pedido = new Pedido($fila['id'],$fila['comercio'],$fila['cliente'],$fila['fecha_alta'],
+			 				  $fila['hora_alta'],$fila['repartidor'],$fila['precio'],'',$fila['estado']);
 			 $matriz[$contador] = $pedido;
 			 $contador++;
 		}
@@ -129,14 +182,17 @@ class PedidoModel extends Conexion{
 		$contador = 0;
 		
 		$cliente = $_SESSION['admin'];
-		$this->query = "SELECT p.id, p.id_comercio, p.id_cliente, p.fecha_alta, p.hora_alta, p.id_repartidor ,p.precio, p.estado
+		// $this->query = "SELECT p.id, p.id_comercio, p.id_cliente, p.fecha_alta, p.hora_alta, p.id_repartidor ,p.precio, p.estado
+		// 				FROM pedido p
+		// 				WHERE id_cliente = (select id from usuario where nombre = '$cliente')";
+		$this->query = "SELECT id, comercio, cliente, fecha_alta, hora_alta, repartidor, precio, estado
 						FROM pedido p
-						WHERE id_cliente = (select id from usuario where nombre = '$cliente')";
+						WHERE cliente = '$cliente'";
 							 
 		$tabla = $this->get_query();
 		while($fila = $tabla->fetch_assoc()){
-			 $pedido = new Pedido($fila['id'],$fila['id_comercio'],$fila['id_cliente'],$fila['fecha_alta'],
-			 				  $fila['hora_alta'],$fila['id_repartidor'],$fila['precio'],'',$fila['estado']);
+			 $pedido = new Pedido($fila['id'],$fila['comercio'],$fila['cliente'],$fila['fecha_alta'],
+			 				  $fila['hora_alta'],$fila['repartidor'],$fila['precio'],'',$fila['estado']);
 			 $matriz[$contador] = $pedido;
 			 $contador++;
 		}
@@ -144,17 +200,30 @@ class PedidoModel extends Conexion{
 	}
 
 	public function getMenuDePedido($id_pedido){
+		// $matriz = array();
+		// $contador = 0;
+		// $this->query = "SELECT m.id, m.descripcion, m.imagen, m.precio , m.id_comercio, pm.cantidad
+		// 				FROM pedido_menus pm JOIN
+		// 					 pedido p ON pm.id_pedido = p.id JOIN
+		// 					 menu m ON m.id = pm.id_menu
+		// 				WHERE p.id = '$id_pedido'";				 
+		// $tabla = $this->get_query();
+		// while($fila = $tabla->fetch_assoc()){
+		// 	 $menu = new Menu($fila['id'],$fila['descripcion'],$fila['imagen'],$fila['precio'],
+		// 	 				  $fila['id_comercio'],$fila['cantidad']);
+		// 	 $matriz[$contador] = $menu;
+		// 	 $contador++;
+		// }
+		// return $matriz;
 		$matriz = array();
 		$contador = 0;
-		$this->query = "SELECT m.id, m.descripcion, m.imagen, m.precio , m.id_comercio, pm.cantidad
-						FROM pedido_menus pm JOIN
-							 pedido p ON pm.id_pedido = p.id JOIN
-							 menu m ON m.id = pm.id_menu
-						WHERE p.id = '$id_pedido'";				 
+		$this->query = "SELECT id, menu, imagen, precio , cantidad
+						FROM pedido_menus
+						WHERE id = '$id_pedido'";				 
 		$tabla = $this->get_query();
 		while($fila = $tabla->fetch_assoc()){
-			 $menu = new Menu($fila['id'],$fila['descripcion'],$fila['imagen'],$fila['precio'],
-			 				  $fila['id_comercio'],$fila['cantidad']);
+			 $menu = new Menu($fila['id'],$fila['menu'],$fila['imagen'],$fila['precio'],
+			 				  '',$fila['cantidad']);
 			 $matriz[$contador] = $menu;
 			 $contador++;
 		}
@@ -163,13 +232,15 @@ class PedidoModel extends Conexion{
 
 	public function estadoPedidoTomar($id_pedido){
 		$repartidor = $_SESSION['admin'];
-		$this->query = "UPDATE pedido SET estado = 2, id_repartidor = (SELECT id FROM usuario WHERE nombre = '$repartidor' ) 
+		// $this->query = "UPDATE pedido SET estado = 2, id_repartidor = (SELECT id FROM usuario WHERE nombre = '$repartidor' ) 
+		// 				WHERE id = '$id_pedido'";
+		$this->query = "UPDATE pedido SET estado = 2, repartidor = '$repartidor' 
 						WHERE id = '$id_pedido'";
 		$this->set_query();
 	}
 
 	public function estadoPedidoCancelar($id_pedido){
-		$this->query = "UPDATE pedido SET estado = 1, id_repartidor = null 
+		$this->query = "UPDATE pedido SET estado = 1, repartidor = null 
 						WHERE id = '$id_pedido'";
 		$this->set_query();
 	}

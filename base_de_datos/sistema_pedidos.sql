@@ -105,33 +105,53 @@ create table Productos_Menu (
 	CONSTRAINT FK_MENU_ID FOREIGN KEY (id_menu) REFERENCES Menu(id)
 );
 
-
-create table Pedido (
+create table pedido(
 	id int primary key auto_increment,
-	-- id_sucursal int,
-	id_comercio int,
-	id_cliente int,
-	fecha_alta DATE NOT NULL,
+	comercio varchar(30) NOT NULL,
+	cliente varchar(30) NOT NULL,
+	fecha_alta DATE not null,
 	hora_alta TIME not null,
-	id_repartidor int,
-	precio Double,
-	penalizado decimal(6,2) default 0, 
+	repartidor varchar(30),
+	penalizado decimal(6,2) default 0,
 	estado int default 1,
-	CONSTRAINT FK_PEDIDO_CLIENTE FOREIGN KEY (id_cliente) REFERENCES Cliente(id_usuario),
-	-- CONSTRAINT FK_PEDIDO_SUCURSAL FOREIGN KEY (id_sucursal) REFERENCES Sucursal(id)
-	CONSTRAINT FK_PEDIDO_COMERCIO FOREIGN KEY (id_comercio) REFERENCES Comercio(id_comercio),
-	CONSTRAINT FK_PEDIDO_REPARTIDOR FOREIGN KEY (id_repartidor) REFERENCES Repartidor(id_usuario)
+	precio Double
 );
-
 
 create table pedido_menus(
-	id_pedido int,
-	id_menu int,
+	id int,
+	menu varchar(60),
+	imagen varchar(80),
+	precio Double,
 	cantidad int default 1,
-	primary key(id_pedido,id_menu),
-	CONSTRAINT FK_PEDIDO_MENUS_MENU FOREIGN KEY (id_menu) REFERENCES Menu(id),
-	CONSTRAINT FK_PEDIDO_MENUS_PEDIDO FOREIGN KEY (id_pedido) REFERENCES Pedido(id)
+	primary key(id,menu),
+	CONSTRAINT FK_REGISTRO_DE_PEDIDO_CONTENIDO FOREIGN KEY (id) REFERENCES pedido(id)
 );
+-- create table Pedido (
+-- 	id int primary key auto_increment,
+-- 	-- id_sucursal int,
+-- 	id_comercio int,
+-- 	id_cliente int,
+-- 	fecha_alta DATE NOT NULL,
+-- 	hora_alta TIME not null,
+-- 	id_repartidor int,
+-- 	precio Double,
+-- 	penalizado decimal(6,2) default 0, 
+-- 	estado int default 1,
+-- 	CONSTRAINT FK_PEDIDO_CLIENTE FOREIGN KEY (id_cliente) REFERENCES Cliente(id_usuario),
+-- 	-- CONSTRAINT FK_PEDIDO_SUCURSAL FOREIGN KEY (id_sucursal) REFERENCES Sucursal(id)
+-- 	CONSTRAINT FK_PEDIDO_COMERCIO FOREIGN KEY (id_comercio) REFERENCES Comercio(id_comercio),
+-- 	CONSTRAINT FK_PEDIDO_REPARTIDOR FOREIGN KEY (id_repartidor) REFERENCES Repartidor(id_usuario)
+-- );
+
+
+-- create table pedido_menus(
+-- 	id_pedido int,
+-- 	id_menu int,
+-- 	cantidad int default 1,
+-- 	primary key(id_pedido,id_menu),
+-- 	CONSTRAINT FK_PEDIDO_MENUS_MENU FOREIGN KEY (id_menu) REFERENCES Menu(id),
+-- 	CONSTRAINT FK_PEDIDO_MENUS_PEDIDO FOREIGN KEY (id_pedido) REFERENCES Pedido(id)
+-- );
 
 create table Entrega (
 	id int not null,
@@ -193,35 +213,35 @@ insert into Administrador(id_usuario, usuario) values
 
 insert into Menu(descripcion,imagen,precio,id_comercio) 
 values ('pizza de muzarella','./public/img/menu/menu03.jpg',220,7),
-	   ('Tostadas de jamon y queso','./public/img/menu/menu05.jpg',49.99,8),
+	   ('Tostadas de jamon y queso','./public/img/menu/menu05.jpg',50,8),
 	   ('Empanadas','./public/img/menu/menu06.jpg',180,8),
-	   ('Saguchitos de miga','./public/img/menu/menu08.jpg',99.99,7);
+	   ('Saguchitos de miga','./public/img/menu/menu08.jpg',100,7);
 
 INSERT INTO Oferta(fecha, id_menu) 
 VALUES (CURDATE(), 1),
 	   ("20181030", 2);
 
-INSERT INTO pedido(id_comercio, id_cliente, fecha_alta, hora_alta, precio)
-VALUES (7, 4, CURDATE() , CURTIME(), 859.98),
-	   (8, 4, CURDATE() , CURTIME(), 720);
+INSERT INTO pedido(comercio,cliente,fecha_alta,hora_alta,precio)
+VALUES ('Carrefour','Luz',CURDATE(), CURTIME(), 540),
+	   ('Jumbo','eli',CURDATE(), CURTIME(), 880),
+	   ('Jumbo','juan',CURDATE(), CURTIME(), 230);
+
+INSERT INTO pedido_menus()
+VALUES (1,'pizza de muzzarella','./public/img/menu/menu02.jpg',220,2),
+	   (1,'Saguchitos de miga','./public/img/menu/menu08.jpg',100,1),
+	   (2,'pizza de muzzarella','./public/img/menu/menu02.jpg',220,4),
+	   (3,'Panchos','./public/img/menu/menu06.jpg',180,1),
+	   (3,'Tostadas de jamon y queso','./public/img/menu/menu04.jpg',50,1);
 
 
-INSERT INTO pedido_menus(id_pedido, id_menu, cantidad)
-VALUES (1, 1, 3),
-	   (1, 4, 2),
-	   (2, 3, 4);
+-- INSERT INTO pedido(id_comercio, id_cliente, fecha_alta, hora_alta, precio)
+-- VALUES (7, 4, CURDATE() , CURTIME(), 859.98),
+-- 	   (8, 4, CURDATE() , CURTIME(), 720);
 
 
--- INSERT INTO sucursal(calle,numero,id_comercio,id_localidad)
--- VALUES ('rivadavia','11200',1,1),
--- 	   ('rivadavia','11200',1,1),
--- 	   ('rivadavia','11200',1,1);
+-- INSERT INTO pedido_menus(id_pedido, id_menu, cantidad)
+-- VALUES (1, 1, 3),
+-- 	   (1, 4, 2),
+-- 	   (2, 3, 4);
 
 
-
--- create table Producto (
--- 	id int primary key auto_increment,
--- 	descripcion varchar(50),
--- 	id_precio int,
--- 	CONSTRAINT FK_PRODUCTO_PRECIO FOREIGN KEY (id_precio) REFERENCES Precio(id)
--- );

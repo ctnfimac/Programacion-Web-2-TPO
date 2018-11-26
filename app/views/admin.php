@@ -22,13 +22,13 @@ elseif(isset($_GET['tabla']) && $_GET['tabla'] == 'comercios'){
 elseif(isset($_GET['tabla']) && $_GET['tabla'] == 'solicitudes'){
 	require_once('admin/sections/tablero.php');
 	printf($tablero);
-}elseif(isset($_GET['tabla']) && $_GET['tabla'] == 'tabla_pedidos'){
+}else{//(isset($_GET['tabla']) && $_GET['tabla'] == 'tabla_pedidos')
 	require_once('admin/sections/tabla_pedidos.php');
 	printf($tablaPedidos);
-}else{
+}/*else{
 	require_once('admin/sections/tablero.php');
 	printf($tablero);
-}
+}*/
 
 
 

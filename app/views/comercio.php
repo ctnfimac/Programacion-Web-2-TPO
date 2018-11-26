@@ -3,7 +3,7 @@
 if(isset($_GET['tabla']) && $_GET['tabla'] == 'menus'){
 	require_once('comercio/sections/menusTabla.php');
 	printf($tablaMenus);	
-}elseif(isset($_GET['tabla']) && $_GET['tabla'] == 'pedidos_realizados'){
+}else{//if(isset($_GET['tabla']) && $_GET['tabla'] == 'pedidos_realizados'){
 	require_once('comercio/sections/pedidos_realizados.php');
 	printf($tablaPedidos);
 }

@@ -184,29 +184,44 @@ class RepartidorModel extends Conexion{
 
 
 	private function tomar_pedido(){
-		//cambio el estado 
-		///echo 'estoy en tomar pedido';
+		// require_once('PedidoModel.php');
+		// $pedido = new PedidoModel();
+		// $pedido->estadoPedidoTomar($_GET['id_pedido']);
+		// $cliente = isset($_GET['cliente']) ?  $_GET['cliente'] : '';
+		// $this->query = "SELECT DISTINCT c.calle, c.numero, l.descripcion 
+		// 				FROM cliente c JOIN
+		// 					 pedido p ON p.id_cliente = c.id_usuario JOIN
+		// 					 localidad l ON c.id_localidad = l.id
+		// 				WHERE c.id_usuario = '$cliente'";
+		// $tabla = $this->get_query();
+		// $entro = false;
+		// $direccion = '';
+		// while($row = $tabla->fetch_assoc()){
+		// 		$calle = $row['calle'];
+		// 		$numero = $row['numero'];
+		// 		$localidad = $row['descripcion'];
+		// 		$direccion = $calle . ' ' .$numero . ' ' . $localidad;
+		// }
 		require_once('PedidoModel.php');
 		$pedido = new PedidoModel();
-		//echo $_SESSION['admin'];
 		$pedido->estadoPedidoTomar($_GET['id_pedido']);
 		$cliente = isset($_GET['cliente']) ?  $_GET['cliente'] : '';
-		$this->query = "SELECT DISTINCT c.calle, c.numero, l.descripcion 
+		$this->query = "SELECT DISTINCT c.calle, c.numero, l.descripcion
 						FROM cliente c JOIN
-							 pedido p ON p.id_cliente = c.id_usuario JOIN
-							 localidad l ON c.id_localidad = l.id
-						WHERE c.id_usuario = '$cliente'";
+							 usuario u ON u.id = c.id_usuario JOIN
+							 pedido p ON p.cliente = u.nombre JOIN
+							 localidad l ON c.id_localidad = l.id 
+						WHERE u.nombre = '$cliente'";
 		$tabla = $this->get_query();
 		$entro = false;
 		$direccion = '';
 		while($row = $tabla->fetch_assoc()){
-			
 				$calle = $row['calle'];
 				$numero = $row['numero'];
 				$localidad = $row['descripcion'];
-	
-				 $direccion = $calle . ' ' .$numero . ' ' . $localidad;
+				$direccion = $calle . ' ' .$numero . ' ' . $localidad;
 		}
+
 		header('location:index.php?route=admin&tabla=pedidos_realizados&direccion='.$direccion);
 	}
 
@@ -246,11 +261,9 @@ class RepartidorModel extends Conexion{
 		$resultado = false;
 		if(isset($_SESSION['admin'])){
 			$repartidor = $_SESSION['admin'];
-			$this->query = "SELECT p.estado 
-							FROM pedido P JOIN
-								 repartidor r ON r.id_usuario = p.id_repartidor JOIN
-								 usuario u ON u.id = r.id_usuario 
-							WHERE u.nombre = '$repartidor' and DATE(p.fecha_alta)= CURDATE()";
+			$this->query = "SELECT estado 
+							FROM pedido 
+							WHERE repartidor = '$repartidor' and DATE(fecha_alta)= CURDATE()";
 			$tabla = $this->get_query();
 			while($fila = $tabla->fetch_assoc()){
 				if($fila['estado'] == 2) $resultado = true;

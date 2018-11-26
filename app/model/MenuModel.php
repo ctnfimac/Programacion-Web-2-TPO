@@ -63,16 +63,16 @@ class MenuModel extends Conexion{
 		$url_img =  self::URL . $_FILES['fileImagen']['name'];
 
 		// guardo la imagen en el directorio
-		if(file_exists($url_img)) unlink($url_img);
+		if(!file_exists($url_img)){ //unlink($url_img);
 			move_uploaded_file($_FILES["fileImagen"]["tmp_name"], $url_img);
 
-		$comercio = $_SESSION['admin'];
-		$this->query = "INSERT INTO menu (descripcion,imagen,precio,id_comercio) VALUES ('$descripcion','$url_img','$precio',
-											(SELECT u.id 
-											 FROM usuario u
-											 WHERE u.nombre = '$comercio'))";
-		$this->set_query();
-
+			$comercio = $_SESSION['admin'];
+			$this->query = "INSERT INTO menu (descripcion,imagen,precio,id_comercio) VALUES ('$descripcion','$url_img','$precio',
+												(SELECT u.id 
+												FROM usuario u
+												WHERE u.nombre = '$comercio'))";
+			$this->set_query();
+		}
 		$route = $_GET['route'];
 		header('location:index.php?route='.$route.'&tabla=menus');
 	}
@@ -85,16 +85,18 @@ class MenuModel extends Conexion{
 		$registro = $resultado->fetch_assoc();
 		$url = $registro['imagen'];
 
+		// echo 'id: ' . $id;
+		// echo 'url: ' . $url;	
 		// primero elimino la oferta si es que existe
 		$this->query = "DELETE FROM oferta WHERE id_menu='$id'";
 		$this->set_query();
 
 		$this->query = "DELETE FROM menu WHERE id='$id'";
 		$this->set_query();
-		if(file_exists($url)) unlink($url);
+		//if(file_exists($url)) unlink($url);
 
 		$route = $_GET['route'];
-		header('location:index.php?route='.$route.'&tabla=menus');
+		//header('location:index.php?route='.$route.'&tabla=menus');
 	}
 
 	protected function modificacion(){
@@ -103,17 +105,21 @@ class MenuModel extends Conexion{
 		$imagen = (isset($_FILES['fileImagen']) && $_FILES['fileImagen']['tmp_name'] != "") ? self::URL . $_FILES['fileImagen']['name'] : $_POST['fileImagenActual'];
 		$precio = (isset($_POST['precio']) && $_POST['precio'] != "") ? $_POST['precio'] : $_POST['precioActual'];
 
-		if($_FILES['fileImagen']['tmp_name'] != ""){
-			if(file_exists($_POST['fileImagenActual'])) unlink($_POST['fileImagenActual']);
-			if(file_exists($imagen)) unlink($imagen);
-			 move_uploaded_file($_FILES["fileImagen"]["tmp_name"], $imagen);
-		  }
+		//if(!file_exists(self::URL . $_FILES['fileImagen']['name'])){
 
-		$this->query = " UPDATE menu SET descripcion = '$descripcion', imagen = '$imagen', precio = '$precio' WHERE id = '$id' ";
-		$this->set_query();	
-		//header('location:index.php?route=admin&tabla=menus');
-		$route = $_GET['route'];
-		//echo 'ruta: ' . $route;
+			if($_FILES['fileImagen']['tmp_name'] != ""){
+				if(file_exists($_POST['fileImagenActual'])) unlink($_POST['fileImagenActual']);
+				if(file_exists($imagen)) unlink($imagen);
+				move_uploaded_file($_FILES["fileImagen"]["tmp_name"], $imagen);
+			}
+
+			$this->query = " UPDATE menu SET descripcion = '$descripcion', imagen = '$imagen', precio = '$precio' WHERE id = '$id' ";
+			$this->set_query();	
+		//}
+			//header('location:index.php?route=admin&tabla=menus');
+			$route = $_GET['route'];
+			//echo 'ruta: ' . $route;
+		
 		header('location:index.php?route='.$route.'&tabla=menus');
 	}
 
@@ -172,6 +178,16 @@ class MenuModel extends Conexion{
 			$id_comercio = $fila['id_comercio'];
 	    }
 	   return $id_comercio;
+	}
+
+	public function buscoNombreDeComercioIdDeComercio($id_comercio){
+		$this->query = "SELECT nombre FROM usuario WHERE id='$id_comercio' LIMIT 1";
+		$tabla = $this->get_query();
+		$id_comercio = null;
+		while($fila = $tabla->fetch_assoc()){
+			$nombre = $fila['nombre'];
+	    }
+	   return $nombre;
 	}
 
 }
