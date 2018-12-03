@@ -144,5 +144,15 @@ class ComercioModel extends Conexion{
 		}
 		return $resultado;
 	}
+
+	public function obtenerIdDelComercio($comercio){
+		$resultado = false;
+		$this->query = "SELECT id FROM usuario WHERE nombre = '$comercio' LIMIT 1";
+		$tabla = $this->get_query();
+		while($row = $tabla->fetch_assoc()){
+			$resultado = $row['id'];
+		}
+		return $resultado;
+	}
 	
 }

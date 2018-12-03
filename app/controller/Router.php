@@ -41,6 +41,9 @@ class Router{
 					case 'menu':
 						$seccion = new MenuModel();
 						break;
+					case 'liquidacion':
+						$seccion = new LiquidacionModel();
+						break;
 					default:
 						$seccion = new MenuModel();
 						break;
@@ -48,6 +51,7 @@ class Router{
 				if(isset($_GET['habilitar'])) $seccion->habilitar($_GET['habilitar']);
 				$seccion->setOperacion($operacion);// alta,baja,modificacion
 				$operacion_ejecutada = $seccion->ejecutarOperacion();
+				//echo 'operacion:'.$operacion_ejecutada ;
 				$view_controller->load_view('admin',$operacion_ejecutada);
 				break;
 			case 'comercio':

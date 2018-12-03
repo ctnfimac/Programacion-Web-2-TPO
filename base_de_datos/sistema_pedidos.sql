@@ -11,11 +11,6 @@ create table Localidad (
 	descripcion varchar(30)
 );
 
--- create table Telefono (
--- 	id int primary key,
--- 	numero varchar(30)
--- );
-
 create table Usuario (
 	id int primary key auto_increment,
 	nombre varchar(30) not null,
@@ -77,16 +72,9 @@ create table Administrador (
 -- 	CONSTRAINT FK_SUCURSAL_COMERCIO FOREIGN KEY (id_comercio) REFERENCES Comercio(id_comercio)
 -- );
 
--- create table Precio (
--- 	id int primary key auto_increment,
--- 	valor double not null
--- );
-
 create table Producto (
 	id int primary key auto_increment,
 	descripcion varchar(50)
-	-- id_precio int,
-	-- CONSTRAINT FK_PRODUCTO_PRECIO FOREIGN KEY (id_precio) REFERENCES Precio(id)
 );
 
 create table Menu (
@@ -126,32 +114,6 @@ create table pedido_menus(
 	primary key(id,menu),
 	CONSTRAINT FK_REGISTRO_DE_PEDIDO_CONTENIDO FOREIGN KEY (id) REFERENCES pedido(id)
 );
--- create table Pedido (
--- 	id int primary key auto_increment,
--- 	-- id_sucursal int,
--- 	id_comercio int,
--- 	id_cliente int,
--- 	fecha_alta DATE NOT NULL,
--- 	hora_alta TIME not null,
--- 	id_repartidor int,
--- 	precio Double,
--- 	penalizado decimal(6,2) default 0, 
--- 	estado int default 1,
--- 	CONSTRAINT FK_PEDIDO_CLIENTE FOREIGN KEY (id_cliente) REFERENCES Cliente(id_usuario),
--- 	-- CONSTRAINT FK_PEDIDO_SUCURSAL FOREIGN KEY (id_sucursal) REFERENCES Sucursal(id)
--- 	CONSTRAINT FK_PEDIDO_COMERCIO FOREIGN KEY (id_comercio) REFERENCES Comercio(id_comercio),
--- 	CONSTRAINT FK_PEDIDO_REPARTIDOR FOREIGN KEY (id_repartidor) REFERENCES Repartidor(id_usuario)
--- );
-
-
--- create table pedido_menus(
--- 	id_pedido int,
--- 	id_menu int,
--- 	cantidad int default 1,
--- 	primary key(id_pedido,id_menu),
--- 	CONSTRAINT FK_PEDIDO_MENUS_MENU FOREIGN KEY (id_menu) REFERENCES Menu(id),
--- 	CONSTRAINT FK_PEDIDO_MENUS_PEDIDO FOREIGN KEY (id_pedido) REFERENCES Pedido(id)
--- );
 
 create table Entrega (
 	id int not null,
@@ -168,6 +130,23 @@ create table Oferta (
 	fecha date not null unique,
 	id_menu int not null,
 	CONSTRAINT FK_MENU_OFERTA FOREIGN KEY (id_menu) REFERENCES Menu(id)
+);
+
+create table liquidacion(
+	id int primary key auto_increment,
+	periodo_pago Date not null,
+	remuneracion decimal(9,2),
+	descuento decimal(5,2),
+	neto decimal(9,2),
+	id_usuario int,
+	CONSTRAINT FK_LIQUIDACION_USUARIO FOREIGN KEY (id_usuario) REFERENCES Usuario(id)
+);
+
+
+create table ganancia(
+	id int primary key auto_increment,
+	fecha Date not null unique,
+	monto decimal(9,2)
 );
 
 
@@ -189,7 +168,7 @@ insert into Usuario(nombre, apellido, email, contrasenia, telefono, habilitado )
 ('Jumbo', '', 'jumbo@gmail.com', '$2y$10$fxxdscKETA7vAp.XgPrux.rQQ/T8dCg5n1r4UiQKwDFKbcBsH3XxG','56446641',''),
 ('hugo', 'Perez', 'hugo@gmail.com', '$2y$10$eRs.y/W/9Bk6e.4aFcO/xexMHW9rv3gWtDzAuG1NEVW3CLCXYllQq','1560010001',''),
 ('Mario', 'Bros', 'mario@gmail.com', '$2y$10$H0f5M3gDfSP34Myp4TMm8ep5oC7C4km/jog2PbLg70z23Vn5WSLei','1560010001','');
--- 123
+
 
 
 INSERT INTO repartidor(id_usuario, fecha_nacimiento, dni, cuil)
@@ -212,36 +191,81 @@ insert into Administrador(id_usuario, usuario) values
 
 
 insert into Menu(descripcion,imagen,precio,id_comercio) 
-values ('pizza de muzarella','./public/img/menu/menu03.jpg',220,7),
-	   ('Tostadas de jamon y queso','./public/img/menu/menu05.jpg',50,8),
-	   ('Empanadas','./public/img/menu/menu06.jpg',180,8),
-	   ('Saguchitos de miga','./public/img/menu/menu08.jpg',100,7);
+values ('pizza de muzarella','./public/img/menu/menu02.jpg',220,7),
+	   ('Tostadas de jamon y queso','./public/img/menu/menu04.jpg',50,8),
+	   ('Empanadas','./public/img/menu/menu07.jpg',200,8),
+	   ('Sanguchitos de miga','./public/img/menu/menu08.jpg',100,7),
+	   ('Panchos','./public/img/menu/menu06.jpg',150,8),
+	   ('Asado','./public/img/menu/menu05.jpg',300,7);
 
 INSERT INTO Oferta(fecha, id_menu) 
-VALUES (CURDATE(), 1),
+VALUES (CURDATE(), 3),
 	   ("20181030", 2);
 
-INSERT INTO pedido(comercio,cliente,fecha_alta,hora_alta,precio)
-VALUES ('Carrefour','Luz',CURDATE(), CURTIME(), 540),
-	   ('Jumbo','eli',CURDATE(), CURTIME(), 880),
-	   ('Jumbo','juan',CURDATE(), CURTIME(), 230);
+INSERT INTO pedido(comercio,cliente,fecha_alta,hora_alta,repartidor,estado,precio)
+VALUES ('Carrefour','Luz','2018-06-11', '22:15:30','hugo', 3, 540),
+	   ('Carrefour','eli', '2018-06-11', '22:00:00','hugo', 3, 880),
+	   ('Jumbo','juan','2018-06-11', '22:10:00','mario', 3, 200),
+	   ('Carrefour','eli','2018-09-11', '12:15:45','hugo', 3, 820),
+ 	   ('Carrefour','luz','2018-09-12', '23:10:30','hugo', 3, 1320),
+	   ('Jumbo','juan','2018-09-12', '20:05:00','mario', 3, 700),
+	   ('Jumbo','juan','2018-10-20', '13:07:10','mario', 3, 200),
+	   ('Jumbo','luz','2018-10-20', '13:06:02','hugo', 3, 1000),
+	   ('Jumbo','eli','2018-10-20', '21:45:55','mario', 3, 800),
+	   ('Carrefour','eli','2018-10-30', '21:25:30','mario', 3, 1100),
+
+	   ('Carrefour','Luz','2018-11-02', '22:15:30','mario', 3, 540),
+	   ('Carrefour','eli', '2018-11-11', '22:00:00','hugo', 3, 880),
+	   ('Jumbo','juan','2018-11-09', '22:10:00','mario', 3, 200),
+	   ('Carrefour','eli','2018-11-11', '12:15:45','hugo', 3, 820),
+ 	   ('Carrefour','luz','2018-11-12', '23:10:30','hugo', 3, 1320),
+	   ('Jumbo','juan','2018-11-12', '20:05:00','mario', 3, 700),
+
+	   ('Carrefour','luz','2018-12-12', '23:10:30','hugo', 3, 2220),
+	   ('Jumbo','juan','2018-12-12', '20:05:00','mario', 3, 1400),
+	   ('Jumbo','juan','2018-12-20', '13:07:10','mario', 3, 1000),
+	   ('Jumbo','luz','2018-12-20', '13:06:02','hugo', 3, 1600),
+	   ('Jumbo','eli','2018-12-20', '21:45:55','mario', 3, 2300),
+	   ('Carrefour','eli','2018-12-30', '21:25:30','mario', 3, 4400);
 
 INSERT INTO pedido_menus()
-VALUES (1,'pizza de muzzarella','./public/img/menu/menu02.jpg',220,2),
-	   (1,'Saguchitos de miga','./public/img/menu/menu08.jpg',100,1),
-	   (2,'pizza de muzzarella','./public/img/menu/menu02.jpg',220,4),
-	   (3,'Panchos','./public/img/menu/menu06.jpg',180,1),
-	   (3,'Tostadas de jamon y queso','./public/img/menu/menu04.jpg',50,1);
+VALUES (1,'pizza de muzarella','./public/img/pedidos/menu02.jpg',220,2),
+	   (1,'Sanguchitos de miga','./public/img/pedidos/menu08.jpg',100,1),
+	   (2,'pizza de muzarella','./public/img/pedidos/menu02.jpg',220,4),
+	   (3,'Panchos','./public/img/pedidos/menu06.jpg',150,1),
+	   (3,'Tostadas de jamon y queso','./public/img/pedidos/menu04.jpg',50,1),
+	   (4,'Asado','./public/img/pedidos/menu05.jpg',300,1),
+	   (4,'Sanguchitos de miga','./public/img/pedidos/menu08.jpg',100,3),
+	   (4,'pizza de muzarella','./public/img/pedidos/menu02.jpg',220,1),
+	   (5,'pizza de muzarella','./public/img/pedidos/menu02.jpg',220,6),
+	   (6,'Panchos','./public/img/pedidos/menu06.jpg',150,3),
+	   (6,'Empanadas','./public/img/pedidos/menu07.jpg',200,2),
+	   (7,'Tostadas de jamon y queso','./public/img/pedidos/menu04.jpg',50,4),
+	   (8,'Empanadas','./public/img/pedidos/menu07.jpg',200,5),
+	   (9,'Panchos','./public/img/pedidos/menu06.jpg',150,2),
+	   (9,'Tostadas de jamon y queso','./public/img/pedidos/menu04.jpg',50,6),
+	   (9,'Empanadas','./public/img/pedidos/menu07.jpg',200,1),
+	   (10,'pizza de muzarella','./public/img/pedidos/menu02.jpg',220,5),
 
+	   (11,'pizza de muzarella','./public/img/pedidos/menu02.jpg',220,2),
+	   (11,'Sanguchitos de miga','./public/img/pedidos/menu08.jpg',100,1),
+	   (12,'pizza de muzarella','./public/img/pedidos/menu02.jpg',220,4),
+	   (13,'Panchos','./public/img/pedidos/menu06.jpg',150,1),
+	   (13,'Tostadas de jamon y queso','./public/img/pedidos/menu04.jpg',50,1),
+	   (14,'Asado','./public/img/pedidos/menu05.jpg',300,1),
+	   (14,'Sanguchitos de miga','./public/img/pedidos/menu08.jpg',100,3),
+	   (14,'pizza de muzarella','./public/img/pedidos/menu02.jpg',220,1),
+	   (15,'pizza de muzarella','./public/img/pedidos/menu02.jpg',220,6),
+	   (16,'Panchos','./public/img/pedidos/menu06.jpg',150,3),
+	   (16,'Empanadas','./public/img/pedidos/menu07.jpg',200,2),
 
--- INSERT INTO pedido(id_comercio, id_cliente, fecha_alta, hora_alta, precio)
--- VALUES (7, 4, CURDATE() , CURTIME(), 859.98),
--- 	   (8, 4, CURDATE() , CURTIME(), 720);
-
-
--- INSERT INTO pedido_menus(id_pedido, id_menu, cantidad)
--- VALUES (1, 1, 3),
--- 	   (1, 4, 2),
--- 	   (2, 3, 4);
-
+	   (17,'pizza de muzarella','./public/img/pedidos/menu02.jpg',220,10),
+	   (18,'Panchos','./public/img/pedidos/menu06.jpg',150,4),
+	   (18,'Empanadas','./public/img/pedidos/menu07.jpg',200,4),
+	   (19,'Tostadas de jamon y queso','./public/img/pedidos/menu04.jpg',50,20),
+	   (20,'Empanadas','./public/img/pedidos/menu07.jpg',200,8),
+	   (21,'Panchos','./public/img/pedidos/menu06.jpg',150,8),
+	   (21,'Tostadas de jamon y queso','./public/img/pedidos/menu04.jpg',50,10),
+	   (21,'Empanadas','./public/img/pedidos/menu07.jpg',200,3),
+	   (22,'pizza de muzarella','./public/img/pedidos/menu02.jpg',220,20);
 

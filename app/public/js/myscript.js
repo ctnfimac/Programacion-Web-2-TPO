@@ -2,6 +2,7 @@ var c_dni = document.getElementById("c-dni");
 var c_cuit = document.getElementById("c-cuit");
 var c_localidad = document.getElementById("c-localidad");
 var c_direccion = document.getElementById("c-direccion");
+var c_apellido = document.getElementById("c-apellido");
 
 var cliente = document.getElementById("tipoDeCliente");
 
@@ -32,6 +33,9 @@ function selectFunction(){
 }
 
 function formCliente(){
+	c_apellido.style.display = "block";
+	c_apellido.style.visibility = "visible";
+	
 	c_dni.style.display = "none";
 	c_dni.style.visibility = "hidden";
 
@@ -47,6 +51,9 @@ function formCliente(){
 }
 
 function formRepartidor(){
+	c_apellido.style.display = "block";
+	c_apellido.style.visibility = "visible";
+
 	c_dni.style.display = "block";
 	c_dni.style.visibility = "visible";
 
@@ -61,6 +68,9 @@ function formRepartidor(){
 }
 
 function formComercio(){
+	c_apellido.style.display = "none";
+	c_apellido.style.visibility = "hidden";
+
 	c_dni.style.display = "none";
 	c_dni.style.visibility = "hidden";
 

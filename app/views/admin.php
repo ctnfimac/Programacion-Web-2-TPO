@@ -22,6 +22,18 @@ elseif(isset($_GET['tabla']) && $_GET['tabla'] == 'comercios'){
 elseif(isset($_GET['tabla']) && $_GET['tabla'] == 'solicitudes'){
 	require_once('admin/sections/tablero.php');
 	printf($tablero);
+}elseif(isset($_GET['tabla']) && $_GET['tabla'] == 'estadisticas'){
+	require_once('admin/sections/estadisticas.php');
+}elseif(isset($_GET['tabla']) && $_GET['tabla'] == 'pedidos_finalizados'){
+	require_once('admin/sections/pedidos_finalizados.php');
+	printf($tablaPedidosFinalizados);
+
+}elseif(isset($_GET['tabla']) && $_GET['tabla'] == 'liquidacion'){
+	require_once('admin/sections/liquidacion.php');
+	printf($tablaLiquidaciones);
+}elseif(isset($_GET['tabla']) && $_GET['tabla'] == 'ganancias'){
+	require_once('admin/sections/ganancias.php');
+	printf($tablaGanancias);
 }else{//(isset($_GET['tabla']) && $_GET['tabla'] == 'tabla_pedidos')
 	require_once('admin/sections/tabla_pedidos.php');
 	printf($tablaPedidos);

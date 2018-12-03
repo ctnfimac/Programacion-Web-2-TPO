@@ -123,30 +123,73 @@ class PedidoModel extends Conexion{
 	}
 
 	public function mostrarPedidos(){
-		// $matriz = array();
-		// $contador = 0;
-
-		// $this->query = "SELECT id, id_comercio, id_cliente, fecha_alta, hora_alta, id_repartidor ,precio,penalizado, estado
-		// 				FROM pedido";
-							 
-		// $tabla = $this->get_query();
-		// while($fila = $tabla->fetch_assoc()){
-		// 	 $pedido = new Pedido($fila['id'],$fila['id_comercio'],$fila['id_cliente'],$fila['fecha_alta'],
-		// 	 				  $fila['hora_alta'],$fila['id_repartidor'],$fila['precio'],$fila['penalizado'],$fila['estado']);
-		// 	 $matriz[$contador] = $pedido;
-		// 	 $contador++;
-		// }
-		// return $matriz;
 		$matriz = array();
 		$contador = 0;
 
 		$this->query = "SELECT id, comercio, cliente, fecha_alta, hora_alta, repartidor ,precio,penalizado, estado
-						FROM pedido";
+						FROM pedido
+						WHERE estado <> 3
+						ORDER BY estado";
+					 
+		$tabla = $this->get_query();
+		while($fila = $tabla->fetch_assoc()){
+			 $RegistroDePedido = new Pedido($fila['id'],$fila['comercio'],$fila['cliente'],$fila['fecha_alta'],
+			 				  $fila['hora_alta'],$fila['repartidor'],$fila['precio'],$fila['penalizado'],$fila['estado']);
+			 $matriz[$contador] = $RegistroDePedido;
+			 $contador++;
+		}
+		return $matriz;
+	}
+
+	public function mostrarPedidosFinalizados(){
+		$matriz = array();
+		$contador = 0;
+
+		$this->query = "SELECT id, comercio, cliente, fecha_alta, hora_alta, repartidor ,precio,penalizado, estado
+						FROM pedido
+						WHERE estado = 3
+						ORDER BY fecha_alta DESC";
 							 
 		$tabla = $this->get_query();
 		while($fila = $tabla->fetch_assoc()){
-			// ($id, $comercio, $cliente, $fecha_alta, $hora_alta ,
-			// 		$repartidor,$precio_total,$penalizado = 0.0, $estado_del_pedido = 1){
+			 $RegistroDePedido = new Pedido($fila['id'],$fila['comercio'],$fila['cliente'],$fila['fecha_alta'],
+			 				  $fila['hora_alta'],$fila['repartidor'],$fila['precio'],$fila['penalizado'],$fila['estado']);
+			 $matriz[$contador] = $RegistroDePedido;
+			 $contador++;
+		}
+		return $matriz;
+	}
+
+	public function mostrarMisPedidosFinalizados(){
+		$matriz = array();
+		$contador = 0;
+		$repartidor = $_SESSION['admin'];
+		$this->query = "SELECT id, comercio, cliente, fecha_alta, hora_alta, repartidor ,precio,penalizado, estado
+						FROM pedido
+						WHERE estado = 3 and repartidor = '$repartidor'
+						ORDER BY fecha_alta DESC";
+							 
+		$tabla = $this->get_query();
+		while($fila = $tabla->fetch_assoc()){
+			 $RegistroDePedido = new Pedido($fila['id'],$fila['comercio'],$fila['cliente'],$fila['fecha_alta'],
+			 				  $fila['hora_alta'],$fila['repartidor'],$fila['precio'],$fila['penalizado'],$fila['estado']);
+			 $matriz[$contador] = $RegistroDePedido;
+			 $contador++;
+		}
+		return $matriz;
+	}
+
+	public function mostrarMisPedidosFinalizadosDelComercio(){
+		$matriz = array();
+		$contador = 0;
+		$repartidor = $_SESSION['admin'];
+		$this->query = "SELECT id, comercio, cliente, fecha_alta, hora_alta, repartidor ,precio,penalizado, estado
+						FROM pedido
+						WHERE estado = 3 and comercio = '$repartidor'
+						ORDER BY fecha_alta DESC";
+							 
+		$tabla = $this->get_query();
+		while($fila = $tabla->fetch_assoc()){
 			 $RegistroDePedido = new Pedido($fila['id'],$fila['comercio'],$fila['cliente'],$fila['fecha_alta'],
 			 				  $fila['hora_alta'],$fila['repartidor'],$fila['precio'],$fila['penalizado'],$fila['estado']);
 			 $matriz[$contador] = $RegistroDePedido;
@@ -165,7 +208,7 @@ class PedidoModel extends Conexion{
 		// 				WHERE id_comercio = (select id from usuario where nombre = '$comercio')";
 		$this->query = "SELECT id, comercio, cliente, fecha_alta, hora_alta, repartidor,precio,estado
 						FROM pedido
-						WHERE comercio = '$comercio'";
+						WHERE comercio = '$comercio' and estado <> 3";
 							 
 		$tabla = $this->get_query();
 		while($fila = $tabla->fetch_assoc()){
@@ -182,18 +225,34 @@ class PedidoModel extends Conexion{
 		$contador = 0;
 		
 		$cliente = $_SESSION['admin'];
-		// $this->query = "SELECT p.id, p.id_comercio, p.id_cliente, p.fecha_alta, p.hora_alta, p.id_repartidor ,p.precio, p.estado
-		// 				FROM pedido p
-		// 				WHERE id_cliente = (select id from usuario where nombre = '$cliente')";
-		$this->query = "SELECT id, comercio, cliente, fecha_alta, hora_alta, repartidor, precio, estado
-						FROM pedido p
-						WHERE cliente = '$cliente'";
+		$this->query = "SELECT id, comercio, cliente, fecha_alta, hora_alta, repartidor,precio,estado
+						FROM pedido
+						WHERE cliente = '$cliente' and estado <> 3";
 							 
 		$tabla = $this->get_query();
 		while($fila = $tabla->fetch_assoc()){
 			 $pedido = new Pedido($fila['id'],$fila['comercio'],$fila['cliente'],$fila['fecha_alta'],
 			 				  $fila['hora_alta'],$fila['repartidor'],$fila['precio'],'',$fila['estado']);
 			 $matriz[$contador] = $pedido;
+			 $contador++;
+		}
+		return $matriz;
+	}
+
+	public function mostrarMisPedidosFinalizadosDelCliente(){
+		$matriz = array();
+		$contador = 0;
+		$cliente = $_SESSION['admin'];
+		$this->query = "SELECT id, comercio, cliente, fecha_alta, hora_alta, repartidor ,precio,penalizado, estado
+						FROM pedido
+						WHERE estado = 3 and cliente = '$cliente'
+						ORDER BY fecha_alta DESC";
+							 
+		$tabla = $this->get_query();
+		while($fila = $tabla->fetch_assoc()){
+			 $RegistroDePedido = new Pedido($fila['id'],$fila['comercio'],$fila['cliente'],$fila['fecha_alta'],
+			 				  $fila['hora_alta'],$fila['repartidor'],$fila['precio'],$fila['penalizado'],$fila['estado']);
+			 $matriz[$contador] = $RegistroDePedido;
 			 $contador++;
 		}
 		return $matriz;
@@ -282,4 +341,106 @@ class PedidoModel extends Conexion{
 		$total_minutos_trasncurridos = $total_minutos_trasncurridos[1]  - $total_minutos_trasncurridos[2];
 		return $total_minutos_trasncurridos;
 	}
+
+
+	/**
+	 * 
+	 *  consultas para los graficos de las liquidaciones
+	 * 
+	 */
+	public function ventasTotalesPorMes(){
+		$this->query = "SELECT MONTH(fecha_alta) mes, COUNT(*) cantidad
+						FROM pedido
+						GROUP BY MONTH(fecha_alta)";
+		$resultado = $this->get_query();
+		return $resultado;
+	}
+
+	public function gananciasTotalesPorMes(){
+		$this->query = "SELECT MONTH(fecha_alta) mes, SUM(precio) monto_total
+						FROM pedido
+						GROUP BY MONTH(fecha_alta)";
+		$resultado = $this->get_query();
+		return $resultado;
+	}
+
+	public function cantidadDePedidosPorComercio(){
+		$this->query = "SELECT comercio, COUNT(*) cantidad
+						FROM pedido
+						WHERE MONTH(fecha_alta)=MONTH(CURDATE())
+						GROUP BY comercio";
+		$resultado = $this->get_query();
+		return $resultado;
+	}
+
+	public function gananciaTotalPorComercioEnElMes(){
+		$this->query = "SELECT comercio, SUM(precio) monto_total
+						FROM pedido
+						WHERE MONTH(fecha_alta)=MONTH(CURDATE())
+						GROUP BY comercio";
+		$resultado = $this->get_query();
+		return $resultado;
+	}
+
+	public function cantidadDePedidosPorCliente(){
+		$this->query = "SELECT cliente, COUNT(*) cantidad
+						FROM pedido
+						WHERE MONTH(fecha_alta)=MONTH(CURDATE())
+						GROUP BY cliente
+						ORDER BY COUNT(*) DESC";
+		$resultado = $this->get_query();
+		return $resultado;
+	}
+
+	public function cantidadDePedidosTotalesPorCliente(){
+		$this->query = "SELECT cliente, COUNT(*) cantidad
+						FROM pedido
+						GROUP BY cliente
+						ORDER BY COUNT(*) DESC";
+		$resultado = $this->get_query();
+		return $resultado;
+	}
+
+	public function cantidadDePedidosRealizadosPorRepartidor(){
+		$this->query = "SELECT repartidor, COUNT(*) cantidad
+						FROM pedido
+						WHERE estado = 3
+						GROUP BY repartidor
+						ORDER BY COUNT(*) DESC";
+		$resultado = $this->get_query();
+		return $resultado;
+	}
+
+	public function topRankingRepartidores(){
+		$this->query = "SELECT repartidor, COUNT(*) cantidad
+						FROM pedido
+						WHERE estado = 3
+						GROUP BY repartidor
+						ORDER BY COUNT(*) DESC
+						LIMIT 5";
+		$resultado = $this->get_query();
+		return $resultado;
+	}
+
+	public function topRankingComercios(){
+		$this->query = "SELECT comercio, COUNT(*) cantidad
+						FROM pedido
+						WHERE estado = 3
+						GROUP BY comercio
+						ORDER BY COUNT(*) DESC
+						LIMIT 5";
+		$resultado = $this->get_query();
+		return $resultado;
+	}
+	// public function gananciaMensualDelRepartidor(){
+
+	// 	$this->query = "SELECT comercio, COUNT(*) * 0.08 AS cantidad
+	// 					FROM pedido
+	// 					WHERE estado = 3
+	// 					GROUP BY comercio
+	// 					ORDER BY COUNT(*) DESC";
+	// 	$resultado = $this->get_query();
+	// 	return $resultado;
+	// }
+
 }

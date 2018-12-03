@@ -33,6 +33,11 @@ $cabecera = '
 			<i class="fas fa-fw fa-table"></i>
 			<span>Pedidos</span></a>
 		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="index.php?route=admin&tabla=pedidos_finalizados">
+			<i class="fas fa-fw fa-table"></i>
+			<span>Pedidos Finalizados</span></a>
+		</li>
 		<!--<li class="nav-item">
 			<a class="nav-link" href="index.php?route=admin&tabla=repartidores">
 			<i class="fas fa-fw fa-table"></i>

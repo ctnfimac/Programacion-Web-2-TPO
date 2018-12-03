@@ -93,7 +93,7 @@ class MenuModel extends Conexion{
 
 		$this->query = "DELETE FROM menu WHERE id='$id'";
 		$this->set_query();
-		//if(file_exists($url)) unlink($url);
+		if(file_exists($url)) unlink($url);
 
 		$route = $_GET['route'];
 		//header('location:index.php?route='.$route.'&tabla=menus');

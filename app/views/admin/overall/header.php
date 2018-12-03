@@ -34,6 +34,11 @@ $cabecera = '
 			<span>Pedidos</span></a>
 		</li>
 		<li class="nav-item">
+			<a class="nav-link" href="index.php?route=admin&tabla=pedidos_finalizados">
+			<i class="fas fa-fw fa-chart-area"></i>
+			<span>Pedidos Finalizados</span></a>
+		</li>
+		<li class="nav-item">
 			<a class="nav-link" href="index.php?route=admin&tabla=clientes">
 			<i class="fas fa-fw fa-table"></i>
 			<span>Clientes</span></a>
@@ -52,6 +57,21 @@ $cabecera = '
 			<a class="nav-link" href="index.php?route=admin&tabla=menus">
 			<i class="fas fa-fw fa-table"></i>
 			<span>Menus</span></a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="index.php?route=admin&tabla=estadisticas">
+			<i class="fas fa-fw fa-table"></i>
+			<span>Estadisticas</span></a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="index.php?route=admin&tabla=liquidacion">
+			<i class="fas fa-fw fa-table"></i>
+			<span>Liquidaciones</span></a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="index.php?route=admin&tabla=ganancias">
+			<i class="fas fa-fw fa-table"></i>
+			<span>Ganancias</span></a>
 		</li>
 	</ul>
 

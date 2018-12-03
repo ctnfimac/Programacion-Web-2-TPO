@@ -5,7 +5,7 @@
 $articulos = '';
 foreach($lista_de_menus as $menu){
 	$articulos .= '
-		<div class="card p-1 m-1">
+		<div class="card p-1 m-1 mb-5">
 			<img class="card-img-top" src="'.$menu->getImagen().'" width="600px" alt="'.$menu->getDescripcion().'">
 			<div class="card-body">
 				<p class="card-title" style="font-size:1.2em">'.$menu->getDescripcion().'</p>

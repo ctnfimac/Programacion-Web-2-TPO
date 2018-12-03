@@ -33,7 +33,7 @@ $modal_registro = '
 						<input type="text" name="nombre" id="nombre" class="form-control form-control-sm">
 						<label for="nombre">Nombre</label>
 					</div>
-					<div class="md-form form-sm">
+					<div class="md-form form-sm" id="c-apellido">
 						<!--<i class="fa fa-user prefix" aria-hidden="true"></i>-->
 						<input type="text" name="apellido" id="apellido" class="form-control form-control-sm">
 						<label for="apellido">Apellido</label>

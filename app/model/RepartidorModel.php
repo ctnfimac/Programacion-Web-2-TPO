@@ -273,5 +273,15 @@ class RepartidorModel extends Conexion{
 		return $resultado;
 	}
 
+	public function obtenerIdDelRepartidor($repartidor){
+		$resultado = false;
+		$this->query = "SELECT id FROM usuario WHERE nombre = '$repartidor' LIMIT 1";
+		$tabla = $this->get_query();
+		while($row = $tabla->fetch_assoc()){
+			$resultado = $row['id'];
+		}
+		return $resultado;
+	}
+
 	
 }
