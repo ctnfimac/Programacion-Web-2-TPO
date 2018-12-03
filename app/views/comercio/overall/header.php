@@ -53,6 +53,11 @@ $cabecera = '
 			<i class="fas fa-fw fa-table"></i>
 			<span>Menus</span></a>
 		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="index.php?route=comercio&tabla=ganancias">
+			<i class="fas fa-fw fa-table"></i>
+			<span>Ganancias</span></a>
+		</li>
 	</ul>
 
 	<div id="content-wrapper">

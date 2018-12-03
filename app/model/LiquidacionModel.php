@@ -150,6 +150,26 @@ class LiquidacionModel extends Conexion{
 		
 	}
 
+	function mostrarMisLiquidaciones(){
+		$matriz = array();
+		$contador = 0;
+		$nombre = $_SESSION['admin'];
+		$this->query = "SELECT l.id, u.nombre, l.periodo_pago, l.remuneracion, l.descuento, l.neto 
+						FROM liquidacion l JOIN
+							usuario u ON l.id_usuario = u.id
+						WHERE u.nombre = '$nombre'";
+						//ORDER BY periodo"; //	
+					 
+		$tabla = $this->get_query();
+		while($fila = $tabla->fetch_assoc()){
+			 $liquidacion = new Liquidacion($fila['id'],$fila['nombre'],$fila['periodo_pago'],$fila['remuneracion'],
+			 				  $fila['descuento'],$fila['neto']);
+			 $matriz[$contador] = $liquidacion;
+			 $contador++;
+		}
+		return $matriz;
+	}
+
 	public function gananciasDeLaApp(){
 		$this->query = "SELECT id, fecha, monto
 						FROM ganancia";	 
