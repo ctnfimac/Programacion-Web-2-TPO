@@ -32,22 +32,22 @@ class LiquidacionModel extends Conexion{
 				$tabla = $this->get_query();
 				$comercioModel = new ComercioModel();
 				while($fila = $tabla->fetch_assoc()){
-				// echo '<br>';
-				$periodo = $fila['fecha'];
-				$remuneracion = $fila['total'];
-				$descuento = $fila['total'] * 0.08;
+					// echo '<br>';
+					$periodo = $fila['fecha'];
+					$remuneracion = $fila['total'];
+					$descuento = $fila['total'] * 0.08;
 
-				$sueldo_app = $sueldo_app + $fila['total'] * 0.05;
-				$sueldo_delivery =  $sueldo_delivery  + $fila['total'] * 0.03;
+					$sueldo_app = $sueldo_app + $fila['total'] * 0.05;
+					$sueldo_delivery =  $sueldo_delivery  + $fila['total'] * 0.03;
 
-				$neto = $fila['total'] - $descuento;
-				$id_comercio = $comercioModel-> obtenerIdDelComercio($fila['comercio'] );
-				// echo 'perdiodo: ' . $fila['fecha'] .', remuneracion: ' . $fila['total'] . 
-				// 	', descuento: ' . $descuento . ', id_comercio: ' . $id_comercio;
-				$this->query = "INSERT INTO liquidacion(periodo_pago, remuneracion, descuento, neto, id_usuario)
-								VALUES ('$periodo','$remuneracion','$descuento','$neto','$id_comercio')";
-				$this->set_query();
-			}
+					$neto = $fila['total'] - $descuento;
+					$id_comercio = $comercioModel-> obtenerIdDelComercio($fila['comercio'] );
+					// echo 'perdiodo: ' . $fila['fecha'] .', remuneracion: ' . $fila['total'] . 
+					// 	', descuento: ' . $descuento . ', id_comercio: ' . $id_comercio;
+					$this->query = "INSERT INTO liquidacion(periodo_pago, remuneracion, descuento, neto, id_usuario)
+									VALUES ('$periodo','$remuneracion','$descuento','$neto','$id_comercio')";
+					$this->set_query();
+				}
 			$this->query = "INSERT INTO ganancia(fecha,monto) 
 							VALUES (CURDATE(),'$sueldo_app')";
 			$this->set_query();
@@ -87,7 +87,7 @@ class LiquidacionModel extends Conexion{
 		$date = new DateTime($fecha, new DateTimeZone('America/Argentina/Buenos_Aires'));
 		date_default_timezone_set('America/Argentina/Buenos_Aires');
 		
-		if(date("d")>1 && date("d")<= 5){ // si estoy dentro de los dias de liquidacion
+		if(date("d")>=1 && date("d")<= 5){ // si estoy dentro de los dias de liquidacion
 			$this->query = "SELECT * 
 						FROM liquidacion
 						WHERE MONTH(periodo_pago) =  MONTH(CURDATE())";
