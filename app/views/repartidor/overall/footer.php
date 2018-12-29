@@ -19,7 +19,7 @@ $footer = '
 	<!-- <script src="./public/js/popper.min.js"></script>-->
 	<script type="text/javascript" src="./public/js/map.js"></script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=...&callback=mapa.initMap">
+    src="https://maps.googleapis.com/maps/api/js?key...&callback=mapa.initMap">
     </script>
 </body>
 </html>
